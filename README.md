@@ -1,2 +1,2 @@
 # OOP-Platformer-Project
-OOP grou project
+OOP group project
