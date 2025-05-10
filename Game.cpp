@@ -18,6 +18,9 @@ void Game::update(){ // Main gameplay loop.
         if(dt > 0.5){ // Prevents delta time from becoming too large. (dt checks time since last frame - if the window was paused for instance, this could become huge otherwise).
             dt = 0.5; // We may want to play with this value a bit.
         }
+        else if(dt < 0.0){ // Shouldn't be possible, but just in case.
+            dt = 0.0;
+        }
 
         sf::Event event; // Could be moved to constructor, but it's essentially empty so initialising every loop isn't intensive. May improve readability? To be revisited.
         while(window.pollEvent(event)){
@@ -25,7 +28,7 @@ void Game::update(){ // Main gameplay loop.
                 window.close();
             }
         }
-
+        player.player_update(dt);
         window.clear();
         window.draw(player.get_player_hitbox());
         window.display();
