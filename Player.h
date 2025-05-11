@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Level.h"
 
 class Player{ // Maybe add a name attribute?
     protected:
@@ -21,14 +22,23 @@ class Player{ // Maybe add a name attribute?
         bool get_on_platform();
         void set_on_platform(bool on_platform);
 
+        float get_player_velocity_x();
+        void set_player_velocity_x(float new_velocity);
+
+        float get_player_velocity_y();
+        void set_player_velocity_y(float new_velocity);
+
+        void set_player_position(float position_x, float position_y);
+
         sf::RectangleShape& get_player_hitbox();
         // void set_player_hitbox(); ^ Shouldn't be needed when passing by reference.
 
         void horizontal_movement(double dt);
         void vertical_movement(double dt);
-        void horizontal_collision();
-        void vertical_collision();
-        void player_update(double dt);
+        void horizontal_collision(double dt, std::vector<Object*>& level_data);
+        void vertical_collision(double dt, std::vector<Object*>& level_data);
+        void encapsulated_collision(double dt, std::vector<Object*>& level_data);
+        void player_update(double dt, std::vector<Object*>& level_data);
 
         ~Player();
 };

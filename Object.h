@@ -4,14 +4,18 @@
 #include <string>
 #include <vector>
 
+class Player;
+
 class Object{
     protected:
-        sf::RectangleShape object;
+        sf::RectangleShape object_hitbox;
     public:
         Object(float object_position_x, float object_position_y, float object_size_x, float object_size_y);
-        virtual void collision_action() = 0;
+        virtual void vertical_collision_action(Player& player) = 0;
+        virtual void horizontal_collision_action(Player& player) = 0;
+        virtual void enscapsulated_collision_action(Player& player) = 0;
         sf::RectangleShape& get_object_hitbox();
-        ~Object();
+        virtual ~Object();
 };
 
 #endif

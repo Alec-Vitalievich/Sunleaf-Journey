@@ -3,7 +3,7 @@
 
 // NOTE: Comments will be cleaned up, this is just for now so we can all understand what parts are doing what and why.
 
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(100,100,50,50){
+Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(50,700,50,50){
     // Initialise variables.
     this->game_name = window_name;
     this->max_framerate = max_framerate;
@@ -11,7 +11,16 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
     // Initialise clock cycle & player object. Set framerate limit (adjust per your machine).
     window.setFramerateLimit(max_framerate);
     clock.restart();
+    load_level(1);
 }
+
+void Game::load_level(int level_number){
+    if(level){ // Checks if the pointer is not null. level != nullptr could be used for clarity?
+        delete level;
+    }
+    level = new Level(level_number);
+}
+
 void Game::update(){ // Main gameplay loop.
     while(window.isOpen()){
         dt = clock.restart().asSeconds(); // Returns the time since restart was last called.
@@ -28,8 +37,12 @@ void Game::update(){ // Main gameplay loop.
                 window.close();
             }
         }
-        player.player_update(dt);
+        std::vector<Object*> level_data = level->get_level_vector();
+        player.player_update(dt, level_data);
         window.clear();
+        for(int i = 0; i < level_data.size(); i++){
+            window.draw(level_data[i]->get_object_hitbox());
+        }
         window.draw(player.get_player_hitbox());
         window.display();
     }
