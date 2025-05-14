@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 #include "Player.h"
+#include "Level.h"
+#include "Menu.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
@@ -8,6 +10,11 @@
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
+
+enum class GameState {
+    MENU,
+    PLAYING
+};
 
 class Game {
     protected:
@@ -20,6 +27,9 @@ class Game {
         double dt; // Delta time (time elapsed since last frame)
         Player player;
         Level* level = nullptr; // was getting seg faults if it wasn't initialised as a nullptr.
+
+        GameState current_state = GameState::MENU;
+
     public:
         Game(int window_x_size, int window_y_size, std::string name, int max_framerate);
         void load_level(int level_number);

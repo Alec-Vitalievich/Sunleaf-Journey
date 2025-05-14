@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "Menu.h"
 
 // NOTE: Comments will be cleaned up, this is just for now so we can all understand what parts are doing what and why.
 
@@ -22,8 +22,35 @@ void Game::load_level(int level_number){
 }
 
 void Game::update(){ // Main gameplay loop.
+
+    Menu menu(window);
+
     while(window.isOpen()){
-        dt = clock.restart().asSeconds(); // Returns the time since restart was last called.
+
+        if (current_state == GameState::MENU) {
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed)
+                window.close();
+
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                    if (menu.is_start_clicked(mousePos)) {
+                        current_state = GameState::PLAYING;
+                    }
+                    if (menu.is_exit_clicked(mousePos)) {
+                        window.close();
+                    }
+                }
+            }
+
+            window.clear();
+            menu.draw(window);
+            window.display();
+        }
+
+        else if (current_state == GameState::PLAYING) {
+            dt = clock.restart().asSeconds(); // Returns the time since restart was last called.
         if(dt > 0.5){ // Prevents delta time from becoming too large. (dt checks time since last frame - if the window was paused for instance, this could become huge otherwise).
             dt = 0.5; // We may want to play with this value a bit.
         }
@@ -47,7 +74,8 @@ void Game::update(){ // Main gameplay loop.
         }
         window.draw(player.get_player_hitbox());
         window.display();
-    }
+        }
+        }
 
     // Update player, update window, etc.
 }

@@ -8,7 +8,7 @@ Level::Level(int level_number){
 
     //Load background textures
     //Check for texture
-    if (!background_texture1.loadFromFile("Textures/plains.png")) {
+    if (!background_texture1.loadFromFile("Textures/LevelTextures/plains.png")) {
             std::cerr << "Failed to load textures!\n";
         } else {
             background_sprite1.setTexture(background_texture1);
