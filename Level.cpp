@@ -1,6 +1,28 @@
 #include "Level.h"
+#include <iostream>
 
 Level::Level(int level_number){
+
+    //Get window size
+    sf::Vector2u windowSize = sf::Vector2u(1000, 800);
+
+    //Load background textures
+    //Check for texture
+    if (!background_texture1.loadFromFile("Textures/plains.png")) {
+            std::cerr << "Failed to load textures!\n";
+        } else {
+            background_sprite1.setTexture(background_texture1);
+
+        //Get size
+        sf::Vector2u textureSize = background_texture1.getSize();
+        float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+        float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+
+        background_sprite1.setScale(scaleX, scaleY);
+
+    }
+
+    //Level logic
     if(level_number > 3){
         level_number = 3;
     }
@@ -19,6 +41,10 @@ Level::Level(int level_number){
         case 3:
             break;
     }
+}
+
+void Level::draw_background(sf::RenderWindow& window) {
+    window.draw(background_sprite1);
 }
 
 std::vector<Object*>& Level::get_level_vector(){
