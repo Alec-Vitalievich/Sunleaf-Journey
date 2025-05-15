@@ -20,6 +20,12 @@ class Level{
         //Textures
         sf::Texture background_texture1;
         sf::Sprite background_sprite1;
+        sf::Texture background_texture2;
+        sf::Sprite background_sprite2;
+        sf::Texture background_texture3;
+        sf::Sprite background_sprite3;
+
+        int current_level_number;
     public:
         Level(int level_number, bool* new_level);
         std::vector<Object*>& get_level_vector();

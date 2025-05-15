@@ -6,22 +6,6 @@ Level::Level(int level_number, bool* new_level){
     //Get window size
     sf::Vector2u windowSize = sf::Vector2u(1920, 1080); // Remember to change when window is scaled.
 
-    //Load background textures
-    //Check for texture
-    if (!background_texture1.loadFromFile("Textures/LevelTextures/plains.png")) {
-            std::cerr << "Failed to load textures!\n";
-        } else {
-            background_sprite1.setTexture(background_texture1);
-
-        //Get size
-        sf::Vector2u textureSize = background_texture1.getSize();
-        float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
-        float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
-
-        background_sprite1.setScale(scaleX, scaleY);
-
-    }
-
     //Level logic
     if(level_number > 3){
         level_number = 3;
@@ -31,6 +15,23 @@ Level::Level(int level_number, bool* new_level){
     }
     switch(level_number){
         case 1:
+
+        current_level_number = level_number;
+        //Load background textures
+        //Check for texture
+        if (!background_texture1.loadFromFile("Textures/LevelTextures/cave.png")) {
+                std::cerr << "Failed to load textures!\n";
+            } else {
+                background_sprite1.setTexture(background_texture1);
+
+            //Get size
+            sf::Vector2u textureSize = background_texture1.getSize();
+            float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+            float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+
+            background_sprite1.setScale(scaleX, scaleY);
+            }
+
             // level_data.push_back(new Platform(30, 750, 200, 20));
             // level_data.push_back(new Platform(30, 650, 200, 20));
             // level_data.push_back(new Platform(230, 650, 20, 120));
@@ -51,12 +52,47 @@ Level::Level(int level_number, bool* new_level){
             level_data.push_back(new Platform(1920, 0, 1, 1080));
             break;
         case 2:
+
+            current_level_number = level_number;
+            //Load background textures
+            //Check for texture
+            if (!background_texture2.loadFromFile("Textures/LevelTextures/forest.png")) {
+                    std::cerr << "Failed to load textures!\n";
+                } else {
+                    background_sprite2.setTexture(background_texture2);
+
+                //Get size
+                sf::Vector2u textureSize = background_texture2.getSize();
+                float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+                float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+
+                background_sprite2.setScale(scaleX, scaleY);
+                }
+
             level_data.push_back(new Platform(0, -1, 1920, 1));
             level_data.push_back(new Platform(0, 1080, 1920, 1));
             level_data.push_back(new Platform(-1, 0, 1, 1080));
             level_data.push_back(new Platform(1920, 0, 1, 1080));
             break;
         case 3:
+
+        current_level_number = level_number;
+            //Load background textures
+            //Check for texture
+            if (!background_texture3.loadFromFile("Textures/LevelTextures/garden.png")) {
+                    std::cerr << "Failed to load textures!\n";
+                } else {
+                    background_sprite3.setTexture(background_texture3);
+
+                //Get size
+                sf::Vector2u textureSize = background_texture3.getSize();
+                float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+                float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+
+                background_sprite3.setScale(scaleX, scaleY);
+                }
+                
+
 
             level_data.push_back(new Platform(0, -1, 1920, 1));
             level_data.push_back(new Platform(0, 1080, 1920, 1));
@@ -67,6 +103,23 @@ Level::Level(int level_number, bool* new_level){
 }
 
 void Level::draw_background(sf::RenderWindow& window) {
+    switch (current_level_number)
+    {
+    case 1:
+        window.draw(background_sprite1);
+        break;
+
+    case 2:
+        window.draw(background_sprite2);
+        break;
+
+    case 3:
+        window.draw(background_sprite3);
+        break;
+    
+    default:
+        break;
+    }
     window.draw(background_sprite1);
 }
 
