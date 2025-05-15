@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Menu.h"
+#include <SFML/Audio.hpp>
+
 
 // NOTE: Comments will be cleaned up, this is just for now so we can all understand what parts are doing what and why.
 
@@ -34,6 +36,13 @@ void Game::load_level(bool* new_level){
 void Game::update(){ // Main gameplay loop.
 
     Menu menu(window);
+
+    if (!background_music.openFromFile("Music/menu_music.ogg")) {
+        std::cerr << "Error loading menu misc";
+    } else {
+        background_music.setLoop(true);
+        background_music.play();
+    }
 
     while(window.isOpen()){
 
