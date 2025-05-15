@@ -2,10 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Player::Player(float player_position_x, float player_position_y, float player_size_x, float player_size_y){
+Player::Player(float player_position_x, float player_position_y, float player_size_x, 
+                float player_size_y, int player_health, int sun_count){
     player_hitbox.setPosition(player_position_x, player_position_y);
     player_hitbox.setSize({player_size_x, player_size_y}); // Takes a vector2f, or 2 position in {}.
     player_hitbox.setFillColor(sf::Color::Cyan); // Will be replaced by texture
+    
+    this->player_health = player_health;
+    this->sun_count = sun_count;
 
     player_acceleration.x = 2000; // Horizontal acceleration
     player_acceleration.y = 1500; // Gravity
@@ -35,6 +39,20 @@ float Player::get_player_velocity_y(){
 }
 void Player::set_player_velocity_y(float new_velocity){
     player_velocity.y = new_velocity;
+}
+
+int Player::get_player_health(){
+    return player_health;
+}
+void Player::set_player_health(int player_health){
+    this->player_health = player_health;
+}
+
+int Player::get_sun_count(){
+    return sun_count;
+}
+void Player::set_sun_count(int sun_count){
+    this->sun_count = sun_count;
 }
 
 void Player::set_player_position(float position_x, float position_y){
@@ -189,8 +207,8 @@ void Player::encapsulated_collision(double dt, std::vector<Object*>& level_data)
         float object_right = object_boundary.left + object_boundary.width;
 
         // might be worth splitting the following if statement up a little for readability reasons. Removing the velocity requirement may be a good idea too? unsure.
-        if((player_velocity.x == 0 && player_velocity.y == 0) && (player_boundary.top >= object_boundary.top && player_bottom <= object_bottom
-        && player_boundary.left >= object_boundary.left && player_right <= object_right)){
+        if(player_boundary.top >= object_boundary.top && player_bottom <= object_bottom
+        && player_boundary.left >= object_boundary.left && player_right <= object_right){
             level_data[i]->enscapsulated_collision_action(*this); // Passes the object that called the function (player) into the function.
             break;
         }
