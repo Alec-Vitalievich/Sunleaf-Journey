@@ -81,6 +81,10 @@ void Game::update(){ // Main gameplay loop.
                             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
                                 current_state = GameState::PLAYING;
                             }
+
+                            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace) {
+                                current_state = GameState::MENU;
+                            }
                         }
 
                     window.clear();
@@ -185,6 +189,9 @@ void Game::update(){ // Main gameplay loop.
                     while(window.pollEvent(event)){
                         if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)){
                             window.close();
+                        }
+                        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
+                            current_state = GameState::MENU;
                         }
                     }
 
