@@ -5,7 +5,7 @@
 
 // NOTE: Comments will be cleaned up, this is just for now so we can all understand what parts are doing what and why.
 
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(50,700,50,50,3,0){
+Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(10,980,50,50,3,0){
     // Initialise variables.
     this->game_name = window_name;
     this->max_framerate = max_framerate;
@@ -37,9 +37,9 @@ void Game::update(){ // Main gameplay loop.
 
     Menu menu(window);
 
-    if (!background_music.play("Music/menu_music.ogg", true)) {
+    /* if (!background_music.play("Music/menu_music.ogg", true)) {
         std::cerr << "Error loading music\n";
-    }
+    } */
     
     while(window.isOpen()){
 

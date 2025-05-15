@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Platform.h"
 #include "Level_Loader.h"
+#include "Spike.h"
 
 class Level{
     protected:

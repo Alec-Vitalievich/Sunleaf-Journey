@@ -37,7 +37,7 @@ class Game {
 
         GameState current_state = GameState::MENU;
 
-        Music background_music;
+        // Music background_music;
 
     public:
         Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level);
