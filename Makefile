@@ -4,7 +4,7 @@ OUT = test1.out
 
 # For windows systems
 windows:
-	@echo "Compiling for Windows"make
+	@echo "Compiling for Windows"
 	@g++ $(SRC) -o $(OUT) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 	@./$(OUT)
 
