@@ -37,7 +37,7 @@ Menu::Menu(sf::RenderWindow& window){
         controls_sprite.setTexture(controls_texture);
 
         //Button scaling (too large originally)
-        const float button_scale = 0.6;
+        const float button_scale = 0.5;
         start.setScale(button_scale, button_scale);
         exit.setScale(button_scale, button_scale);
         load_sprite.setScale(button_scale, button_scale);
@@ -58,15 +58,34 @@ Menu::Menu(sf::RenderWindow& window){
 
         const float spacing = 100.0;
 
-        start.setPosition(centerX, centerY - spacing * 3);
-        load_sprite.setPosition(centerX, centerY - spacing * 1);
-        controls_sprite.setPosition(centerX, centerY + spacing * 1);
+        start.setPosition(centerX, centerY - spacing * 1);
+        load_sprite.setPosition(centerX, centerY + spacing * 0.25);
+        controls_sprite.setPosition(centerX, centerY + spacing * 1.75);
         exit.setPosition(centerX, centerY + spacing * 3);
+
+        //Title screen
+            //Load font
+            if (!font.loadFromFile("Fonts/antiquity-print.ttf")) {
+                std::cerr << "Error loading font";
+            }
+
+            //Title text
+            title_text.setFont(font);
+            title_text.setString("Sunleaf Journey: The Quest For The Sun");
+            title_text.setCharacterSize(32);
+            title_text.setFillColor(sf::Color::Black);
+            title_text.setStyle(sf::Text::Bold);
+
+            //Center
+            sf::FloatRect text_bounds = title_text.getLocalBounds();
+            title_text.setOrigin(text_bounds.width / 2, text_bounds.height / 2);
+            title_text.setPosition(window.getSize().x / 2, 100);
 
 }
 
 void Menu::draw(sf::RenderWindow& window) {
     window.draw(menu);
+    window.draw(title_text);
     window.draw(start);
     window.draw(exit);
     window.draw(load_sprite);
@@ -76,9 +95,9 @@ void Menu::draw(sf::RenderWindow& window) {
 void Menu::update(sf::Vector2i mousePosition) {
     auto hover_effect = [&](sf::Sprite& sprite) {
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
-            sprite.setScale(0.65, 0.65);
+            sprite.setScale(0.55, 0.55);
         } else {
-            sprite.setScale(0.6, 0.6);
+            sprite.setScale(0.5, 0.5);
         }
     };
 

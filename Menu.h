@@ -32,6 +32,10 @@ class Menu {
         sf::Sprite load_sprite;
         sf::Sprite controls_sprite;
 
+        //Title
+        sf::Font font;
+        sf::Text title_text;
+
 };
 
 #endif
