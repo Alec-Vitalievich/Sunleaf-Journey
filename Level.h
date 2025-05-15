@@ -7,6 +7,8 @@
 #include "Platform.h"
 #include "Level_Loader.h"
 #include "Spike.h"
+#include "Water.h"
+#include "Lava.h"
 
 class Level{
     protected:

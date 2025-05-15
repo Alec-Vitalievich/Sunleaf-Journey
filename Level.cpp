@@ -39,6 +39,8 @@ Level::Level(int level_number, bool* new_level){
             level_data.push_back(new Platform(230, 680, 20, 100));
             level_data.push_back(new Platform(10, 680, 20, 100));
             level_data.push_back(new Spike(1000,1060,100,20,1));
+            level_data.push_back(new Water(1300,1060,100,20,2));
+            level_data.push_back(new Lava(1600,1060,100,20,2));
             level_data.push_back(new Level_Loader(700,650,100,100,new_level));
             // Keep these. Add a border to the player can't fall out the window. Will need to be changed if the window changes size.
             level_data.push_back(new Platform(0, -1, 1920, 1));

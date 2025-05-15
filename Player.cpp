@@ -64,6 +64,13 @@ sf::RectangleShape& Player::get_player_hitbox(){
 }
 
 void Player::player_update(double dt, std::vector<Object*>& level_data){
+    if(player_health < 0){
+        player_health = 0;
+    }
+    else if(player_health > 3){
+        player_health = 3;
+    }
+    
     horizontal_movement(dt);
     horizontal_collision(dt, level_data);
     vertical_movement(dt);

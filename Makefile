@@ -1,10 +1,10 @@
 #Source files and output file for project
-SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp
+SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp Water.cpp Lava.cpp
 OUT = test1.out
 
 # For windows systems
 windows:
-	@echo "Compiling for Windows"
+	@echo "Compiling for Windows"make
 	@g++ $(SRC) -o $(OUT) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 	@./$(OUT)
 
