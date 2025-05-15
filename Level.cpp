@@ -1,10 +1,10 @@
 #include "Level.h"
 #include <iostream>
 
-Level::Level(int level_number){
+Level::Level(int level_number, bool* new_level){
 
     //Get window size
-    sf::Vector2u windowSize = sf::Vector2u(1000, 800);
+    sf::Vector2u windowSize = sf::Vector2u(1000, 800); // Remember to change when window is scaled.
 
     //Load background textures
     //Check for texture
@@ -31,14 +31,32 @@ Level::Level(int level_number){
     }
     switch(level_number){
         case 1:
-            level_data.push_back(new Platform(30, 750, 200, 20));
-            level_data.push_back(new Platform(30, 650, 200, 20));
-            level_data.push_back(new Platform(230, 650, 20, 120));
-            level_data.push_back(new Platform(10, 650, 20, 120));
+            // level_data.push_back(new Platform(30, 750, 200, 20));
+            // level_data.push_back(new Platform(30, 650, 200, 20));
+            // level_data.push_back(new Platform(230, 650, 20, 120));
+            // level_data.push_back(new Platform(10, 650, 20, 120));
+            level_data.push_back(new Platform(30, 750, 800, 20));
+            level_data.push_back(new Platform(230, 680, 20, 100));
+            level_data.push_back(new Platform(10, 680, 20, 100));
+            level_data.push_back(new Level_Loader(700,650,100,100,new_level));
+            // Keep these. Add a border to the player can't fall out the window. Will need to be changed if the window changes size.
+            level_data.push_back(new Platform(0, -1, 1000, 1));
+            level_data.push_back(new Platform(0, 800, 1000, 1));
+            level_data.push_back(new Platform(-1, 0, 1, 800));
+            level_data.push_back(new Platform(1000, 0, 1, 1000));
             break;
         case 2:
+            level_data.push_back(new Platform(0, -1, 1000, 1));
+            level_data.push_back(new Platform(0, 800, 1000, 1));
+            level_data.push_back(new Platform(-1, 0, 1, 800));
+            level_data.push_back(new Platform(1000, 0, 1, 1000));
             break;
         case 3:
+
+            level_data.push_back(new Platform(0, -1, 1000, 1));
+            level_data.push_back(new Platform(0, 800, 1000, 1));
+            level_data.push_back(new Platform(-1, 0, 1, 800));
+            level_data.push_back(new Platform(1000, 0, 1, 1000));
             break;
     }
 }

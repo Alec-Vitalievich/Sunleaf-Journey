@@ -3,22 +3,32 @@
 
 // NOTE: Comments will be cleaned up, this is just for now so we can all understand what parts are doing what and why.
 
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(50,700,50,50){
+Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(50,700,50,50){
     // Initialise variables.
     this->game_name = window_name;
     this->max_framerate = max_framerate;
+    this->current_level = current_level;
     this->window_size = window.getSize();
     // Initialise clock cycle & player object. Set framerate limit (adjust per your machine).
     window.setFramerateLimit(max_framerate);
     clock.restart();
-    load_level(1);
+    // Start loading the first level. This may get weird with the menu and loading a previous save? 
+    // My thought was we would have a set up function in main that came first and updated the first level number. 
+    // Not sure how to make it work now. Call it after all the menu stuff I suppose? it needed to happen anyways.
+    new_level = new bool;
+    *new_level = true;
+    load_level(new_level);
 }
 
-void Game::load_level(int level_number){
-    if(level){ // Checks if the pointer is not null. level != nullptr could be used for clarity?
-        delete level;
+void Game::load_level(bool* new_level){
+    if(*new_level == true){
+        if(level){ // Checks if the pointer is not null. level != nullptr could be used for clarity?
+            delete level;
+            current_level++;
+        }
+        *new_level = false;
+        level = new Level(current_level, new_level);
     }
-    level = new Level(level_number);
 }
 
 void Game::update(){ // Main gameplay loop.
@@ -94,6 +104,9 @@ void Game::update(){ // Main gameplay loop.
                 window.close();
             }
         }
+
+        load_level(new_level);
+
         std::vector<Object*> level_data = level->get_level_vector();
         player.player_update(dt, level_data);
         window.clear();
@@ -115,7 +128,5 @@ double Game::get_dt(){
 }
 
 Game::~Game(){
-    // Nothin' to see here. We will need something with a pointer though, hm.
-    // If collision is a virtual function of... whatever parent class is handling platforms & obstacles,
-    // aggregate those using pointer to iterate through?? We still need dynamic memory allocation though.
+    // Delete level perhaps?
 }
