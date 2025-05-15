@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Level.h"
 #include "Menu.h"
+#include "Music.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
@@ -36,7 +37,7 @@ class Game {
 
         GameState current_state = GameState::MENU;
 
-        sf::Music background_music;
+        Music background_music;
 
     public:
         Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level);

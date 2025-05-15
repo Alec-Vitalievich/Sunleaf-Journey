@@ -2,13 +2,16 @@
 #include <iostream>
 
 bool Music::play(const std::string& filename, bool loop) {
+    if (background_music.getStatus() == sf::SoundSource::Playing) {
+        background_music.stop();
+    }
+
     if (!background_music.openFromFile("Music/menu_music.ogg")) {
         return false;
-    } else {
-        background_music.setLoop(loop);
-        background_music.play();
-        return true;
-    }
+    } 
+    background_music.setLoop(loop);
+    background_music.play();
+    return true;
 
 }
 

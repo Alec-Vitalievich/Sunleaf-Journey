@@ -37,13 +37,10 @@ void Game::update(){ // Main gameplay loop.
 
     Menu menu(window);
 
-    if (!background_music.openFromFile("Music/menu_music.ogg")) {
-        std::cerr << "Error loading menu misc";
-    } else {
-        background_music.setLoop(true);
-        background_music.play();
+    if (!background_music.play("Music/menu_music.ogg", true)) {
+        std::cerr << "Error loading music\n";
     }
-
+    
     while(window.isOpen()){
 
         if (current_state == GameState::MENU) {
