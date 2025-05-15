@@ -25,14 +25,17 @@ class Game {
         sf::RenderWindow window;
         sf::Clock clock; 
         double dt; // Delta time (time elapsed since last frame)
+
         Player player;
         Level* level = nullptr; // was getting seg faults if it wasn't initialised as a nullptr.
+        int current_level;
+        bool* new_level = nullptr;
 
         GameState current_state = GameState::MENU;
 
     public:
-        Game(int window_x_size, int window_y_size, std::string name, int max_framerate);
-        void load_level(int level_number);
+        Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level);
+        void load_level(bool* new_level);
         void update(); // Removed parameter: sf::RectangleShape& player_hitbox
         double get_dt();
         ~Game();

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class Player;
+class Player; // Forward declaration. Don't remove.
 
 class Object{
     protected:
