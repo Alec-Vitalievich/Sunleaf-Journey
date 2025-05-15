@@ -54,6 +54,9 @@ void Game::update(){ // Main gameplay loop.
                     if (menu.is_start_clicked(mousePos)) {
                         current_state = GameState::STORY;
                     }
+                    if (menu.is_controls_clicked(mousePos)) {
+                        current_state = GameState::CONTROLS;
+                    }
                     if (menu.is_exit_clicked(mousePos)) {
                         window.close();
                     }
@@ -68,95 +71,137 @@ void Game::update(){ // Main gameplay loop.
             window.display();
         }
 
-        else if (current_state == GameState::STORY) {
-            sf::Event event;
-            while(window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    window.close();
+                    //STORY gamestate
+                    else if (current_state == GameState::STORY) {
+                        sf::Event event;
+                        while(window.pollEvent(event)) {
+                            if (event.type == sf::Event::Closed)
+                                window.close();
 
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-                    current_state = GameState::PLAYING;
-                }
-            }
+                            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                                current_state = GameState::PLAYING;
+                            }
+                        }
 
-        window.clear();
+                    window.clear();
 
-        sf::Font font;
-        font.loadFromFile("Fonts/antiquity-print.ttf");
-        sf::Text story_text;
-        story_text.setFont(font);
-        story_text.setString("Buried in the darkness below,\n"
-                                "a small seedling sprouts,\n"
-                                "unfurling its leaves in a strange new world.\n\n"
+                    sf::Font font;
+                    font.loadFromFile("Fonts/antiquity-print.ttf");
+                    sf::Text story_text;
+                    story_text.setFont(font);
+                    story_text.setString("Buried in the darkness below,\n"
+                                            "a small seedling sprouts,\n"
+                                            "unfurling its leaves in a strange new world.\n\n"
 
-                                "You don't know how you got here,\n"
-                                "but you sense something is missing.\n"
-                                "Whilst the soil is lush with nutrients\n"
-                                "and water abounds, there's little light\n"
-                                "to be found. How will you grow without the sun?\n\n"
+                                            "You don't know how you got here,\n"
+                                            "but you sense something is missing.\n"
+                                            "Whilst the soil is lush with nutrients\n"
+                                            "and water abounds, there's little light\n"
+                                            "to be found. How will you grow without the sun?\n\n"
 
-                                "You must begin your journey to find the light\n"
-                                "and find a home a place to set down roots.\n"
-                                "Collect little slices of sun whilst traversing\n"
-                                "through a whole new world from dim caves full\n"
-                                "of dangerous obstacles to forests full of\n"
-                                "dappled light and shadow to reach your perfect\n"
-                                "patch of sun. But beware, it's a dangerous world\n"
-                                "out there for a small Sunleaf.\n"
-                                "\n");
-        story_text.setCharacterSize(24);
-        story_text.setFillColor(sf::Color::White);
-        story_text.setPosition(100, 65);
+                                            "You must begin your journey to find the light\n"
+                                            "and find a home a place to set down roots.\n"
+                                            "Collect little slices of sun whilst traversing\n"
+                                            "through a whole new world from dim caves full\n"
+                                            "of dangerous obstacles to forests full of\n"
+                                            "dappled light and shadow to reach your perfect\n"
+                                            "patch of sun. But beware, it's a dangerous world\n"
+                                            "out there for a small Sunleaf.\n"
+                                            "\n");
+                    story_text.setCharacterSize(24);
+                    story_text.setFillColor(sf::Color::White);
+                    story_text.setPosition(100, 65);
 
-        //Separate text for continuing the game
-        sf::Text continue_text;
-        continue_text.setFont(font);
-        continue_text.setString("...Press ENTER to continue");
-        continue_text.setCharacterSize(24);
-        continue_text.setFillColor(sf::Color::Yellow);
+                    //Separate text for continuing the game
+                    sf::Text continue_text;
+                    continue_text.setFont(font);
+                    continue_text.setString("...Press ENTER to continue");
+                    continue_text.setCharacterSize(24);
+                    continue_text.setFillColor(sf::Color::Yellow);
 
-        //Position text
-        sf::Vector2u window_size = window.getSize();
-        float continue_text_x = 100;
-        float continue_text_y = window_size.y - 70;
-        continue_text.setPosition(continue_text_x, continue_text_y);
+                    //Position text
+                    sf::Vector2u window_size = window.getSize();
+                    float continue_text_x = 100;
+                    float continue_text_y = window_size.y - 70;
+                    continue_text.setPosition(continue_text_x, continue_text_y);
 
-        window.draw(story_text);
-        window.draw(continue_text);
-        window.display();
+                    window.draw(story_text);
+                    window.draw(continue_text);
+                    window.display();
 
-        }
+                    }
 
-        else if (current_state == GameState::PLAYING) {
-            dt = clock.restart().asSeconds(); // Returns the time since restart was last called.
-        if(dt > 0.5){ // Prevents delta time from becoming too large. (dt checks time since last frame - if the window was paused for instance, this could become huge otherwise).
-            dt = 0.5; // We may want to play with this value a bit.
-        }
-        else if(dt < 0.0){ // Shouldn't be possible, but just in case.
-            dt = 0.0;
-        }
+                    //CONTROLS gamestate
+                    else if (current_state == GameState::CONTROLS) {
+                        sf::Event event;
+                        while(window.pollEvent(event)) {
+                            if (event.type == sf::Event::Closed)
+                                window.close();
 
-        sf::Event event; // Could be moved to constructor, but it's essentially empty so initialising every loop isn't intensive. May improve readability? To be revisited.
-        while(window.pollEvent(event)){
-            if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)){
-                window.close();
-            }
-        }
+                            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                                current_state = GameState::MENU;
+                            }
+                        }
 
-        load_level(new_level);
+                    window.clear();
 
-        std::vector<Object*> level_data = level->get_level_vector();
-        player.player_update(dt, level_data);
-        window.clear();
-        level->draw_background(window);
+                    sf::Font font;
+                    font.loadFromFile("Fonts/antiquity-print.ttf");
+                    sf::Text controls_text;
+                    sf::Text return_text;
+                    controls_text.setFont(font);
+                    return_text.setFont(font);
 
-        for(int i = 0; i < level_data.size(); i++){
-            window.draw(level_data[i]->get_object_hitbox());
-        }
-        window.draw(player.get_player_hitbox());
-        window.display();
-        }
-        }
+                    controls_text.setString("WASD for movement keys\n"
+                                            "E to interact");
+
+                    return_text.setString("... Press ENTER to return to the main menu");
+                    
+                    controls_text.setCharacterSize(24);
+                    controls_text.setFillColor(sf::Color::White);
+                    controls_text.setPosition(100, 65);
+
+                    return_text.setCharacterSize(24);
+                    return_text.setFillColor(sf::Color::Yellow);
+                    return_text.setPosition(100, 25);
+
+                    window.draw(controls_text);
+                    window.draw(return_text);
+                    window.display();
+
+                    }
+
+                    //PLAYING gamestate
+                    else if (current_state == GameState::PLAYING) {
+                        dt = clock.restart().asSeconds(); // Returns the time since restart was last called.
+                    if(dt > 0.5){ // Prevents delta time from becoming too large. (dt checks time since last frame - if the window was paused for instance, this could become huge otherwise).
+                        dt = 0.5; // We may want to play with this value a bit.
+                    }
+                    else if(dt < 0.0){ // Shouldn't be possible, but just in case.
+                        dt = 0.0;
+                    }
+
+                    sf::Event event; // Could be moved to constructor, but it's essentially empty so initialising every loop isn't intensive. May improve readability? To be revisited.
+                    while(window.pollEvent(event)){
+                        if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)){
+                            window.close();
+                        }
+                    }
+
+                    load_level(new_level);
+
+                    std::vector<Object*> level_data = level->get_level_vector();
+                    player.player_update(dt, level_data);
+                    window.clear();
+                    level->draw_background(window);
+
+                    for(int i = 0; i < level_data.size(); i++){
+                        window.draw(level_data[i]->get_object_hitbox());
+                    }
+                    window.draw(player.get_player_hitbox());
+                    window.display();
+                    }
+                    }
 
     // Update player, update window, etc.
 }

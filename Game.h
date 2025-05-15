@@ -17,7 +17,9 @@
 enum class GameState {
     MENU,
     STORY,
-    PLAYING
+    PLAYING,
+    CONTROLS,
+    END,
 };
 
 class Game {
