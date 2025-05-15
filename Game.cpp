@@ -44,6 +44,9 @@ void Game::update(){ // Main gameplay loop.
                 }
             }
 
+            sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+            menu.update(mousePos);
+
             window.clear();
             menu.draw(window);
             window.display();

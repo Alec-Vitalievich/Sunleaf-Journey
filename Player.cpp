@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 Player::Player(float player_position_x, float player_position_y, float player_size_x, float player_size_y){

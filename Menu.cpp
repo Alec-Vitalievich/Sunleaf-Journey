@@ -43,11 +43,25 @@ Menu::Menu(sf::RenderWindow& window){
         load_sprite.setScale(button_scale, button_scale);
         controls_sprite.setScale(button_scale, button_scale);
 
-        start.setPosition(window.getSize().x / 2 - start.getGlobalBounds(). width / 2, window.getSize().y / 2 - start.getGlobalBounds().height - 200);
-        load_sprite.setPosition(window.getSize().x / 2 - load_sprite.getGlobalBounds(). width / 2, window.getSize().y / 2 - load_sprite.getGlobalBounds().height - 50);
-        controls_sprite.setPosition(window.getSize().x / 2 - controls_sprite.getGlobalBounds(). width / 2, window.getSize().y / 2 - controls_sprite.getGlobalBounds().height + 150);
-        exit.setPosition(window.getSize().x / 2 - exit.getGlobalBounds(). width / 2, window.getSize().y / 2 - exit.getGlobalBounds().height + 300);
+        auto center_origin = [](sf::Sprite& sprite) {
+            sf::FloatRect bounds = sprite.getLocalBounds();
+            sprite.setOrigin(bounds.width / 2, bounds.height / 2);
+        };
 
+        center_origin(start);
+        center_origin(load_sprite);
+        center_origin(controls_sprite);
+        center_origin(exit);
+
+        float centerX = windowSize.x / 2.0;
+        float centerY = windowSize.y / 2.0;
+
+        const float spacing = 100.0;
+
+        start.setPosition(centerX, centerY - spacing * 3);
+        load_sprite.setPosition(centerX, centerY - spacing * 1);
+        controls_sprite.setPosition(centerX, centerY + spacing * 1);
+        exit.setPosition(centerX, centerY + spacing * 3);
 
 }
 
@@ -62,9 +76,9 @@ void Menu::draw(sf::RenderWindow& window) {
 void Menu::update(sf::Vector2i mousePosition) {
     auto hover_effect = [&](sf::Sprite& sprite) {
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
-            sprite.setScale(0.65f, 0.65f);
+            sprite.setScale(0.65, 0.65);
         } else {
-            sprite.setScale(0.6f, 0.6f);
+            sprite.setScale(0.6, 0.6);
         }
     };
 
