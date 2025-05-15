@@ -12,12 +12,14 @@ class Player{ // Maybe add a name attribute?
         sf::Vector2f player_velocity;
         sf::Vector2i player_acceleration;
         sf::Vector2i max_player_velocity; // Maybe change to max velocity for consistency?
+        int player_health;
+        int sun_count;
         int friction_reduction;
         int jump_velocity;
         bool on_platform;
     public:
         Player(float player_position_x, float player_position_y, float player_size_x, 
-               float player_size_y); // Some of these can probably be changed to constant variables.
+               float player_size_y, int player_health, int sun_count); // Some of these can probably be changed to constant variables.
 
         bool get_on_platform();
         void set_on_platform(bool on_platform);
@@ -27,6 +29,12 @@ class Player{ // Maybe add a name attribute?
 
         float get_player_velocity_y();
         void set_player_velocity_y(float new_velocity);
+        
+        int get_player_health();
+        void set_player_health(int player_health);
+
+        int get_sun_count();
+        void set_sun_count(int sun_count);
 
         void set_player_position(float position_x, float position_y);
 
