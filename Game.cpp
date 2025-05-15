@@ -88,12 +88,44 @@ void Game::update(){ // Main gameplay loop.
         font.loadFromFile("Fonts/antiquity-print.ttf");
         sf::Text story_text;
         story_text.setFont(font);
-        story_text.setString("This game is fun");
+        story_text.setString("Buried in the darkness below,\n"
+                                "a small seedling sprouts,\n"
+                                "unfurling its leaves in a strange new world.\n\n"
+
+                                "You don't know how you got here,\n"
+                                "but you sense something is missing.\n"
+                                "Whilst the soil is lush with nutrients\n"
+                                "and water abounds, there's little light\n"
+                                "to be found. How will you grow without the sun?\n\n"
+
+                                "You must begin your journey to find the light\n"
+                                "and find a home a place to set down roots.\n"
+                                "Collect little slices of sun whilst traversing\n"
+                                "through a whole new world from dim caves full\n"
+                                "of dangerous obstacles to forests full of\n"
+                                "dappled light and shadow to reach your perfect\n"
+                                "patch of sun. But beware, it's a dangerous world\n"
+                                "out there for a small Sunleaf.\n"
+                                "\n");
         story_text.setCharacterSize(24);
         story_text.setFillColor(sf::Color::White);
-        story_text.setPosition(100, 100);
+        story_text.setPosition(100, 65);
+
+        //Separate text for continuing the game
+        sf::Text continue_text;
+        continue_text.setFont(font);
+        continue_text.setString("...Press ENTER to continue");
+        continue_text.setCharacterSize(24);
+        continue_text.setFillColor(sf::Color::Yellow);
+
+        //Position text
+        sf::Vector2u window_size = window.getSize();
+        float continue_text_x = 100;
+        float continue_text_y = window_size.y - 70;
+        continue_text.setPosition(continue_text_x, continue_text_y);
 
         window.draw(story_text);
+        window.draw(continue_text);
         window.display();
 
         }
