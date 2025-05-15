@@ -1,5 +1,5 @@
 #Source files and output file for project
-SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp Water.cpp Lava.cpp
+SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp Water.cpp Lava.cpp One_Way_Platform.cpp Jump_Pad.cpp
 OUT = test1.out
 
 # For windows systems

@@ -9,6 +9,8 @@
 #include "Spike.h"
 #include "Water.h"
 #include "Lava.h"
+#include "One_Way_Platform.h"
+#include "Jump_Pad.h"
 
 class Level{
     protected:

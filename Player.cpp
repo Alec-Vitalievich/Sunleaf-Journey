@@ -16,7 +16,7 @@ Player::Player(float player_position_x, float player_position_y, float player_si
     max_player_velocity.x = 500;
     max_player_velocity.y = 5000; // I have no idea what this value should be, so it can just be large for now.
     friction_reduction = 750;
-    jump_velocity = -500;
+    jump_velocity = -600;
     on_platform = false;
 }
 
@@ -55,6 +55,13 @@ void Player::set_sun_count(int sun_count){
     this->sun_count = sun_count;
 }
 
+int Player::get_jump_velocity(){
+    return jump_velocity;
+}
+void Player::set_jump_velocity(int jump_velocity){
+    this->jump_velocity = jump_velocity;
+}
+
 void Player::set_player_position(float position_x, float position_y){
     player_hitbox.setPosition(position_x, position_y);
 }
@@ -64,6 +71,7 @@ sf::RectangleShape& Player::get_player_hitbox(){
 }
 
 void Player::player_update(double dt, std::vector<Object*>& level_data){
+    // Potentially move to game class
     if(player_health < 0){
         player_health = 0;
     }
@@ -125,6 +133,8 @@ void Player::vertical_movement(double dt){
         player_velocity.y = jump_velocity;
         on_platform = false;
     }
+
+    jump_velocity = -600;
 
     // Gravity
     player_velocity.y += player_acceleration.y * dt;
