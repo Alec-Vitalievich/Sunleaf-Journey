@@ -247,8 +247,8 @@ void Player::encapsulated_collision(double dt, std::vector<Object*>& level_data)
         float object_right = object_boundary.left + object_boundary.width;
 
         // might be worth splitting the following if statement up a little for readability reasons. Removing the velocity requirement may be a good idea too? unsure.
-        if(player_boundary.top >= object_boundary.top && player_bottom <= object_bottom
-        && player_boundary.left >= object_boundary.left && player_right <= object_right){
+        if(player_boundary.left < object_right && player_right > object_boundary.left && player_boundary.top < object_bottom &&
+        player_bottom > object_boundary.top){
             level_data[i]->enscapsulated_collision_action(*this); // Passes the object that called the function (player) into the function.
             break;
         }
