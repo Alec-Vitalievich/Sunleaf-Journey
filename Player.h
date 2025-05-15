@@ -29,6 +29,12 @@ class Player{ // Maybe add a name attribute?
 
         float get_player_velocity_y();
         void set_player_velocity_y(float new_velocity);
+
+        int get_player_acceleration_x();
+        void set_player_acceleration_x(int new_acceleration);
+
+        int get_player_acceleration_y();
+        void set_player_acceleration_y(int new_acceleration);
         
         int get_player_health();
         void set_player_health(int player_health);

@@ -39,7 +39,7 @@ Level::Level(int level_number, bool* new_level){
             level_data.push_back(new Platform(230, 680, 20, 100));
             level_data.push_back(new Platform(10, 680, 20, 100));
             level_data.push_back(new Spike(1000,1060,100,20,1));
-            level_data.push_back(new Water(1300,1060,100,20,2));
+            level_data.push_back(new Water(1300,780,100,300,2));
             level_data.push_back(new Lava(1600,1060,100,20,2));
             level_data.push_back(new One_Way_Platform(800,1000,100,20));
             level_data.push_back(new Jump_Pad(600,980,100,100,2));

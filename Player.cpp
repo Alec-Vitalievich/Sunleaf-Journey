@@ -14,7 +14,7 @@ Player::Player(float player_position_x, float player_position_y, float player_si
     player_acceleration.x = 2000; // Horizontal acceleration
     player_acceleration.y = 1500; // Gravity
     max_player_velocity.x = 500;
-    max_player_velocity.y = 5000; // I have no idea what this value should be, so it can just be large for now.
+    max_player_velocity.y = 1500; // I have no idea what this value should be, so it can just be large for now.
     friction_reduction = 750;
     jump_velocity = -600;
     on_platform = false;
@@ -39,6 +39,20 @@ float Player::get_player_velocity_y(){
 }
 void Player::set_player_velocity_y(float new_velocity){
     player_velocity.y = new_velocity;
+}
+
+int Player::get_player_acceleration_x(){
+    return player_acceleration.x;
+}
+void Player::set_player_acceleration_x(int new_acceleration){
+    player_acceleration.x = new_acceleration;
+}
+
+int Player::get_player_acceleration_y(){
+    return player_acceleration.y;
+}
+void Player::set_player_acceleration_y(int new_acceleration){
+    player_acceleration.y = new_acceleration;
 }
 
 int Player::get_player_health(){
@@ -118,6 +132,8 @@ void Player::horizontal_movement(double dt){
         input = 0;
     }
 
+    player_acceleration.x = 2000;
+
     // Cap. speed.
     if(player_velocity.x > max_player_velocity.x){
         player_velocity.x = max_player_velocity.x;
@@ -136,6 +152,10 @@ void Player::vertical_movement(double dt){
 
     jump_velocity = -600;
 
+    if(player_velocity.y > 0){
+        on_platform = false;
+    }
+
     // Gravity
     player_velocity.y += player_acceleration.y * dt;
     if(player_velocity.y > max_player_velocity.y){
@@ -144,6 +164,9 @@ void Player::vertical_movement(double dt){
     else if(player_velocity.y < -max_player_velocity.y){ // Shouldn't really be possible, but just in case.
         player_velocity.y = -max_player_velocity.y;
     }
+
+    player_acceleration.y = 1500;
+
 }
 
 void Player::horizontal_collision(double dt, std::vector<Object*>& level_data){
