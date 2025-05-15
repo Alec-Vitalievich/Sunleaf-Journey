@@ -36,7 +36,7 @@ void Game::update(){ // Main gameplay loop.
                 if (event.type == sf::Event::MouseButtonPressed) {
                     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                     if (menu.is_start_clicked(mousePos)) {
-                        current_state = GameState::PLAYING;
+                        current_state = GameState::STORY;
                     }
                     if (menu.is_exit_clicked(mousePos)) {
                         window.close();
@@ -50,6 +50,33 @@ void Game::update(){ // Main gameplay loop.
             window.clear();
             menu.draw(window);
             window.display();
+        }
+
+        else if (current_state == GameState::STORY) {
+            sf::Event event;
+            while(window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                    current_state = GameState::PLAYING;
+                }
+            }
+
+        window.clear();
+
+        sf::Font font;
+        font.loadFromFile("Fonts/antiquity-print.ttf");
+        sf::Text story_text;
+        story_text.setFont(font);
+        story_text.setString("This game is fun");
+        story_text.setCharacterSize(24);
+        story_text.setFillColor(sf::Color::White);
+        story_text.setPosition(100, 100);
+
+        window.draw(story_text);
+        window.display();
+
         }
 
         else if (current_state == GameState::PLAYING) {
