@@ -11,8 +11,10 @@
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
 
+//Different game states
 enum class GameState {
     MENU,
+    STORY,
     PLAYING
 };
 
