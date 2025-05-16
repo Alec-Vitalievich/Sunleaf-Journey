@@ -155,7 +155,7 @@ void Game::update(){
         //Separate text for continuing the game
         sf::Text continue_text;
         continue_text.setFont(font);
-        continue_text.setString("...Press ENTER to continue");
+        continue_text.setString("...Press ENTER to continue, ...BACKSPACE to return to main menu");
         continue_text.setCharacterSize(24);
         continue_text.setFillColor(sf::Color::Yellow);
 
@@ -194,18 +194,26 @@ void Game::update(){
         controls_text.setFont(font);
         return_text.setFont(font);
 
-        controls_text.setString("WASD for movement keys\n"
-                                "E to interact");
+        controls_text.setString(
+            "CONTROLS:\n"
+            "\n"
+            " - W: Move Up\n"
+            " - A: Move Left\n"
+            " - S: Move Down\n"
+            " - D: Move Right\n"
+            " - E Interact (Portals, collectables like sun)\n"
+            " - Esc: Pause / Exit Game\n"
+        );
 
         return_text.setString("... Press ENTER to return to the main menu");
         
         controls_text.setCharacterSize(24);
         controls_text.setFillColor(sf::Color::White);
-        controls_text.setPosition(100, 65);
+        controls_text.setPosition(100, 40);
 
         return_text.setCharacterSize(24);
         return_text.setFillColor(sf::Color::Yellow);
-        return_text.setPosition(100, 25);
+        return_text.setPosition(100, 900);
 
         window.draw(controls_text);
         window.draw(return_text);
