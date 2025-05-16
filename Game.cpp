@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Menu.h"
+#include "save_data.h"
+#include "save_manager.h"
 #include <SFML/Audio.hpp>
 
 
@@ -20,13 +22,22 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
     new_level = new bool;
     *new_level = true;
     load_level(new_level);
+
+    if (!save_manager::load_game(save_game_data, "Saves/save.txt")) {
+        std::cerr << "Failed to load save";
+        save_game_data = save_data(0, 10, 400, 3, 0);
+    }
+
+    current_level = save_game_data.get_level_number();
+    player.set_player_position(save_game_data.get_player_position_x(), save_game_data.get_player_position_y());
+    player.set_player_health(save_game_data.get_player_health());
+    player.set_sun_count(save_game_data.get_sun_count());
 }
 
 void Game::load_level(bool* new_level){
     if(*new_level == true){
         if(level){ // Checks if the pointer is not null. level != nullptr could be used for clarity?
             delete level;
-            current_level++;
         }
         *new_level = false;
         level = new Level(current_level, new_level);
@@ -51,12 +62,35 @@ void Game::update(){ // Main gameplay loop.
 
                 if (event.type == sf::Event::MouseButtonPressed) {
                     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+
+                    //IF START IS CLICKED IN MENU
                     if (menu.is_start_clicked(mousePos)) {
                         current_state = GameState::STORY;
                     }
+
+                    //IF CONTROLS IS CLICKED IN MENU
                     if (menu.is_controls_clicked(mousePos)) {
                         current_state = GameState::CONTROLS;
                     }
+
+                    //IF LOAD IS CLICKED IN MENU
+                    if (menu.is_load_clicked(mousePos)) {
+                        if (save_manager::load_game(save_game_data, "Saves/save.txt")) {
+                            current_level = save_game_data.get_level_number();
+                            player.set_player_position(save_game_data.get_player_position_x(), save_game_data.get_player_position_y());
+                            player.set_player_health(save_game_data.get_player_health());
+                            player.set_sun_count(save_game_data.get_sun_count());
+
+                            *new_level = true;
+                            load_level(new_level);
+
+                            current_state = GameState::PLAYING;
+                        } else {
+                            std::cerr << "Failed to load game";
+                        }
+                    }
+
+                    //IF EXIT IS CLICKED IN MENU
                     if (menu.is_exit_clicked(mousePos)) {
                         window.close();
                     }
@@ -189,6 +223,14 @@ void Game::update(){ // Main gameplay loop.
                     while(window.pollEvent(event)){
                         if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)){
                             window.close();
+
+                            //Save the game
+                            save_game_data.set_level_number(current_level);
+                            save_game_data.set_player_position(player.get_player_position().x, player.get_player_position().y);
+                            save_game_data.set_player_health(player.get_player_health());
+                            save_game_data.set_sun_count(player.get_sun_count());
+
+                            save_manager::save_game(save_game_data, "Saves/save.txt");
                         }
                         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
                             current_state = GameState::MENU;

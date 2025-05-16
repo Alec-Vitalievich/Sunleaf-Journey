@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include "Level.h"
+#include "save_data.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
@@ -38,6 +39,8 @@ class Game {
         bool* new_level = nullptr;
 
         GameState current_state = GameState::MENU;
+
+        save_data save_game_data;
 
         // Music background_music;
 
