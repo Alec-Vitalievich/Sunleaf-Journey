@@ -45,6 +45,7 @@ class Player{ // Maybe add a name attribute?
         int get_jump_velocity();
         void set_jump_velocity(int jump_velocity);
 
+        int get_player_position(float position_x, float position_y);
         void set_player_position(float position_x, float position_y);
 
         sf::RectangleShape& get_player_hitbox();
