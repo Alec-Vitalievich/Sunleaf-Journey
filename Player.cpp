@@ -76,9 +76,8 @@ void Player::set_jump_velocity(int jump_velocity){
     this->jump_velocity = jump_velocity;
 }
 
-int Player::get_player_position(float position_x, float position_y){
-    return position_x;
-    return position_y;
+sf::Vector2f Player::get_player_position() {
+    return player_hitbox.getPosition();
 }
 
 void Player::set_player_position(float position_x, float position_y){
