@@ -3,7 +3,7 @@
 
 Menu::Menu(sf::RenderWindow& window){
     //Load background
-    if (!menuTexture.loadFromFile("Textures/MenuTextures/menu.png")) {
+    if (!menuTexture.loadFromFile("Assets/Textures/MenuTextures/menu.png")) {
         std::cerr << "Can't load texture";
     }
     menu.setTexture(menuTexture);
@@ -17,16 +17,16 @@ Menu::Menu(sf::RenderWindow& window){
 
     //Buttons
         //Check for textures
-        if (!startTexture.loadFromFile("Textures/MenuTextures/startButton.png")) {
+        if (!startTexture.loadFromFile("Assets/Textures/MenuTextures/startButton.png")) {
         std::cerr << "Can't load start texture";
         }
-        if (!load_texture.loadFromFile("Textures/MenuTextures/load_button.png")) {
+        if (!load_texture.loadFromFile("Assets/Textures/MenuTextures/load_button.png")) {
         std::cerr << "Can't load load texture";
         }
-        if (!controls_texture.loadFromFile("Textures/MenuTextures/controls_button.png")) {
+        if (!controls_texture.loadFromFile("Assets/Textures/MenuTextures/controls_button.png")) {
         std::cerr << "Can't load controls texture";
         }
-        if (!exitTexture.loadFromFile("Textures/MenuTextures/quitButton.png")) {
+        if (!exitTexture.loadFromFile("Assets/Textures/MenuTextures/quitButton.png")) {
         std::cerr << "Can't load quit texture";
         }
         
@@ -65,7 +65,7 @@ Menu::Menu(sf::RenderWindow& window){
 
         //Title screen
             //Load font
-            if (!font.loadFromFile("Fonts/antiquity-print.ttf")) {
+            if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf")) {
                 std::cerr << "Error loading font";
             }
 

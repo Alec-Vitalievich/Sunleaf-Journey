@@ -6,7 +6,7 @@ bool Music::play(const std::string& filename, bool loop) {
         background_music.stop();
     }
 
-    if (!background_music.openFromFile("Music/menu_music.ogg")) {
+    if (!background_music.openFromFile("Assets/Music/menu_music.ogg")) {
         return false;
     } 
     background_music.setLoop(loop);

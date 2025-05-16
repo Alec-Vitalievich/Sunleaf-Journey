@@ -23,7 +23,7 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
     *new_level = true;
     load_level(new_level);
 
-    if (!save_manager::load_game(save_game_data, "Saves/save.txt")) {
+    if (!save_manager::load_game(save_game_data, "Assets/Saves/save.txt")) {
         std::cerr << "Failed to load save";
         save_game_data = save_data(0, 10, 400, 3, 0);
     }
@@ -75,7 +75,7 @@ void Game::update(){ // Main gameplay loop.
 
                     //IF LOAD IS CLICKED IN MENU
                     if (menu.is_load_clicked(mousePos)) {
-                        if (save_manager::load_game(save_game_data, "Saves/save.txt")) {
+                        if (save_manager::load_game(save_game_data, "Assets/Saves/save.txt")) {
                             current_level = save_game_data.get_level_number();
                             player.set_player_position(save_game_data.get_player_position_x(), save_game_data.get_player_position_y());
                             player.set_player_health(save_game_data.get_player_health());
@@ -124,7 +124,7 @@ void Game::update(){ // Main gameplay loop.
                     window.clear();
 
                     sf::Font font;
-                    font.loadFromFile("Fonts/antiquity-print.ttf");
+                    font.loadFromFile("Assets/Fonts/antiquity-print.ttf");
                     sf::Text story_text;
                     story_text.setFont(font);
                     story_text.setString("Buried in the darkness below,\n"
@@ -184,7 +184,7 @@ void Game::update(){ // Main gameplay loop.
                     window.clear();
 
                     sf::Font font;
-                    font.loadFromFile("Fonts/antiquity-print.ttf");
+                    font.loadFromFile("Assets/Fonts/antiquity-print.ttf");
                     sf::Text controls_text;
                     sf::Text return_text;
                     controls_text.setFont(font);
@@ -230,7 +230,7 @@ void Game::update(){ // Main gameplay loop.
                             save_game_data.set_player_health(player.get_player_health());
                             save_game_data.set_sun_count(player.get_sun_count());
 
-                            save_manager::save_game(save_game_data, "Saves/save.txt");
+                            save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
                         }
                         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
                             current_state = GameState::MENU;

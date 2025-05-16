@@ -19,7 +19,7 @@ Level::Level(int level_number, bool* new_level){
         current_level_number = level_number;
         //Load background textures
         //Check for texture
-        if (!background_texture1.loadFromFile("Textures/LevelTextures/cave.png")) {
+        if (!background_texture1.loadFromFile("Assets/Textures/LevelTextures/cave.png")) {
                 std::cerr << "Failed to load textures!\n";
             } else {
                 background_sprite1.setTexture(background_texture1);
@@ -56,7 +56,7 @@ Level::Level(int level_number, bool* new_level){
             current_level_number = level_number;
             //Load background textures
             //Check for texture
-            if (!background_texture2.loadFromFile("Textures/LevelTextures/forest.png")) {
+            if (!background_texture2.loadFromFile("Assets/Textures/LevelTextures/forest.png")) {
                     std::cerr << "Failed to load textures!\n";
                 } else {
                     background_sprite2.setTexture(background_texture2);
@@ -79,7 +79,7 @@ Level::Level(int level_number, bool* new_level){
         current_level_number = level_number;
             //Load background textures
             //Check for texture
-            if (!background_texture3.loadFromFile("Textures/LevelTextures/garden.png")) {
+            if (!background_texture3.loadFromFile("Assets/Textures/LevelTextures/garden.png")) {
                     std::cerr << "Failed to load textures!\n";
                 } else {
                     background_sprite3.setTexture(background_texture3);
