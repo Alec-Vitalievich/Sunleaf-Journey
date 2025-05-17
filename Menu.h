@@ -7,11 +7,16 @@
 
 class Menu {
     public:
+
+        //Menu constructor
         Menu(sf::RenderWindow& window);
 
+
+        //Menu drawing and updates
         void draw(sf::RenderWindow& window);
         void update(sf::Vector2i mousePosition);
 
+        // Constructors for buttons
         bool is_start_clicked(sf::Vector2i mousePosition);
         bool is_exit_clicked(sf::Vector2i mousePosition);
         bool is_load_clicked(sf::Vector2i mousePosition);
@@ -32,7 +37,7 @@ class Menu {
         sf::Sprite load_sprite;
         sf::Sprite controls_sprite;
 
-        //Title
+        //Title font and text
         sf::Font font;
         sf::Text title_text;
 

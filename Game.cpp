@@ -5,7 +5,7 @@
 #include <SFML/Audio.hpp>
 
 // Game constructor
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(10,400,50,50,3,0){
+Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(0,0,50,50,3,0){
     
     // Initialise main variables
     this->game_name = window_name;

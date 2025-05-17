@@ -17,7 +17,7 @@ class Level{
         std::vector<Object*> level_data;
         // bool* new_level = nullptr; maybe not neccessary
 
-        //Textures
+        //Textures for levels
         sf::Texture background_texture1;
         sf::Sprite background_sprite1;
         sf::Texture background_texture2;
@@ -26,6 +26,7 @@ class Level{
         sf::Sprite background_sprite3;
 
         int current_level_number;
+        
     public:
         Level(int level_number, bool* new_level);
         std::vector<Object*>& get_level_vector();
