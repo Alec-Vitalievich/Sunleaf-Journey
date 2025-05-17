@@ -13,7 +13,7 @@ void Level_Loader::horizontal_collision_action(Player& player){}
 void Level_Loader::enscapsulated_collision_action(Player& player){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
         *new_level = true;
-        player.set_player_position(10,980); // Change to wherever the player's starting position is.
+        player.set_player_position(0,800); // Change to wherever the player's starting position is.
         player.set_player_velocity_x(0);
         player.set_player_velocity_y(0);
         player.set_player_health(player.get_player_health() + 1);
