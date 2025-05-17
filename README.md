@@ -55,7 +55,10 @@ brew install sfml@2
 ---
 
 ## 🖼️ Screenshots
-#add screenshots here
+<img width="1428" alt="sunleaf_journey1" src="https://github.com/user-attachments/assets/55096358-1b79-416f-b7d4-cfb29304f0d4" />
+<img width="1441" alt="sunleaf_journey2" src="https://github.com/user-attachments/assets/76160f22-6c69-49e5-94b0-96f7b44675ea" />
+
+
 ---
 
 ---
