@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Menu.h"
 #include "Story_Screen.h"
+#include "End_Screen.h"
 #include "save_data.h"
 #include "save_manager.h"
 #include <SFML/Audio.hpp>
@@ -9,7 +10,8 @@
 Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate,
            int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name)
            ,player(0,0,50,50,3,0), 
-           story_screen(font, sf::Vector2u(window_size_x, window_size_y)){
+           story_screen(font, sf::Vector2u(window_size_x, window_size_y)),
+           end_screen(font, sf::Vector2u(window_size_x, window_size_y)){
     
     // Load font
     if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf")) {
@@ -52,7 +54,13 @@ void Game::load_level(bool* new_level){
                 current_level++;
             }
             *new_level = false;
-            level = new Level(current_level, new_level);
+
+            if (current_level > 3) {
+                window.clear();
+                current_state = GameState::END;
+            } else {
+                level = new Level(current_level, new_level);
+            }
      }
 }
 
@@ -115,34 +123,34 @@ void Game::update(){
             window.display();
             }
 
-        // Story screen gamestate logic
-        else if (current_state == GameState::STORY) {
-            sf::Event event;
-            while(window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    window.close();
+    // Story screen gamestate logic
+    else if (current_state == GameState::STORY) {
+        sf::Event event;
+        while(window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
 
-                // Change gamestates depending on key pressed
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-                    current_level = 1;
-                    *new_level = true;
-                    load_level(new_level);
-                    player.set_sun_count(0);
-                    player.set_player_health(3);
-                    player.set_player_position(0,800);
-                    current_state = GameState::PLAYING;
-                }
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace) {
-                    current_state = GameState::MENU;
-                }
+            // Change gamestates depending on key pressed
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                current_level = 1;
+                *new_level = true;
+                load_level(new_level);
+                player.set_sun_count(0);
+                player.set_player_health(3);
+                player.set_player_position(0,800);
+                current_state = GameState::PLAYING;
             }
-                
-        window.clear();
-        story_screen.draw(window);
-        window.display();
-
-
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace) {
+                current_state = GameState::MENU;
+            }
         }
+            
+    window.clear();
+    story_screen.draw(window);
+    window.display();
+
+
+    }
 
     // Controls gamestate
     else if (current_state == GameState::CONTROLS) {
@@ -235,7 +243,29 @@ void Game::update(){
         window.draw(player.get_player_hitbox());
         window.display();
         }
+
+    // End screen gamestate
+    else if (current_state == GameState::END){
+        sf::Event event;
+        while(window.pollEvent(event)){
+            if(event.type == sf::Event::Closed){
+                window.close();
+            }
+
+            if (end_screen.handle_event(event)) {
+            current_state = GameState::MENU;
+            current_level = 0;
+            }
+        }
+
+        window.clear();
+        end_screen.draw(window);
+        window.display();
     }
+
+    }
+
+
 
         // Update player, update window, etc.
 }
@@ -247,6 +277,6 @@ void Game::update(){
 
 // Game destructor
     Game::~Game(){
-        delete level;
-        delete new_level;
+        if (level) delete level;
+        if (new_level) delete new_level;
     }
