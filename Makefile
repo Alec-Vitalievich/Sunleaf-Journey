@@ -16,7 +16,7 @@ LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 # -------------------------
 
 #Source files and output file for project
-SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp Water.cpp Lava.cpp One_Way_Platform.cpp Jump_Pad.cpp save_data.cpp save_manager.cpp Collectable.cpp Sun.cpp Heart.cpp Story_Screen.cpp
+SRC = main.cpp Game.cpp Player.cpp Object.cpp Platform.cpp Level_Loader.cpp Level.cpp Menu.cpp Obstacle.cpp Spike.cpp Water.cpp Lava.cpp One_Way_Platform.cpp Jump_Pad.cpp save_data.cpp save_manager.cpp Collectable.cpp Sun.cpp Heart.cpp Story_Screen.cpp End_Screen.cpp
 OUT = test1.out
 
 # -------------------------

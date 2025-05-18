@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "save_data.h"
 #include "Story_Screen.h"
+#include "End_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
@@ -48,6 +49,7 @@ class Game {
 
         // Screens
         story_screen story_screen;
+        end_screen end_screen;
 
         // Font
         sf::Font font;
