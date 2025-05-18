@@ -11,7 +11,7 @@ void Spike::vertical_collision_action(Player& player){ // This could be moved to
     sf::FloatRect player_hitbox_boundaries = player.get_player_hitbox().getGlobalBounds();
     sf::FloatRect spike_hitbox_boundaries = this->get_object_hitbox().getGlobalBounds();
     if(player.get_player_velocity_y() > 0){
-        player.set_player_position(10, 980);
+        player.set_player_position(0,800);
         player.set_player_health(player.get_player_health() - health_modifier);
         player.set_on_platform(true);
     }
@@ -38,6 +38,8 @@ void Spike::horizontal_collision_action(Player& player){
 }
 
 void Spike::enscapsulated_collision_action(Player& player){
+    player.set_player_position(0,800);
+    player.set_player_health(player.get_player_health() - health_modifier);
     // Doesn't do anything for spikes.
 }
 

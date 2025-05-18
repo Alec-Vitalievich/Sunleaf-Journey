@@ -18,10 +18,8 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
     window.setFramerateLimit(max_framerate);
     clock.restart();
 
-    // Load first level
+
     new_level = new bool;
-    *new_level = true;
-    load_level(new_level);
 
     // Save handling
     if (!save_manager::load_game(save_game_data, "Assets/Saves/save.txt")) {
@@ -42,6 +40,7 @@ void Game::load_level(bool* new_level){
         if(*new_level == true){
             if(level){ // Checks if the pointer is not null. level != nullptr could be used for clarity?
                 delete level;
+                current_level++;
             }
             *new_level = false;
             level = new Level(current_level, new_level);
@@ -116,6 +115,12 @@ void Game::update(){
 
                 // Change gamestates depending on key pressed
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                    current_level = 1;
+                    *new_level = true;
+                    load_level(new_level);
+                    player.set_sun_count(0);
+                    player.set_player_health(3);
+                    player.set_player_position(0,800);
                     current_state = GameState::PLAYING;
                 }
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace) {
@@ -201,7 +206,7 @@ void Game::update(){
             " - A: Move Left\n"
             " - S: Move Down\n"
             " - D: Move Right\n"
-            " - E Interact (Portals, collectables like sun)\n"
+            " - E Interact (Next level portal)\n"
             " - Esc: Pause / Exit Game\n"
         );
 
@@ -274,5 +279,6 @@ void Game::update(){
 
 // Game destructor
     Game::~Game(){
-        // Delete level perhaps?
+        delete level;
+        delete new_level;
     }
