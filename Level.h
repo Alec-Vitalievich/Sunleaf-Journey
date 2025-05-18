@@ -12,6 +12,11 @@
 #include "One_Way_Platform.h"
 #include "Jump_Pad.h"
 
+
+#include "Collectable.h"
+#include "Sun.h"
+#include "Heart.h"
+
 class Level{
     protected:
         std::vector<Object*> level_data;

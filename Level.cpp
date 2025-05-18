@@ -62,6 +62,10 @@ Level::Level(int level_number, bool* new_level){
                 level_data.push_back(new Platform(0, 1020, 1800, 1));
                 level_data.push_back(new Platform(-1, 0, 1, 1020));
                 level_data.push_back(new Platform(1800, 0, 1, 1020));
+
+                // Testing new sun texture
+                level_data.push_back(new Sun(550, 550, 20, 20));
+                level_data.push_back(new Heart(500, 550, 20, 20));
                 break;
 
         case 2:
