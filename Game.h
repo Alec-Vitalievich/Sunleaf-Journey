@@ -10,6 +10,7 @@
 #include <vector>
 #include "Level.h"
 #include "save_data.h"
+#include "Story_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
@@ -20,6 +21,7 @@ enum class GameState {
     STORY,
     PLAYING,
     CONTROLS,
+    PAUSE,
     END,
 };
 
@@ -43,6 +45,12 @@ class Game {
         save_data save_game_data;
 
         // Music background_music;
+
+        // Screens
+        story_screen story_screen;
+
+        // Font
+        sf::Font font;
 
     public:
         Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level);

@@ -1,11 +1,20 @@
 #include "Game.h"
 #include "Menu.h"
+#include "Story_Screen.h"
 #include "save_data.h"
 #include "save_manager.h"
 #include <SFML/Audio.hpp>
 
 // Game constructor
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate, int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name),player(0,0,50,50,3,0){
+Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate,
+           int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name)
+           ,player(0,0,50,50,3,0), 
+           story_screen(font, sf::Vector2u(window_size_x, window_size_y)){
+    
+    // Load font
+    if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf")) {
+        std::cerr << "Failed to load font";
+    }
     
     // Initialise main variables
     this->game_name = window_name;
@@ -129,50 +138,9 @@ void Game::update(){
             }
                 
         window.clear();
-
-        sf::Font font;
-        font.loadFromFile("Assets/Fonts/antiquity-print.ttf");
-        sf::Text story_text;
-        story_text.setFont(font);
-        story_text.setString("Buried in the darkness below,\n"
-                            "a small seedling sprouts,\n"
-                            "unfurling its leaves in a strange new world.\n\n"
-
-                            "You don't know how you got here,\n"
-                            "but you sense something is missing.\n"
-                            "Whilst the soil is lush with nutrients\n"
-                            "and water abounds, there's little light\n"
-                            "to be found. How will you grow without the sun?\n\n"
-
-                            "You must begin your journey to find the light\n"
-                            "and find a home a place to set down roots.\n"
-                            "Collect little slices of sun whilst traversing\n"
-                            "through a whole new world from dim caves full\n"
-                            "of dangerous obstacles to forests full of\n"
-                            "dappled light and shadow to reach your perfect\n"
-                            "patch of sun. But beware, it's a dangerous world\n"
-                            "out there for a small Sunleaf.\n"
-                            "\n");
-        story_text.setCharacterSize(24);
-        story_text.setFillColor(sf::Color::White);
-        story_text.setPosition(100, 65);
-
-        //Separate text for continuing the game
-        sf::Text continue_text;
-        continue_text.setFont(font);
-        continue_text.setString("...Press ENTER to continue, ...BACKSPACE to return to main menu");
-        continue_text.setCharacterSize(24);
-        continue_text.setFillColor(sf::Color::Yellow);
-
-        //Position text
-        sf::Vector2u window_size = window.getSize();
-        float continue_text_x = 100;
-        float continue_text_y = window_size.y - 70;
-        continue_text.setPosition(continue_text_x, continue_text_y);
-
-        window.draw(story_text);
-        window.draw(continue_text);
+        story_screen.draw(window);
         window.display();
+
 
         }
 

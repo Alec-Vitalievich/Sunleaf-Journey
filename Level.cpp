@@ -87,12 +87,44 @@ Level::Level(int level_number, bool* new_level){
                 background_sprite2.setScale(scaleX, scaleY);
                 }
                 
-            // Border to keep player falling out of bounds
-            level_data.push_back(new Platform(0, -1, 1800, 1));
-            level_data.push_back(new Platform(0, 1020, 1800, 1));
-            level_data.push_back(new Platform(-1, 0, 1, 1020));
-            level_data.push_back(new Platform(1800, 0, 1, 1020));
-            break;
+            // Level entities
+                // Base platform (start area)
+                level_data.push_back(new Platform(30, 980, 300, 20)); // Start platform at bottom left
+
+                // Zig-zag platforms
+                level_data.push_back(new Platform(400, 880, 300, 20)); // Right
+                level_data.push_back(new Platform(100, 780, 300, 20)); // Left
+                level_data.push_back(new Platform(500, 680, 300, 20)); // Right
+                level_data.push_back(new Platform(200, 580, 300, 20)); // Left
+                level_data.push_back(new Platform(600, 480, 300, 20)); // Right
+                level_data.push_back(new Platform(300, 380, 300, 20)); // Left
+                level_data.push_back(new Platform(700, 280, 300, 20)); // Right
+                level_data.push_back(new Platform(400, 180, 300, 20)); // Left
+
+                // Final platform with portal at top-right
+                level_data.push_back(new Platform(1200, 200, 200, 20)); // Final platform
+                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level)); // End portal
+                level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
+
+                // Obstacles
+                level_data.push_back(new Spike(555, 660, 100, 20, 1)); // Spike on a rightward platform
+                level_data.push_back(new Water(650, 960, 100, 40, 2)); // Water hazard near bottom
+                level_data.push_back(new Lava(900, 260, 100, 20, 2));  // Lava near the top
+                level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
+
+                // One-way platform
+                level_data.push_back(new One_Way_Platform(850, 180, 100, 20)); // Near final jump
+
+                // Border to keep player falling out of bounds
+                level_data.push_back(new Platform(0, -1, 1800, 1));
+                level_data.push_back(new Platform(0, 1020, 1800, 1));
+                level_data.push_back(new Platform(-1, 0, 1, 1020));
+                level_data.push_back(new Platform(1800, 0, 1, 1020));
+
+                // Testing new sun texture
+                level_data.push_back(new Sun(550, 550, 20, 20));
+                level_data.push_back(new Heart(500, 550, 20, 20));
+                break;
 
         case 3:
 
@@ -113,12 +145,44 @@ Level::Level(int level_number, bool* new_level){
                 }
                 
 
-            // Border to keep player falling out of bounds
-            level_data.push_back(new Platform(0, -1, 1800, 1));
-            level_data.push_back(new Platform(0, 1020, 1800, 1));
-            level_data.push_back(new Platform(-1, 0, 1, 1020));
-            level_data.push_back(new Platform(1800, 0, 1, 1020));
-            break;
+            // Level entities
+                // Base platform (start area)
+                level_data.push_back(new Platform(30, 980, 300, 20)); // Start platform at bottom left
+
+                // Zig-zag platforms
+                level_data.push_back(new Platform(400, 880, 300, 20)); // Right
+                level_data.push_back(new Platform(100, 780, 300, 20)); // Left
+                level_data.push_back(new Platform(500, 680, 300, 20)); // Right
+                level_data.push_back(new Platform(200, 580, 300, 20)); // Left
+                level_data.push_back(new Platform(600, 480, 300, 20)); // Right
+                level_data.push_back(new Platform(300, 380, 300, 20)); // Left
+                level_data.push_back(new Platform(700, 280, 300, 20)); // Right
+                level_data.push_back(new Platform(400, 180, 300, 20)); // Left
+
+                // Final platform with portal at top-right
+                level_data.push_back(new Platform(1200, 200, 200, 20)); // Final platform
+                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level)); // End portal
+                level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
+
+                // Obstacles
+                level_data.push_back(new Spike(555, 660, 100, 20, 1)); // Spike on a rightward platform
+                level_data.push_back(new Water(650, 960, 100, 40, 2)); // Water hazard near bottom
+                level_data.push_back(new Lava(900, 260, 100, 20, 2));  // Lava near the top
+                level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
+
+                // One-way platform
+                level_data.push_back(new One_Way_Platform(850, 180, 100, 20)); // Near final jump
+
+                // Border to keep player falling out of bounds
+                level_data.push_back(new Platform(0, -1, 1800, 1));
+                level_data.push_back(new Platform(0, 1020, 1800, 1));
+                level_data.push_back(new Platform(-1, 0, 1, 1020));
+                level_data.push_back(new Platform(1800, 0, 1, 1020));
+
+                // Testing new sun texture
+                level_data.push_back(new Sun(550, 550, 20, 20));
+                level_data.push_back(new Heart(500, 550, 20, 20));
+                break;
     }
 }
 
