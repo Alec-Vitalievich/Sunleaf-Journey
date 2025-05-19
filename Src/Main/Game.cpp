@@ -11,7 +11,8 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
            int current_level):window(sf::VideoMode(window_size_x, window_size_y), window_name)
            ,player(0,0,50,50,3,0), 
            story_screen(font, sf::Vector2u(window_size_x, window_size_y)),
-           end_screen(font, sf::Vector2u(window_size_x, window_size_y)){
+           end_screen(font, sf::Vector2u(window_size_x, window_size_y)),
+           control_screen(font, sf::Vector2u(window_size_x, window_size_y)){
     
     // Load font
     if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf")) {
@@ -160,45 +161,15 @@ void Game::update(){
                 window.close();
 
             // Return to main menu from controls screen
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+            if (control_screen.handle_event(event)) {
                 current_state = GameState::MENU;
             }
         }
 
         window.clear();
-
-        // Text to explain controls
-        sf::Font font;
-        font.loadFromFile("Assets/Fonts/antiquity-print.ttf");
-        sf::Text controls_text;
-        sf::Text return_text;
-        controls_text.setFont(font);
-        return_text.setFont(font);
-
-        controls_text.setString(
-            "CONTROLS:\n"
-            "\n"
-            " - W: Move Up\n"
-            " - A: Move Left\n"
-            " - S: Move Down\n"
-            " - D: Move Right\n"
-            " - E Interact (Next level portal)\n"
-            " - Esc: Pause / Exit Game\n"
-        );
-
-        return_text.setString("... Press ENTER to return to the main menu");
-        
-        controls_text.setCharacterSize(24);
-        controls_text.setFillColor(sf::Color::White);
-        controls_text.setPosition(100, 40);
-
-        return_text.setCharacterSize(24);
-        return_text.setFillColor(sf::Color::Yellow);
-        return_text.setPosition(100, 900);
-
-        window.draw(controls_text);
-        window.draw(return_text);
+        control_screen.draw(window);
         window.display();
+
 
     }
 

@@ -12,6 +12,7 @@
 #include "Save/save_data.h"
 #include "Screens/Story_Screen.h"
 #include "Screens/End_Screen.h"
+#include "Screens/Controls_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
@@ -49,6 +50,7 @@ class Game {
 
         // Screens
         Story_Screen story_screen;
+        Controls_Screen control_screen;
         End_Screen end_screen;
 
         // Font
