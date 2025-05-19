@@ -29,5 +29,16 @@
 # Executables
 *.exe
 *.out
-*.app.DS_Store
-Textures/.DS_Store
+*.app
+*.bin
+*.run
+
+# macOS 
+.DS_Store
+*/.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+
