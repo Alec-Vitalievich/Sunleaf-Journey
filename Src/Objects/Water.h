@@ -1,6 +1,6 @@
 #ifndef WATER_H
 #define WATER_H
-#include "Src/Objects/Obstacle.h"
+#include "Objects/Obstacle.h"
 
 class Water : public Obstacle{
     protected:

@@ -1,4 +1,4 @@
-#include "Src/Objects/Object.h"
+#include "Objects/Object.h"
 
         Object::Object(float object_position_x, float object_position_y, float object_size_x, float object_size_y){
             object_hitbox.setPosition(object_position_x, object_position_y);

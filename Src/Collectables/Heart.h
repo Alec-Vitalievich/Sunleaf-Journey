@@ -1,7 +1,7 @@
 #ifndef HEART_H
 #define HEART_H
-#include "Src/Collectables/Collectable.h"
-#include "Src/Objects/Object.h"
+#include "Collectables/Collectable.h"
+#include "Objects/Object.h"
 
 class Heart: public Collectable{
     protected:

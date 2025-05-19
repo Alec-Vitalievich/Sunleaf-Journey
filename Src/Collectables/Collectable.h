@@ -1,6 +1,6 @@
 #ifndef COLLECT_H
 #define COLLECT_H
-#include "Src/Objects/Object.h"
+#include "Objects/Object.h"
 class Collectable: public Object{
     protected:
     public:

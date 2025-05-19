@@ -1,6 +1,6 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
-#include "Src/Objects/Object.h"
+#include "Objects/Object.h"
 class Platform : public Object{
     protected:
     public:

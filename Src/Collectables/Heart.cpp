@@ -1,7 +1,7 @@
-#include "Src/Collectables/Heart.h"
-#include "Src/Collectables/Collectable.h"
-#include "Src/Objects/Object.h"
-#include "Src/Main/Player.h"
+#include "Collectables/Heart.h"
+#include "Collectables/Collectable.h"
+#include "Objects/Object.h"
+#include "Main/Player.h"
 
 Heart::Heart(float Heart_pos_x, float Heart_pos_y, float Heart_size_x, float Heart_size_y)
 : Collectable(Heart_pos_x,Heart_pos_y,Heart_size_x,Heart_size_y) {

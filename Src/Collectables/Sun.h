@@ -1,7 +1,7 @@
 #ifndef SUN_H
 #define SUN_H
-#include "Src/Collectables/Collectable.h"
-#include "Src/Objects/Object.h"
+#include "Collectables/Collectable.h"
+#include "Objects/Object.h"
 
 class Sun: public Collectable{
     protected:

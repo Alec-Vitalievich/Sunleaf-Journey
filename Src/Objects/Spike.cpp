@@ -1,5 +1,5 @@
-#include "Src/Objects/Obstacle.h"
-#include "Src/Main/Player.h"
+#include "Objects/Obstacle.h"
+#include "Main/Player.h"
 
 Spike::Spike(float spike_position_x, float spike_position_y, float spike_size_x, float spike_size_y, int health_modifer):
 Obstacle(spike_position_x, spike_position_y,spike_size_x, spike_size_y, health_modifer){

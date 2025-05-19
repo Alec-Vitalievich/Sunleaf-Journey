@@ -1,5 +1,6 @@
-#include "Src/Levels/Level.h"
-#include "Src/Main/Game.h"
+#include "Levels/Level.h"
+#include "Main/Game.h"
+#include "Collectables/Heart.h"
 #include <iostream>
 
 Level::Level(int level_number, bool* new_level){

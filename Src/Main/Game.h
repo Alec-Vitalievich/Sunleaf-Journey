@@ -1,17 +1,17 @@
 #ifndef GAME_H
 #define GAME_H
-#include "Src/Main/Player.h"
-#include "Src/Levels/Level.h"
-#include "Src/Screens/Menu.h"
-#include "Src/Audio/Music.h"
+#include "Main/Player.h"
+#include "Levels/Level.h"
+#include "Screens/Menu.h"
+// #include "Audio/Music.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
 #include <vector>
-#include "Src/Levels/Level.h"
-#include "Src/Save/save_data.h"
-#include "Src/Screens/Story_Screen.h"
-#include "Src/Screens/End_Screen.h"
+#include "Levels/Level.h"
+#include "Save/save_data.h"
+#include "Screens/Story_Screen.h"
+#include "Screens/End_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>

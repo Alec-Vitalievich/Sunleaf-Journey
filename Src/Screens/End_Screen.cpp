@@ -1,4 +1,4 @@
-#include "Src/Screens/End_Screen.h"
+#include "Screens/End_Screen.h"
 
 End_Screen::End_Screen(sf::Font& font, sf::Vector2u window_size) {
     end_text.setFont(font);
