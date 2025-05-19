@@ -17,6 +17,9 @@ class Player{ // Maybe add a name attribute?
         int friction_reduction;
         int jump_velocity;
         bool on_platform;
+
+        sf::Texture player_texture;
+
     public:
         Player(float player_position_x, float player_position_y, float player_size_x, 
                float player_size_y, int player_health, int sun_count); // Some of these can probably be changed to constant variables.
