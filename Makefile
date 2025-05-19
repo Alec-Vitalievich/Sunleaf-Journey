@@ -18,6 +18,13 @@ CXXFLAGS = -std=c++20 #-Wall -Wextra
 #Linker flags (SFML since using SFML libraries)
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+#Check OS
+ifeq ($(OS),Windows_NT)
+	CLEAR = cls
+else
+	CLEAR = clear
+endif
+
 # -------------------------
 # Files
 # -------------------------
@@ -47,12 +54,14 @@ $(OUT): $(OBJ)
 all: $(OUT)
 
 windows: all
+	@$(CLEAR)
 	@echo "Compiling for Windows"
 	@./$(OUT)
 
 mac: CXXFLAGS += $(SFML_INCLUDE)
 mac: LDFLAGS += $(SFML_LIB)
 mac: all
+	@$(CLEAR)
 	@echo "Compiling for macOS"
 	@./$(OUT)
 
@@ -69,6 +78,7 @@ debug: all
 # -------------------------
 
 clean:
+	@$(CLEAR)
 	rm -f $(OUT) $(OBJ)
 
 run: all
