@@ -1,6 +1,6 @@
 #ifndef SPIKE_H
 #define SPIKE_H
-#include "Obstacle.h"
+#include "Src/Objects/Obstacle.h"
 
 class Spike : public Obstacle{
     protected:

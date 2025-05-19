@@ -1,6 +1,6 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
-#include "Object.h"
+#include "Src/Objects/Object.h"
 
 class Obstacle : public Object{
     protected:

@@ -3,19 +3,19 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Object.h"
-#include "Platform.h"
-#include "Level_Loader.h"
-#include "Spike.h"
-#include "Water.h"
-#include "Lava.h"
-#include "One_Way_Platform.h"
-#include "Jump_Pad.h"
+#include "Src/Objects/Object.h"
+#include "Src/Objects/Platform.h"
+#include "Src/Levels/Level_Loader.h"
+#include "Src/Objects/Spike.h"
+#include "Src/Objects/Water.h"
+#include "Src/Objects/Lava.h"
+#include "Src/Objects/One_Way_Platform.h"
+#include "Src/Objects/Jump_Pad.h"
 
 
-#include "Collectable.h"
-#include "Sun.h"
-#include "Heart.h"
+#include "Src/Collectables/Collectable.h"
+#include "Src/Collectables/Sun.h"
+#include "Src/Collectables/Sun.h"
 
 class Level{
     protected:

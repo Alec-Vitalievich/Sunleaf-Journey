@@ -1,5 +1,5 @@
-#include "Water.h"
-#include "Player.h"
+#include "Src/Objects/Water.h"
+#include "Src/Main/Player.h"
 
 Water::Water(float Water_position_x, float Water_position_y, float Water_size_x, float Water_size_y, int health_modifer):
 Obstacle(Water_position_x, Water_position_y,Water_size_x, Water_size_y, health_modifer){

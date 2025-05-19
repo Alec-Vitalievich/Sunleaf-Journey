@@ -1,6 +1,6 @@
 #ifndef ONE_WAY_PLATFORM_H
 #define ONE_WAY_PLATFORM_H
-#include "Platform.h"
+#include "Src/Objects/Platform.h"
 
 class One_Way_Platform : public Platform{
     protected:

@@ -1,9 +1,9 @@
-#include "Game.h"
-#include "Menu.h"
-#include "Story_Screen.h"
-#include "End_Screen.h"
-#include "save_data.h"
-#include "save_manager.h"
+#include "Src/Main/Game.h"
+#include "Src/Screens/Menu.h"
+#include "Src/Screens/Story_Screen.h"
+#include "Src/Screens/End_Screen.h"
+#include "Src/Save/save_data.h"
+#include "Src/Save/save_manager.h"
 #include <SFML/Audio.hpp>
 
 // Game constructor

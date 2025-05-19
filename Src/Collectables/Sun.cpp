@@ -1,7 +1,7 @@
-#include "Collectable.h"
-#include "Object.h"
-#include "Sun.h"
-#include "Player.h"
+#include "Src/Collectables/Collectable.h"
+#include "Src/Objects/Object.h"
+#include "Src/Collectables/Sun.h"
+#include "Src/Main/Player.h"
 
 
 Sun::Sun(float Sun_pos_x, float Sun_pos_y, float Sun_size_x, float Sun_size_y)

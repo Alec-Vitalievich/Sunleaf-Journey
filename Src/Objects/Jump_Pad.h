@@ -1,6 +1,6 @@
 #ifndef JUMP_PAD
 #define JUMP_PAD
-#include "Object.h"
+#include "Src/Objects/Object.h"
 
 class Jump_Pad : public Object{
     protected:

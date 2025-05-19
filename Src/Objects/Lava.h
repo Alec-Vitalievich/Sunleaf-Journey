@@ -1,6 +1,6 @@
 #ifndef LAVA_H
 #define LAVA_H
-#include "Obstacle.h"
+#include "Src/Objects/Obstacle.h"
 
 class Lava : public Obstacle{
     protected:

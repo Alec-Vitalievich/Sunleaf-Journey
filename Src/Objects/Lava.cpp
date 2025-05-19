@@ -1,5 +1,5 @@
-#include "Lava.h"
-#include "Player.h"
+#include "Src/Objects/Lava.h"
+#include "Src/Main/Player.h"
 
 Lava::Lava(float Lava_position_x, float Lava_position_y, float Lava_size_x, float Lava_size_y, int health_modifer):
 Obstacle(Lava_position_x, Lava_position_y,Lava_size_x, Lava_size_y, health_modifer){

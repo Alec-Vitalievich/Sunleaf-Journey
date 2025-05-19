@@ -1,5 +1,5 @@
-#include "Jump_Pad.h"
-#include "Player.h"
+#include "Src/Objects/Jump_Pad.h"
+#include "Src/Main/Player.h"
 
 Jump_Pad::Jump_Pad(float jump_pad_position_x, float jump_pad_position_y, float jump_pad_size_x, float jump_pad_size_y, int jump_modifier):
 Object(jump_pad_position_x, jump_pad_position_y, jump_pad_size_x, jump_pad_size_y),jump_modifier(jump_modifier){

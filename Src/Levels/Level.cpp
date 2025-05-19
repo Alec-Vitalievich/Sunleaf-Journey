@@ -1,5 +1,5 @@
-#include "Level.h"
-#include "Game.h"
+#include "Src/Levels/Level.h"
+#include "Src/Main/Game.h"
 #include <iostream>
 
 Level::Level(int level_number, bool* new_level){

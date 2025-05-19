@@ -1,4 +1,4 @@
-#include "Story_Screen.h"
+#include "Src/Screens/Story_Screen.h"
 
 Story_Screen::Story_Screen(sf::Font& font, sf::Vector2u window_size) {
     story_text.setFont(font);

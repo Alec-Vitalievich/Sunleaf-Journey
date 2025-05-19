@@ -1,5 +1,5 @@
-#include "Level_Loader.h"
-#include "Player.h"
+#include "Src/Levels/Level_Loader.h"
+#include "Src/Main/Player.h"
 
 Level_Loader::Level_Loader(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y, bool* new_level):
 Object(platform_position_x, platform_position_y,platform_size_x, platform_size_y),new_level(new_level){
