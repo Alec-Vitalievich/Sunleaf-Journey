@@ -4,10 +4,18 @@
 
 Player::Player(float player_position_x, float player_position_y, float player_size_x, 
                 float player_size_y, int player_health, int sun_count){
+    
+    
     player_hitbox.setPosition(player_position_x, player_position_y);
     player_hitbox.setSize({player_size_x, player_size_y}); // Takes a vector2f, or 2 position in {}.
-    player_hitbox.setFillColor(sf::Color::Cyan); // Will be replaced by texture
     
+    if (!player_texture.loadFromFile("Assets/Textures/player_texture.png")) {
+        std::cerr << "Failed to load player texture";
+        player_hitbox.setFillColor(sf::Color::Magenta);
+    } else {
+        player_hitbox.setTexture(&player_texture);
+    }
+
     this->player_health = player_health;
     this->sun_count = sun_count;
 
