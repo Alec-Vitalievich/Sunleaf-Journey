@@ -13,6 +13,7 @@
 #include "Screens/Story_Screen.h"
 #include "Screens/End_Screen.h"
 #include "Screens/Controls_Screen.h"
+#include "Screens/Pause_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>

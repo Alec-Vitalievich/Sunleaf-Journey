@@ -2,9 +2,12 @@
 #include "Screens/Menu.h"
 #include "Screens/Story_Screen.h"
 #include "Screens/End_Screen.h"
+#include "Screens/Pause_Screen.h"
 #include "Save/save_data.h"
 #include "Save/save_manager.h"
 #include <SFML/Audio.hpp>
+
+/*pause_screen(font, sf::Vector2u(window_size_x, window_size_y))*/
 
 // Game constructor
 Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate,
@@ -71,6 +74,7 @@ void Game::update(){
 
     // Load main menu
     Menu menu(window);
+    Pause_Screen pause_screen(window);
 
         /* if (!background_music.play("Music/menu_music.ogg", true)) {
             std::cerr << "Error loading music\n";
@@ -185,19 +189,19 @@ void Game::update(){
 
     sf::Event event; // Could be moved to constructor, but it's essentially empty so initialising every loop isn't intensive. May improve readability? To be revisited.
     while(window.pollEvent(event)){
-        if(event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)){
-            window.close();
 
-            //Save the game
+        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
+            current_state = GameState::MENU;
+        }
+        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape){
+            current_state = GameState::PAUSE;
+
             save_game_data.set_level_number(current_level);
             save_game_data.set_player_position(player.get_player_position().x, player.get_player_position().y);
             save_game_data.set_player_health(player.get_player_health());
             save_game_data.set_sun_count(player.get_sun_count());
 
             save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
-        }
-        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
-            current_state = GameState::MENU;
         }
     }
 
@@ -234,11 +238,86 @@ void Game::update(){
         window.display();
     }
 
+    // Pause gamestate
+    else if (current_state == GameState::PAUSE){
+        sf::Event event;
+        while(window.pollEvent(event)){
+            if(event.type == sf::Event::Closed) window.close();
+
+            // Get mouse pos
+            if (event.type == sf::Event::MouseButtonPressed) {
+                sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+
+                // Buttons
+                if (pause_screen.is_resume_clicked(mouse_position)) current_state = GameState::PLAYING;
+                if (pause_screen.is_quit_clicked(mouse_position)) current_state = GameState::MENU;
+                }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) current_state = GameState::PLAYING;
+
+
+        }
+
+        sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+        pause_screen.update(mouse_position);
+
+        window.clear();
+        pause_screen.draw(window);
+        window.display();
+    
     }
 
 
+    /* Pause gamestate
+    else if (current_state == GameState::PAUSE) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
 
-        // Update player, update window, etc.
+            if (event.type == sf::Event::MouseMoved) {
+                sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+                pause_screen.update_hover(mouse_position);
+            }
+
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+                    pause_screen.handle_event(event, mouse_position);
+
+                    if (pause_screen.is_resume_clicked()) {
+                        current_state = GameState::PLAYING;
+                    }
+
+                    if (pause_screen.is_quit_clicked()) {
+
+                        // Save game
+                        save_game_data.set_level_number(current_level);
+                        save_game_data.set_player_position(player.get_player_position().x, player.get_player_position().y);
+                        save_game_data.set_player_health(player.get_player_health());
+                        save_game_data.set_sun_count(player.get_sun_count());
+
+                        save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
+
+                        current_state = GameState::MENU;
+                    }
+}
+            
+            if (event.type == sf::Event::KeyPressed &&
+                event.key.code == sf::Keyboard::P){
+                current_state = GameState::PLAYING;
+                }
+        }
+
+        // Draw window
+        window.clear(sf::Color(0, 0, 0, 150));
+        pause_screen.draw(window);
+        window.display();
+    }
+
+    } 
+    */
+        // Update player, update window, etc.   
+    }
 }
 
 // Game dt getter
