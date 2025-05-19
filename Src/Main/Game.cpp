@@ -193,6 +193,7 @@ void Game::update(){
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace){
             current_state = GameState::MENU;
         }
+        if(event.type == sf::Event::Closed) window.close();
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape){
             current_state = GameState::PAUSE;
 
@@ -260,8 +261,22 @@ void Game::update(){
         sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
         pause_screen.update(mouse_position);
 
+        // Block of code to make the pause menu transparent so you can still see the level
+        std::vector<Object*> level_data = level->get_level_vector();
         window.clear();
-        pause_screen.draw(window);
+        level->draw_background(window);
+        for(int i = 0; i < level_data.size(); i++){
+            window.draw(level_data[i]->get_object_hitbox());
+        }
+        window.draw(player.get_player_hitbox());
+
+        sf::RectangleShape transparent_overlay;
+        transparent_overlay.setSize(sf::Vector2f(window_size.x, window_size.y));
+        transparent_overlay.setFillColor(sf::Color(0, 0, 0, 150)); // RGBA - 150 alpha for ~50% opacity
+        window.draw(transparent_overlay);
+
+        // Pause window
+        pause_screen.draw(window);  
         window.display();
     
     }
