@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 
-class end_screen{
+class End_Screen{
     private:
         sf::Text end_text;
         sf::Text return_text;
 
     public:
-        end_screen(sf::Font& font, const sf::Vector2u window_size);
+        End_Screen(sf::Font& font, const sf::Vector2u window_size);
 
         void draw(sf::RenderWindow& window);
         bool handle_event(const sf::Event& event);

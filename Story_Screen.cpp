@@ -1,6 +1,6 @@
 #include "Story_Screen.h"
 
-story_screen::story_screen(sf::Font& font, sf::Vector2u window_size) {
+Story_Screen::Story_Screen(sf::Font& font, sf::Vector2u window_size) {
     story_text.setFont(font);
     story_text.setString("Buried in the darkness below,\n"
                             "a small seedling sprouts,\n"
@@ -35,11 +35,11 @@ story_screen::story_screen(sf::Font& font, sf::Vector2u window_size) {
 
 }
 
-void story_screen::draw(sf::RenderWindow& window) {
+void Story_Screen::draw(sf::RenderWindow& window) {
     window.draw(story_text);
     window.draw(continue_text);
 }
 
-bool story_screen::handle_event(const sf::Event& event) {
+bool Story_Screen::handle_event(const sf::Event& event) {
     return (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter);
 }

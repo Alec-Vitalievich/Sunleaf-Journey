@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 
-class story_screen {
+class Story_Screen {
     private:
         sf::Text story_text;
         sf::Text continue_text;
 
     public:
-        story_screen(sf::Font& font, const sf::Vector2u window_size);
+        Story_Screen(sf::Font& font, const sf::Vector2u window_size);
         
         void draw(sf::RenderWindow& window);
         bool handle_event(const sf::Event& event);

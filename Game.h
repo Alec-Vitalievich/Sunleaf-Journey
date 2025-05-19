@@ -48,8 +48,8 @@ class Game {
         // Music background_music;
 
         // Screens
-        story_screen story_screen;
-        end_screen end_screen;
+        Story_Screen story_screen;
+        End_Screen end_screen;
 
         // Font
         sf::Font font;
