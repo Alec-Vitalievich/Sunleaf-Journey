@@ -2,6 +2,7 @@
 #include "Main/Game.h"
 #include "Collectables/Heart.h"
 #include <iostream>
+#include <string>
 
 Level::Level(int level_number, bool* new_level){
 
@@ -11,6 +12,25 @@ Level::Level(int level_number, bool* new_level){
     //Level logic
     if(level_number > 3) level_number = 3; //Game only has 3 levels
     else if(level_number < 0) level_number = 0;
+
+
+    // Load textures for custom display. Some of it could be moved into the custom display, but it will stop it wasting resources.
+    if (!sun_display_texture.loadFromFile("Assets/Textures/ObjectTextures/sun.png")){
+    std::cout << "Failed to load sun texture (display function)!" << std::endl;
+    }
+    else{
+        sun_display_sprite.setTexture(sun_display_texture);
+        sun_display_sprite.setScale(2,2);
+    }
+
+    if (!health_display_texture.loadFromFile("Assets/Textures/ObjectTextures/heart.png")){
+    std::cout << "Failed to load heart texture (display function)!" << std::endl;
+    }
+    else{
+        health_display_sprite.setTexture(health_display_texture);
+        health_display_sprite.setScale(2,2);
+    }
+
 
     //Switch for each level
     switch(level_number){
@@ -209,6 +229,24 @@ void Level::draw_background(sf::RenderWindow& window) {
         break;
     }
     window.draw(background_sprite1);
+}
+
+void Level::custom_stats_display(sf::RenderWindow& window, sf::Font& font, Player& player){
+    sun_display_sprite.setPosition(20,20);
+    health_display_sprite.setPosition(20,80);
+
+    std::string sun_text_string = "#: " + std::to_string(player.get_sun_count());
+    sf::Text sun_text(sun_text_string, font, 32);
+    sun_text.setPosition(70, 20);
+
+    std::string health_text_string = "#: " + std::to_string(player.get_player_health());
+    sf::Text health_text(health_text_string, font, 32);
+    health_text.setPosition(70, 80);
+
+    window.draw(sun_display_sprite);
+    window.draw(health_display_sprite);
+    window.draw(sun_text);
+    window.draw(health_text);
 }
 
 std::vector<Object*>& Level::get_level_vector(){

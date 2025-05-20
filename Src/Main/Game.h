@@ -58,7 +58,7 @@ class Game {
         sf::Font font;
 
     public:
-        Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level);
+        Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level); // Update to remove window size variables
         void load_level(bool* new_level);
         void update(); // Removed parameter: sf::RectangleShape& player_hitbox
         double get_dt();

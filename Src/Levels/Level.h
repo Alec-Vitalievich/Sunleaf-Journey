@@ -17,6 +17,8 @@
 #include "Collectables/Sun.h"
 #include "Collectables/Sun.h"
 
+#include "Main/Player.h"
+
 class Level{
     protected:
         std::vector<Object*> level_data;
@@ -30,12 +32,19 @@ class Level{
         sf::Texture background_texture3;
         sf::Sprite background_sprite3;
 
+        // Textures for custom display:
+        sf::Texture sun_display_texture;
+        sf::Sprite sun_display_sprite;
+        sf::Texture health_display_texture;
+        sf::Sprite health_display_sprite;
+
         int current_level_number;
         
     public:
         Level(int level_number, bool* new_level);
         std::vector<Object*>& get_level_vector();
         void draw_background(sf::RenderWindow& window);
+        void custom_stats_display(sf::RenderWindow& window, sf::Font& font, Player& player);
         ~Level();
 };
 

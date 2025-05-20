@@ -212,6 +212,8 @@ void Game::update(){
         player.player_update(dt, level_data);
         window.clear();
         level->draw_background(window);
+        level->custom_stats_display(window, font, player);
+        // std::cout << "Health: " << player.get_player_health() << " | Sun: " << player.get_sun_count() << std::endl;
 
         for(int i = 0; i < level_data.size(); i++){
             window.draw(level_data[i]->get_object_hitbox());
@@ -265,6 +267,7 @@ void Game::update(){
         std::vector<Object*> level_data = level->get_level_vector();
         window.clear();
         level->draw_background(window);
+        level->custom_stats_display(window, font, player);
         for(int i = 0; i < level_data.size(); i++){
             window.draw(level_data[i]->get_object_hitbox());
         }
