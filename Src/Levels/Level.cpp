@@ -71,7 +71,7 @@ Level::Level(int level_number, bool* new_level){
                 level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
 
                 // Obstacles
-                level_data.push_back(new Spike(555, 660, 100, 20, 1)); // Spike on a rightward platform
+                level_data.push_back(new Spike(555, 660, 100, 21, 20)); // Spike on a rightward platform
                 level_data.push_back(new Water(650, 960, 100, 40, 2)); // Water hazard near bottom
                 level_data.push_back(new Lava(900, 260, 100, 20, 2));  // Lava near the top
                 level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
