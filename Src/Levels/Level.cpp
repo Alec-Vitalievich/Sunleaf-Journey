@@ -4,14 +4,14 @@
 #include <iostream>
 #include <string>
 
-Level::Level(int level_number, bool* new_level){
+Level::Level(int* level_number, bool* new_level){
 
     //Get window size
     sf::Vector2u windowSize = sf::Vector2u(1800, 1020); // Remember to change when window is scaled.
 
     //Level logic
-    if(level_number > 3) level_number = 3; //Game only has 3 levels
-    else if(level_number < 0) level_number = 0;
+    if(*level_number > 3) *level_number = 3; //Game only has 3 levels
+    else if(*level_number < 0) *level_number = 0;
 
 
     // Load textures for custom display. Some of it could be moved into the custom display, but it will stop it wasting resources.
@@ -33,10 +33,10 @@ Level::Level(int level_number, bool* new_level){
 
 
     //Switch for each level
-    switch(level_number){
+    switch(*level_number){
         case 1:
 
-            current_level_number = level_number;
+            current_level_number = *level_number;
 
             //Load textures
             if (!background_texture1.loadFromFile("Assets/Textures/LevelTextures/cave.png")) {
@@ -67,8 +67,8 @@ Level::Level(int level_number, bool* new_level){
 
                 // Final platform with portal at top-right
                 level_data.push_back(new Platform(1200, 200, 200, 20)); // Final platform
-                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level)); // End portal
-                level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
+                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
+                level_data.push_back(new Water(1550, 200, 100, 900,2)); // Water beneath portal (added by Isabella)
 
                 // Obstacles
                 level_data.push_back(new Spike(555, 660, 21, 20, 1)); // Spike on a rightward platform
@@ -92,7 +92,7 @@ Level::Level(int level_number, bool* new_level){
 
         case 2:
 
-            current_level_number = level_number;
+            current_level_number = *level_number;
                 
             // Load textures
             if (!background_texture2.loadFromFile("Assets/Textures/LevelTextures/forest.png")) {
@@ -108,7 +108,7 @@ Level::Level(int level_number, bool* new_level){
                 background_sprite2.setScale(scaleX, scaleY);
                 }
                 
-            // Level entities
+            // Level  (consider moving to save file, can iterate through file using loop.)
                 // Base platform (start area)
                 level_data.push_back(new Platform(30, 980, 300, 20)); // Start platform at bottom left
 
@@ -124,12 +124,12 @@ Level::Level(int level_number, bool* new_level){
 
                 // Final platform with portal at top-right
                 level_data.push_back(new Platform(1200, 200, 200, 20)); // Final platform
-                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level)); // End portal
-                level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
+                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
+                level_data.push_back(new Water(1550, 200, 100, 900,2)); // Water beneath portal (added by Isabella)
 
                 // Obstacles
                 level_data.push_back(new Spike(555, 660, 100, 20, 1)); // Spike on a rightward platform
-                level_data.push_back(new Water(650, 960, 100, 40, 2)); // Water hazard near bottom
+                level_data.push_back(new Water(850, 400, 100, 500, 2)); // Water hazard near bottom
                 level_data.push_back(new Lava(900, 260, 100, 20, 2));  // Lava near the top
                 level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
 
@@ -149,7 +149,7 @@ Level::Level(int level_number, bool* new_level){
 
         case 3:
 
-            current_level_number = level_number;
+            current_level_number = *level_number;
 
             //Check for texture
             if (!background_texture3.loadFromFile("Assets/Textures/LevelTextures/garden.png")) {
@@ -182,8 +182,8 @@ Level::Level(int level_number, bool* new_level){
 
                 // Final platform with portal at top-right
                 level_data.push_back(new Platform(1200, 200, 200, 20)); // Final platform
-                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level)); // End portal
-                level_data.push_back(new Platform(1550, 200, 100, 20)); // Platform beneath portal (added by Isabella)
+                level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
+                level_data.push_back(new Water(1550, 200, 100, 900,2)); // Water beneath portal (added by Isabella)
 
                 // Obstacles
                 level_data.push_back(new Spike(555, 660, 100, 20, 1)); // Spike on a rightward platform

@@ -41,7 +41,7 @@ class Level{
         int current_level_number;
         
     public:
-        Level(int level_number, bool* new_level);
+        Level(int* level_number, bool* new_level);
         std::vector<Object*>& get_level_vector();
         void draw_background(sf::RenderWindow& window);
         void custom_stats_display(sf::RenderWindow& window, sf::Font& font, Player& player);

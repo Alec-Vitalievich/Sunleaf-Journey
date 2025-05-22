@@ -40,7 +40,7 @@ class Game {
 
         Player player;
         Level* level = nullptr; // was getting seg faults if it wasn't initialised as a nullptr.
-        int current_level;
+        int* current_level;
         bool* new_level = nullptr;
 
         GameState current_state = GameState::MENU;
@@ -58,7 +58,7 @@ class Game {
         sf::Font font;
 
     public:
-        Game(int window_x_size, int window_y_size, std::string name, int max_framerate, int current_level); // Update to remove window size variables
+        Game(int window_x_size, int window_y_size, std::string name, int max_framerate); // Update to remove window size variables
         void load_level(bool* new_level);
         void update(); // Removed parameter: sf::RectangleShape& player_hitbox
         double get_dt();
