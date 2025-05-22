@@ -253,7 +253,6 @@ void Game::update()
         // End screen gamestate
         else if (current_state == GameState::END)
         {   
-            std::cout << "Sucessfully entered end state\n";
             if (level) {
                 delete level;
                 level = nullptr;
