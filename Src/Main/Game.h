@@ -29,24 +29,30 @@ enum class GameState
     END,
 };
 
+// Main class - manages all other classes and processes.
 class Game
 {
 protected:
+    // General game variables.
     sf::Vector2u window_size;
     std::string game_name;
     int max_framerate;
 
-    sf::RenderWindow window;
+    // Clock/time object & variable.
     sf::Clock clock;
     double dt; // Delta time (time elapsed since last frame)
 
+    // Player object and level-related pointers.
     Player player;
     Level *level = nullptr;
     int *current_level;
     bool *new_level = nullptr;
 
+    // Default gamestate.
     GameState current_state = GameState::MENU;
 
+    // Other objects.
+    sf::RenderWindow window;
     save_data save_game_data;
 
     // Music background_music;
@@ -62,7 +68,7 @@ protected:
 public:
     Game(int window_x_size, int window_y_size, std::string name, int max_framerate); // Update to remove window size variables
     void load_level(bool *new_level);
-    void update(); // Removed parameter: sf::RectangleShape& player_hitbox
+    void update();
     double get_dt();
     ~Game();
 };
