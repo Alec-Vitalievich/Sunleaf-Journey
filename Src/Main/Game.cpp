@@ -7,13 +7,11 @@
 #include "Save/save_manager.h"
 #include <SFML/Audio.hpp>
 
-/*pause_screen(font, sf::Vector2u(window_size_x, window_size_y))*/
-
 // Game constructor
 Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate) : window(sf::VideoMode(window_size_x, window_size_y), window_name), player(0, 0, 50, 50, 3, 0),
-                                story_screen(font, sf::Vector2u(window_size_x, window_size_y)),
-                                end_screen(font, sf::Vector2u(window_size_x, window_size_y)),
-                                control_screen(font, sf::Vector2u(window_size_x, window_size_y))
+                                                                                               story_screen(font, sf::Vector2u(window_size_x, window_size_y)),
+                                                                                               end_screen(font, sf::Vector2u(window_size_x, window_size_y)),
+                                                                                               control_screen(font, sf::Vector2u(window_size_x, window_size_y))
 {
 
     // Load font
@@ -38,14 +36,8 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
     if (!save_manager::load_game(save_game_data, "Assets/Saves/save.txt"))
     {
         std::cerr << "Failed to load save";
-        save_game_data = save_data(1, 10, 400, 3, 0);
+        save_game_data = save_data(1, 3, 0);
     }
-
-    // Extract and apply sava data to current game
-    *current_level = save_game_data.get_level_number();
-    player.set_player_position(save_game_data.get_player_position_x(), save_game_data.get_player_position_y());
-    player.set_player_health(save_game_data.get_player_health());
-    player.set_sun_count(save_game_data.get_sun_count());
 }
 
 // Level loading handling
@@ -88,13 +80,14 @@ void Game::update()
     {
         // Check current gamestate
         if (current_state == GameState::MENU)
-        {   
-            if (level) {
+        {
+            if (level)
+            {
                 delete level;
                 level = nullptr;
             }
 
-            *current_level = 1;  // Reset level
+            *current_level = 1; // Reset level
             sf::Event event;
             while (window.pollEvent(event))
             {
@@ -118,9 +111,11 @@ void Game::update()
                         if (save_manager::load_game(save_game_data, "Assets/Saves/save.txt"))
                         {
                             *current_level = save_game_data.get_level_number();
-                            player.set_player_position(save_game_data.get_player_position_x(), save_game_data.get_player_position_y());
+                            player.set_player_position(0, 800);
                             player.set_player_health(save_game_data.get_player_health());
                             player.set_sun_count(save_game_data.get_sun_count());
+                            player.set_saved_player_health(save_game_data.get_player_health());
+                            player.set_saved_sun_count(save_game_data.get_sun_count());
 
                             *new_level = true;
                             load_level(new_level);
@@ -219,27 +214,25 @@ void Game::update()
                 {
                     current_state = GameState::MENU;
                 }
-                if (event.type == sf::Event::Closed)
+                if (event.type == sf::Event::Closed) // I'm not wrong in thinking it's not saving the values if they close the window using the close button right?
                     window.close();
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 {
                     current_state = GameState::PAUSE;
 
                     save_game_data.set_level_number(*current_level);
-                    save_game_data.set_player_position(player.get_player_position().x, player.get_player_position().y);
-                    save_game_data.set_player_health(player.get_player_health());
-                    save_game_data.set_sun_count(player.get_sun_count());
+                    save_game_data.set_player_health(player.get_saved_player_health());
+                    save_game_data.set_sun_count(player.get_saved_sun_count());
 
                     save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
                 }
             }
 
-            std::vector<Object*> level_data = level->get_level_vector();
+            std::vector<Object *> level_data = level->get_level_vector();
             player.player_update(dt, level_data);
             window.clear();
             level->draw_background(window);
             level->custom_stats_display(window, font, player);
-            // std::cout << "Health: " << player.get_player_health() << " | Sun: " << player.get_sun_count() << std::endl;
 
             for (int i = 0; i < level_data.size(); i++)
             {
@@ -252,11 +245,18 @@ void Game::update()
 
         // End screen gamestate
         else if (current_state == GameState::END)
-        {   
-            if (level) {
+        {
+            if (level)
+            {
                 delete level;
                 level = nullptr;
             }
+
+            save_game_data.set_level_number(1);
+            save_game_data.set_player_health(3);
+            save_game_data.set_sun_count(0);
+            save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
+
             sf::Event event;
             while (window.pollEvent(event))
             {
@@ -323,57 +323,6 @@ void Game::update()
             pause_screen.draw(window);
             window.display();
         }
-
-        /* Pause gamestate
-        else if (current_state == GameState::PAUSE) {
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
-                    window.close();
-                }
-
-                if (event.type == sf::Event::MouseMoved) {
-                    sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-                    pause_screen.update_hover(mouse_position);
-                }
-
-                    if (event.type == sf::Event::MouseButtonPressed) {
-                        sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-                        pause_screen.handle_event(event, mouse_position);
-
-                        if (pause_screen.is_resume_clicked()) {
-                            current_state = GameState::PLAYING;
-                        }
-
-                        if (pause_screen.is_quit_clicked()) {
-
-                            // Save game
-                            save_game_data.set_level_number(current_level);
-                            save_game_data.set_player_position(player.get_player_position().x, player.get_player_position().y);
-                            save_game_data.set_player_health(player.get_player_health());
-                            save_game_data.set_sun_count(player.get_sun_count());
-
-                            save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
-
-                            current_state = GameState::MENU;
-                        }
-    }
-
-                if (event.type == sf::Event::KeyPressed &&
-                    event.key.code == sf::Keyboard::P){
-                    current_state = GameState::PLAYING;
-                    }
-            }
-
-            // Draw window
-            window.clear(sf::Color(0, 0, 0, 150));
-            pause_screen.draw(window);
-            window.display();
-        }
-
-        }
-        */
-        // Update player, update window, etc.
     }
 }
 
@@ -387,9 +336,15 @@ double Game::get_dt()
 Game::~Game()
 {
     if (level)
+    {
         delete level;
+    }
     if (new_level)
+    {
         delete new_level;
+    }
     if (current_level)
+    {
         delete current_level;
+    }
 }

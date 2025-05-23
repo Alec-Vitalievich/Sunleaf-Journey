@@ -4,28 +4,27 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-class Pause_Screen{
-    private:
-        //Textures
-        sf::Texture resume_texture;
-        sf::Texture quit_texture;
+class Pause_Screen
+{
+private:
+    // Textures
+    sf::Texture resume_texture;
+    sf::Texture quit_texture;
 
-        //Sprites
-        sf::Sprite resume_sprite;
-        sf::Sprite quit_sprite;
+    // Sprites
+    sf::Sprite resume_sprite;
+    sf::Sprite quit_sprite;
 
-    public:
-        Pause_Screen(sf::RenderWindow& window);
+public:
+    Pause_Screen(sf::RenderWindow &window);
 
-        // Draw
-        void draw(sf::RenderWindow& window);
-        void update(sf::Vector2i mouse_position);
+    // Draw
+    void draw(sf::RenderWindow &window);
+    void update(sf::Vector2i mouse_position);
 
-        // Construc
-        bool is_resume_clicked(sf::Vector2i mouse_positiion);
-        bool is_quit_clicked(sf::Vector2i mouse_positiion);
-
-        
+    // Construc
+    bool is_resume_clicked(sf::Vector2i mouse_positiion);
+    bool is_quit_clicked(sf::Vector2i mouse_positiion);
 };
 
 #endif

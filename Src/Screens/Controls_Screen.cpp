@@ -1,6 +1,7 @@
 #include "Screens/Controls_Screen.h"
 
-Controls_Screen::Controls_Screen(sf::Font& font, sf::Vector2u window_size) {
+Controls_Screen::Controls_Screen(sf::Font &font, sf::Vector2u window_size)
+{
     controls_text.setFont(font);
     controls_text.setString("CONTROLS:\n"
                             "\n"
@@ -35,14 +36,15 @@ Controls_Screen::Controls_Screen(sf::Font& font, sf::Vector2u window_size) {
     float return_text_x = 100;
     float return_text_y = window_size.y - 100;
     return_text.setPosition(return_text_x, return_text_y);
-
 }
 
-void Controls_Screen::draw(sf::RenderWindow& window) {
+void Controls_Screen::draw(sf::RenderWindow &window)
+{
     window.draw(controls_text);
     window.draw(return_text);
 }
 
-bool Controls_Screen::handle_event(const sf::Event& event) {
+bool Controls_Screen::handle_event(const sf::Event &event)
+{
     return (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter);
 }
