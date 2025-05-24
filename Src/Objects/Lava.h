@@ -2,14 +2,16 @@
 #define LAVA_H
 #include "Objects/Obstacle.h"
 
-class Lava : public Obstacle{
-    protected:
-    public:
-        Lava(float Lava_position_x, float Lava_position_y, float Lava_size_x, float Lava_size_y, int health_modifier);
-        void vertical_collision_action(Player& player);
-        void horizontal_collision_action(Player& player);
-        void enscapsulated_collision_action(Player& player);
-        ~Lava();
+// Lava is a drawn object that acts as an obstacle for the player.
+class Lava : public Obstacle
+{
+protected:
+public:
+    Lava(float Lava_position_x, float Lava_position_y, float Lava_size_x, float Lava_size_y, int health_modifier);
+    void vertical_collision_action(Player &player);
+    void horizontal_collision_action(Player &player);
+    void enscapsulated_collision_action(Player &player);
+    ~Lava();
 };
 
 #endif

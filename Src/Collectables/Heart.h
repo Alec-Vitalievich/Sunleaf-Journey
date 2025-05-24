@@ -3,6 +3,7 @@
 #include "Collectables/Collectable.h"
 #include "Objects/Object.h"
 
+// Heart collectable. Allows player to regain one health upon collection.
 class Heart : public Collectable
 {
 protected:

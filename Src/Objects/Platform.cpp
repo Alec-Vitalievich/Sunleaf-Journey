@@ -1,12 +1,13 @@
 #include "Objects/Platform.h"
 #include "Main/Player.h"
 
+// TODO: comments
 Platform::Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y):
 Object(platform_position_x, platform_position_y,platform_size_x, platform_size_y){
     object_hitbox.setFillColor(sf::Color::Black); // Will be replaced by texture
 }
 
-void Platform::vertical_collision_action(Player& player){ // This could be moved to player, in a way? We could call on functions in player anyways. But I think that's... a not so great idea.
+void Platform::vertical_collision_action(Player& player){
     // sf::RectangleShape player_hitbox = player.get_player_hitbox();
     sf::FloatRect player_hitbox_boundaries = player.get_player_hitbox().getGlobalBounds();
     sf::FloatRect platform_hitbox_boundaries = this->get_object_hitbox().getGlobalBounds();

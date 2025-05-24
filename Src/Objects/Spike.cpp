@@ -1,9 +1,9 @@
 #include "Objects/Obstacle.h"
 #include "Main/Player.h"
 
+// TODO: comments
 Spike::Spike(float spike_position_x, float spike_position_y, float spike_size_x, float spike_size_y, int health_modifer):
 Obstacle(spike_position_x, spike_position_y,spike_size_x, spike_size_y, health_modifer){
-    //object_hitbox.setFillColor(sf::Color(255,255,255,125)); // Will be replaced by texture
     if(!spike_texture.loadFromFile("Assets/Textures/ObjectTextures/spike.png")){
         std::cout << "Failed to load sun texture!" << std::endl;
     }
@@ -12,7 +12,7 @@ Obstacle(spike_position_x, spike_position_y,spike_size_x, spike_size_y, health_m
     }
 }
 
-void Spike::vertical_collision_action(Player& player){ // This could be moved to player, in a way? We could call on functions in player anyways. But I think that's... a not so great idea.
+void Spike::vertical_collision_action(Player& player){
     // sf::RectangleShape player_hitbox = player.get_player_hitbox();
     sf::FloatRect player_hitbox_boundaries = player.get_player_hitbox().getGlobalBounds();
     sf::FloatRect spike_hitbox_boundaries = this->get_object_hitbox().getGlobalBounds();

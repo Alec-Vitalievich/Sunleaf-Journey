@@ -2,9 +2,11 @@
 #define LEVEL_LOADER_H
 #include "Objects/Object.h"
 
+// Drawn object in the window that the user uses to move to the next level (sort of similar to a portal).
 class Level_Loader : public Object
 {
 protected:
+    // Empty pointers to store the same address as the dynamically allocated variables in game.
     bool *new_level = nullptr;
     int *current_level = nullptr;
 

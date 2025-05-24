@@ -3,6 +3,7 @@
 #include "Collectables/Collectable.h"
 #include "Objects/Object.h"
 
+// Sun collectable. Acts as an additional goal for the player.
 class Sun : public Collectable
 {
 protected:

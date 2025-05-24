@@ -1,6 +1,7 @@
 #include "Objects/One_Way_Platform.h"
 #include "Main/Player.h"
 
+// TODO: comments
 One_Way_Platform::One_Way_Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y):
 Platform(platform_position_x, platform_position_y, platform_size_x, platform_size_y){
     object_hitbox.setFillColor(sf::Color(0,0,0,200));
