@@ -70,6 +70,7 @@ public:
     void load_level(bool *new_level);
     void update();
     double get_dt();
+    void game_reset();
     ~Game();
 };
 

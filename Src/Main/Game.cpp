@@ -278,6 +278,10 @@ void Game::update()
 
             // Call function to check if the next level needs to be loaded.
             load_level(new_level);
+            // Game reset if health is zero
+            if(player.get_player_health() == 0){
+                game_reset();
+            }
         }
 
         // End screen gamestate
@@ -369,6 +373,16 @@ void Game::update()
             window.display();
         }
     }
+}
+// Game reset
+void Game::game_reset(){
+    *current_level = 1;
+    *new_level = true;
+    load_level(new_level);
+    player.set_sun_count(0);
+    player.set_player_health(3);
+    player.set_player_position(0,800);
+    remove("Assets/Saves/save.txt"); // can be debated
 }
 
 // dt getter
