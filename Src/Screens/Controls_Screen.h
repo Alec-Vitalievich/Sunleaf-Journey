@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+// Screen for displaying information on game mechanics.
 class Controls_Screen
 {
 private:

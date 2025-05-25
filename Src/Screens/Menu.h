@@ -15,7 +15,7 @@ public:
     void draw(sf::RenderWindow &window);
     void update(sf::Vector2i mousePosition);
 
-    // Constructors for buttons
+    // Checking functions for buttons
     bool is_start_clicked(sf::Vector2i mousePosition);
     bool is_exit_clicked(sf::Vector2i mousePosition);
     bool is_load_clicked(sf::Vector2i mousePosition);

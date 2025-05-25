@@ -6,7 +6,6 @@
 
 Level::Level(int *level_number, bool *new_level)
 {
-
     // Get window size
     sf::Vector2u windowSize = sf::Vector2u(1800, 1020); // Remember to change when window is scaled.
 
@@ -16,7 +15,7 @@ Level::Level(int *level_number, bool *new_level)
     else if (*level_number < 0)
         *level_number = 0;
 
-    // Load textures for custom display. Some of it could be moved into the custom display, but it will stop it wasting resources.
+    // Load textures for custom display.
     if (!sun_display_texture.loadFromFile("Assets/Textures/ObjectTextures/sun.png"))
     {
         std::cout << "Failed to load sun texture (display function)!" << std::endl;
@@ -248,23 +247,28 @@ void Level::draw_background(sf::RenderWindow &window)
 
 void Level::custom_stats_display(sf::RenderWindow &window, sf::Font &font, Player &player)
 {
+    // Set position of the sprites (rectangles with textures).
     sun_display_sprite.setPosition(20, 20);
     health_display_sprite.setPosition(20, 80);
 
+    // Set string & position of sun count.
     std::string sun_text_string = "#: " + std::to_string(player.get_sun_count());
     sf::Text sun_text(sun_text_string, font, 32);
     sun_text.setPosition(70, 20);
 
-    std::string health_text_string = "#: " + std::to_string(player.get_player_health());
+    // Set string & position of player health.
+    std::string health_text_string = "#: " + std::to_string(player.get_player_health()) + "/3";
     sf::Text health_text(health_text_string, font, 32);
     health_text.setPosition(70, 80);
 
+    // Draw sprites and text in the GUI (window).
     window.draw(sun_display_sprite);
     window.draw(health_display_sprite);
     window.draw(sun_text);
     window.draw(health_text);
 }
 
+// getter for vector containing all level objects.
 std::vector<Object *> &Level::get_level_vector()
 {
     return level_data;
@@ -272,6 +276,7 @@ std::vector<Object *> &Level::get_level_vector()
 
 Level::~Level()
 {
+    // Iterate through each element of the vector to release the memory.
     for (int i = 0; i < level_data.size(); i++)
     {
         delete level_data[i];

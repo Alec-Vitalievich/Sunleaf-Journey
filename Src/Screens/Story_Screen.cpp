@@ -2,6 +2,7 @@
 
 Story_Screen::Story_Screen(sf::Font &font, sf::Vector2u window_size)
 {
+    // set text explaining the backstory and goal of the user.
     story_text.setFont(font);
     story_text.setString("Buried in the darkness below,\n"
                          "a small seedling sprouts,\n"
@@ -26,6 +27,7 @@ Story_Screen::Story_Screen(sf::Font &font, sf::Vector2u window_size)
     story_text.setFillColor(sf::Color::White);
     story_text.setPosition(100, 65);
 
+    // Set text explaining how to contine or return to menu.
     continue_text.setFont(font);
     continue_text.setString("...Press ENTER to continue, ...BACKSPACE to return to main menu");
     continue_text.setCharacterSize(24);
@@ -37,11 +39,13 @@ Story_Screen::Story_Screen(sf::Font &font, sf::Vector2u window_size)
 
 void Story_Screen::draw(sf::RenderWindow &window)
 {
+    // Draw text elements to GUI (window).
     window.draw(story_text);
     window.draw(continue_text);
 }
 
 bool Story_Screen::handle_event(const sf::Event &event)
 {
+    // Return true if the correct event has occured (Enter key pressed)
     return (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter);
 }

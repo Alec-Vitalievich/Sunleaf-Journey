@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+// Screen for displaying the game's story to the user.
 class Story_Screen
 {
 private:

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+// Screen displayed to user when win condition is met (beating all three levels).
 class End_Screen
 {
 private:

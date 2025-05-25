@@ -3,22 +3,22 @@
 
 Menu::Menu(sf::RenderWindow &window)
 {
-    // Load background
+    // Load background.
     if (!menuTexture.loadFromFile("Assets/Textures/ScreenTextures/menu.png"))
     {
         std::cerr << "Can't load texture";
     }
     menu.setTexture(menuTexture);
 
-    // Scale background texture to fit window size
+    // Scale background texture to fit window size.
     sf::Vector2u textureSize = menuTexture.getSize();
     sf::Vector2u windowSize = window.getSize();
     float scaleX = (float)windowSize.x / textureSize.x;
     float scaleY = (float)windowSize.y / textureSize.y;
     menu.setScale(scaleX, scaleY);
 
-    // Buttons
-    // Check for textures
+    // Buttons:
+    // Check for textures.
     if (!startTexture.loadFromFile("Assets/Textures/ScreenTextures/startButton.png"))
     {
         std::cerr << "Can't load start texture";
@@ -42,33 +42,34 @@ Menu::Menu(sf::RenderWindow &window)
     load_sprite.setTexture(load_texture);
     controls_sprite.setTexture(controls_texture);
 
-    // Button scaling (too large originally)
+    // Button scaling (too large without modification).
     const float button_scale = 0.5;
     start.setScale(button_scale, button_scale);
     exit.setScale(button_scale, button_scale);
     load_sprite.setScale(button_scale, button_scale);
     controls_sprite.setScale(button_scale, button_scale);
 
-    auto center_origin = [](sf::Sprite &sprite)
+    auto centre_origin = [](sf::Sprite &sprite)
     {
         sf::FloatRect bounds = sprite.getLocalBounds();
         sprite.setOrigin(bounds.width / 2, bounds.height / 2);
     };
 
-    center_origin(start);
-    center_origin(load_sprite);
-    center_origin(controls_sprite);
-    center_origin(exit);
+    // Modify centre position.
+    centre_origin(start);
+    centre_origin(load_sprite);
+    centre_origin(controls_sprite);
+    centre_origin(exit);
 
-    float centerX = windowSize.x / 2.0;
-    float centerY = windowSize.y / 2.0;
+    float centreX = windowSize.x / 2.0;
+    float centreY = windowSize.y / 2.0;
+    float spacing = 100.0;
 
-    const float spacing = 100.0;
-
-    start.setPosition(centerX, centerY - spacing * 1);
-    load_sprite.setPosition(centerX, centerY + spacing * 0.25);
-    controls_sprite.setPosition(centerX, centerY + spacing * 1.75);
-    exit.setPosition(centerX, centerY + spacing * 3);
+    // Set position based on the centre position and the spacing factor.
+    start.setPosition(centreX, centreY - spacing * 1);
+    load_sprite.setPosition(centreX, centreY + spacing * 0.25);
+    controls_sprite.setPosition(centreX, centreY + spacing * 1.75);
+    exit.setPosition(centreX, centreY + spacing * 3);
 
     // Title screen
     // Load font
@@ -84,7 +85,7 @@ Menu::Menu(sf::RenderWindow &window)
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);
 
-    // Center
+    // centre
     sf::FloatRect text_bounds = title_text.getLocalBounds();
     title_text.setOrigin(text_bounds.width / 2, text_bounds.height / 2);
     title_text.setPosition(window.getSize().x / 2, 100);
@@ -92,6 +93,7 @@ Menu::Menu(sf::RenderWindow &window)
 
 void Menu::draw(sf::RenderWindow &window)
 {
+    // Draw all elements of the menu in the GUI (window).
     window.draw(menu);
     window.draw(title_text);
     window.draw(start);
@@ -104,6 +106,7 @@ void Menu::update(sf::Vector2i mousePosition)
 {
     auto hover_effect = [&](sf::Sprite &sprite)
     {
+        // Check if mouse position is within a given button.
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
         {
             sprite.setScale(0.55, 0.55);
@@ -120,6 +123,7 @@ void Menu::update(sf::Vector2i mousePosition)
     hover_effect(controls_sprite);
 }
 
+// Button checking functions.
 bool Menu::is_start_clicked(sf::Vector2i mousePosition)
 {
     return start.getGlobalBounds().contains(sf::Vector2f(mousePosition));

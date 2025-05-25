@@ -3,18 +3,38 @@
 save_data::save_data(int level, int health, int sun) : level_number(level), player_health(health), sun_count(sun) {}
 
 // Getters
-int save_data::get_level_number() const
+int save_data::get_level_number()
 {
+    if (level_number < 1)
+    {
+        level_number = 1;
+    }
+    else if (level_number > 3)
+    {
+        level_number = 3;
+    }
     return level_number;
 }
 
-int save_data::get_player_health() const
+int save_data::get_player_health()
 {
+    if (player_health < 0)
+    {
+        player_health = 0;
+    }
+    else if (player_health > 3)
+    {
+        player_health = 3;
+    }
     return player_health;
 }
 
-int save_data::get_sun_count() const
+int save_data::get_sun_count()
 {
+    if (sun_count < 0)
+    {
+        sun_count = 0;
+    }
     return sun_count;
 }
 

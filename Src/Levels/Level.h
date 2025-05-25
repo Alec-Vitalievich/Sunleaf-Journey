@@ -18,11 +18,12 @@
 
 #include "Main/Player.h"
 
+// Class to create & manage each level.
 class Level
 {
 protected:
+    // Vector to store all objects in the level.
     std::vector<Object *> level_data;
-    // bool* new_level = nullptr; maybe not neccessary
 
     // Textures for levels
     sf::Texture background_texture1;
@@ -32,7 +33,7 @@ protected:
     sf::Texture background_texture3;
     sf::Sprite background_sprite3;
 
-    // Textures for custom display:
+    // Textures for custom display.
     sf::Texture sun_display_texture;
     sf::Sprite sun_display_sprite;
     sf::Texture health_display_texture;

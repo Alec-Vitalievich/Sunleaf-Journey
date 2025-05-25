@@ -22,7 +22,7 @@ public:
     void draw(sf::RenderWindow &window);
     void update(sf::Vector2i mouse_position);
 
-    // Construc
+    // Checking if button has been clicked.
     bool is_resume_clicked(sf::Vector2i mouse_positiion);
     bool is_quit_clicked(sf::Vector2i mouse_positiion);
 };
