@@ -3,7 +3,7 @@
 # -------------------------
 
 #Includes 
-INCLUDES = -ISrc
+INCLUDES = -ISrc -IUnit_Tests
 
 #SFML path for macOS
 SFML_INCLUDE = -I/opt/homebrew/opt/sfml@2/include
@@ -39,7 +39,7 @@ OUT = game.out
 # -------------------------
 
 #Unit test
-TEST_SRC = $(wildcard Unit_Tests/*.cpp)
+TEST_SRC = $(wildcard Unit_Tests/**/*.cpp) Unit_Tests/catch_amalgamated.cpp
 TEST_OBJ = $(TEST_SRC:.cpp=.o)
 TEST_OUT = tests.out
 

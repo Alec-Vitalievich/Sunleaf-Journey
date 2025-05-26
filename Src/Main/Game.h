@@ -79,7 +79,6 @@ public:
     void game_reset();
     void on_close_action(sf::Event event);
 
-    // Destructor
     ~Game();
 };
 
