@@ -96,10 +96,7 @@ void Game::update()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
+                on_close_action(event);
 
                 // Check if a mouse click has occured (for the menu buttons).
                 if (event.type == sf::Event::MouseButtonPressed)
@@ -164,10 +161,7 @@ void Game::update()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
+                on_close_action(event);
 
                 // Change gamestates depending on key pressed
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
@@ -200,10 +194,7 @@ void Game::update()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
+                on_close_action(event);
 
                 // Return to main menu from controls screen.
                 if (control_screen.handle_event(event))
@@ -304,10 +295,7 @@ void Game::update()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
+                on_close_action(event);
 
                 if (end_screen.handle_event(event))
                 {
@@ -327,11 +315,7 @@ void Game::update()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
-
+                on_close_action(event);
                 // Check if mouse event has occured.
                 if (event.type == sf::Event::MouseButtonPressed)
                 {
@@ -382,7 +366,10 @@ void Game::game_reset(){
     player.set_sun_count(0);
     player.set_player_health(3);
     player.set_player_position(0,800);
-    remove("Assets/Saves/save.txt"); // can be debated
+}
+
+void Game::on_close_action(sf::Event event){
+    if (event.type == sf::Event::Closed){window.close();}
 }
 
 // dt getter
