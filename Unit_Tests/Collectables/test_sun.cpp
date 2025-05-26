@@ -3,20 +3,20 @@
 #include "Main/Player.h"
 
 class Mock_Player : public Player {
-    int mock_health;
+    int mock_sun;
 
     private:
-        int health = 0;
+        int sun = 0;
 
     public:
-        Mock_Player() : Player(0, 0, 32, 32, 5, 0), mock_health(5) {}
+        Mock_Player() : Player(0, 0, 32, 32, 5, 0), mock_sun(0) {}
 
-        int get_player_health() {
-            return health;
+        int get_player_sun() {
+            return sun;
         }
     
-        void set_player_health(int h) {
-            health = h;
+        void set_player_health(int s) {
+            sun = s;
         }
 };
 
