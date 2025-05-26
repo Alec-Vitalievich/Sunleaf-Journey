@@ -77,12 +77,7 @@ public:
     void update();
     double get_dt();
     void game_reset();
-<<<<<<< HEAD
     void on_close_action(sf::Event event);
-=======
-
-    // Destructor
->>>>>>> refs/remotes/origin/v1.1
     ~Game();
 };
 
