@@ -24,7 +24,7 @@ TEST_CASE("Level 1 initialisation")
 
     SECTION("Level number constant")
     {
-        REQUIRE(level_number == 1);
+        REQUIRE(level.get_current_level() == 1);
     }
 
     SECTION("Level has correct number of objects")
@@ -43,7 +43,7 @@ TEST_CASE("Level 2 initialisation")
 
     SECTION("Level number constant")
     {
-        REQUIRE(level_number == 2);
+        REQUIRE(level.get_current_level() == 2);
     }
 
     SECTION("Level has correct number of objects")
@@ -62,7 +62,7 @@ TEST_CASE("Level 3 initialisation")
 
     SECTION("Level number constant")
     {
-        REQUIRE(level_number == 3);
+        REQUIRE(level.get_current_level() == 3);
     }
 
     SECTION("Level has correct number of objects")
