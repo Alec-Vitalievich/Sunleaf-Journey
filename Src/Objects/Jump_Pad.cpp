@@ -3,15 +3,7 @@
 
 Jump_Pad::Jump_Pad(float jump_pad_position_x, float jump_pad_position_y, float jump_pad_size_x, float jump_pad_size_y, int jump_modifier) : Object(jump_pad_position_x, jump_pad_position_y, jump_pad_size_x, jump_pad_size_y), jump_modifier(jump_modifier)
 {
-    /* if (!jump_pad_texture.loadFromFile("Assets/Textures/ObjectTextures/jump_pad.png"))
-    {
-        std::cout << "Failed to load junp pad texture!" << std::endl;
-    }
-    else
-    {
-        object_hitbox.setTexture(&jump_pad_texture);
-    } */
-   object_hitbox.setFillColor(sf::Color::Green);
+   object_hitbox.setFillColor(sf::Color(157, 193, 131));
 
 }
 

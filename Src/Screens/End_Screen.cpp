@@ -4,7 +4,8 @@ End_Screen::End_Screen(sf::Font &font, sf::Vector2u window_size)
 {
     // Setting end screen (win screen) text attributes and string.
     end_text.setFont(font);
-    end_text.setString("The young sunleaf finds the sun,\n"
+    end_text.setString("The young sunleaf finds the sun - \n"
+                       "a place to set down roots,\n"
                        "from a young seedling to full sprout,\n"
                        "you have completed your journey.\n");
     end_text.setCharacterSize(38);

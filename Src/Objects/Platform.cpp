@@ -4,7 +4,7 @@
 
 Platform::Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y) : Object(platform_position_x, platform_position_y, platform_size_x, platform_size_y)
 {
-    object_hitbox.setFillColor(sf::Color::Black); // Will be replaced by texture
+    object_hitbox.setFillColor(sf::Color(74, 44, 42)); // Will be replaced by texture
 }
 
 // Action when vertical-axis collision is detected.

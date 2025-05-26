@@ -4,7 +4,7 @@
 Lava::Lava(float Lava_position_x, float Lava_position_y, float Lava_size_x, float Lava_size_y, int health_modifer) : 
             Obstacle(Lava_position_x, Lava_position_y, Lava_size_x, Lava_size_y, health_modifer)
 {
-    object_hitbox.setFillColor(sf::Color::Red); // Will be replaced by texture
+    object_hitbox.setFillColor(sf::Color(234, 24, 7)); // Will be replaced by texture
 }
 
 // Action taken if the player interacts with the hitbox of the lava in any way, from any direction.

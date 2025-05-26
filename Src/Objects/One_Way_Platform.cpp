@@ -4,7 +4,7 @@
 // Constructor for unidirectional platform (can jump through bottom, not top).
 One_Way_Platform::One_Way_Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y) : Platform(platform_position_x, platform_position_y, platform_size_x, platform_size_y)
 {
-    object_hitbox.setFillColor(sf::Color(0, 0, 0, 200));
+    object_hitbox.setFillColor(sf::Color(134, 119, 95, 200));
 }
 
 void One_Way_Platform::vertical_collision_action(Player &player)

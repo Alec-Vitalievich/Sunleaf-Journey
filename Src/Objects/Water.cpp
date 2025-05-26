@@ -3,7 +3,7 @@
 
 Water::Water(float Water_position_x, float Water_position_y, float Water_size_x, float Water_size_y, int health_modifer) : Obstacle(Water_position_x, Water_position_y, Water_size_x, Water_size_y, health_modifer)
 {
-    object_hitbox.setFillColor(sf::Color(0, 100, 255)); // Will be replaced by texture
+    object_hitbox.setFillColor(sf::Color(0, 128, 218)); // Will be replaced by texture
     touched_water = false;
 }
 

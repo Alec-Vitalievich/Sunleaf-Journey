@@ -9,7 +9,6 @@ protected:
 
     // Jump modifier to boost players vertical jump
     int jump_modifier;
-    sf::Texture jump_pad_texture;
 
 public:
 
