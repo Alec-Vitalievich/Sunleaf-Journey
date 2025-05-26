@@ -1,8 +1,6 @@
-#define CATCH_CONFIG_MAIN
 #include "catch_amalgamated.hpp"
 #include "Collectables/Heart.h"
 #include "Main/Player.h"
-#include <SFML/Graphics.hpp>
 
 class Mock_Player : public Player {
     int mock_health;
@@ -22,17 +20,23 @@ class Mock_Player : public Player {
         }
 };
 
-TEST_CASE("Heart Constructor sets position") {
+TEST_CASE("Heart initialisation") {
     Heart heart(100, 150, 32, 32);
 
+    // Check position set correctly
     REQUIRE(heart.get_position().x == Catch::Approx(100));
     REQUIRE(heart.get_position().y == Catch::Approx(150));
+
+    // Check size set correctly
+    REQUIRE(heart.get_size().x == Catch::Approx(32));
+    REQUIRE(heart.get_size().y == Catch::Approx(32));
 }
 
 TEST_CASE("Heart position update") {
     Heart heart(0, 0, 32, 32);
     heart.set_collectable_position(200, 300);
 
+    // Check if new position is set correctly
     REQUIRE(heart.get_position().x == Catch::Approx(200));
     REQUIRE(heart.get_position().y == Catch::Approx(300));
 }
@@ -45,5 +49,10 @@ TEST_CASE("Heart collision increases health"){
 
     heart.enscapsulated_collision_action(player);
 
+    // Check if health increased
     REQUIRE(player.get_player_health() == health + 1); 
+
+    // Check if heart moved out of bounds
+    REQUIRE(heart.get_position().x == Catch::Approx(2000));
+    REQUIRE(heart.get_position().y == Catch::Approx(2000));
 }
