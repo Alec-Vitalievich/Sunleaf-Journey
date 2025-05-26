@@ -8,12 +8,12 @@
 #include <SFML/Audio.hpp>
 
 // Game constructor.
-Game::Game(std::string window_name, int max_framerate) : window(sf::VideoMode(1800, 1020), window_name), player(0, 0, 50, 50, 3, 0),
+Game::Game(std::string window_name, int max_framerate) : window(sf::VideoMode(1800, 1020), window_name), player(0, 0, 70, 70, 3, 0),
                                                          story_screen(font, sf::Vector2u(1800, 1020)),
                                                          end_screen(font, sf::Vector2u(1800, 1020)),
-                                                         control_screen(font, sf::Vector2u(1800, 1020))
+                                                         control_screen(font, sf::Vector2u(1800, 1020)),
+                                                         game_over_screen(font, sf::Vector2u(1800, 1020))
 {
-
     // Load font.
     if (!font.loadFromFile("Assets/Fonts/m6x11plus.ttf"))
     {
@@ -250,6 +250,11 @@ void Game::update()
                     save_game_data.set_sun_count(player.get_saved_sun_count());
                     save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
                 }
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
+                {
+                    // Manually reset game.
+                    game_reset();
+                }
             }
 
             // Retrieve level data, and update player sprite.
@@ -273,8 +278,41 @@ void Game::update()
             // Game reset if health is less than one.
             if (player.get_player_health() < 1)
             {
-                game_reset();
+                current_state = GameState::GAMEOVER;
             }
+        }
+
+        // Gamestate when player runs out of all health and is reset.
+        else if (current_state == GameState::GAMEOVER)
+        {
+            if (level)
+            {
+                delete level;
+                level = nullptr;
+            }
+
+            // Reset save data to default.
+            save_game_data.set_level_number(1);
+            save_game_data.set_player_health(3);
+            save_game_data.set_sun_count(0);
+            save_manager::save_game(save_game_data, "Assets/Saves/save.txt");
+
+            // Check for keyboard events.
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                on_close_action(event);
+
+                if (game_over_screen.handle_event(event))
+                {
+                    current_state = GameState::MENU;
+                }
+            }
+
+            // Draw 'game over screen' assets in window
+            window.clear();
+            game_over_screen.draw(window);
+            window.display();
         }
 
         // End screen gamestate
@@ -305,7 +343,7 @@ void Game::update()
                 }
             }
 
-            // Draw 'end sreen' assets in window
+            // Draw 'end screen' assets in window
             window.clear();
             end_screen.draw(window);
             window.display();

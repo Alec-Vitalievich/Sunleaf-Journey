@@ -14,6 +14,7 @@
 #include "Screens/End_Screen.h"
 #include "Screens/Controls_Screen.h"
 #include "Screens/Pause_Screen.h"
+#include "Screens/Game_Over_Screen.h"
 // #include <SFML/Window.hpp>
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
@@ -26,6 +27,7 @@ enum class GameState
     PLAYING,
     CONTROLS,
     PAUSE,
+    GAMEOVER,
     END,
 };
 
@@ -59,13 +61,14 @@ protected:
     // Music background_music;
     // OS specific
 
+    // Font
+    sf::Font font;
+
     // Screens
     Story_Screen story_screen;
     Controls_Screen control_screen;
     End_Screen end_screen;
-
-    // Font
-    sf::Font font;
+    Game_Over_Screen game_over_screen;
 
 public:
 
