@@ -9,3 +9,7 @@ Collectable::Collectable(float collectable_pos_x, float collectable_pos_y, float
 sf::Vector2f Collectable::get_position() const {
     return object_hitbox.getPosition();
 }
+
+sf::Vector2f Collectable::get_size() const {
+    return object_hitbox.getSize();
+}

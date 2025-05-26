@@ -16,8 +16,10 @@ public:
 
     // Getters and setters
     sf::Vector2f get_position() const;
-
     sf::Vector2f set_position() const;
+
+    sf::Vector2f get_size() const;
+    sf::Vector2f set_size() const;
 };
 
 #endif
