@@ -48,8 +48,8 @@ public:
     int get_player_acceleration_y();
     void set_player_acceleration_y(int new_acceleration);
 
-    int get_player_health();
-    void set_player_health(int player_health);
+    virtual int get_player_health();
+    virtual void set_player_health(int player_health);
 
     int get_sun_count();
     void set_sun_count(int sun_count);

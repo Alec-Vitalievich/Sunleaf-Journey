@@ -13,6 +13,11 @@ public:
     
     // Pure virtual function to move the collectable out of the window once interacted with.
     virtual void set_collectable_position(int x, int y) = 0;
+
+    // Getters and setters
+    sf::Vector2f get_position() const;
+
+    sf::Vector2f set_position() const;
 };
 
 #endif
