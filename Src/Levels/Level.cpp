@@ -6,8 +6,13 @@
 
 Level::Level(int *level_number, bool *new_level)
 {
+
+    // Dynamically allocate memory for level_loader bool. 
+    // (Checks if the player is in the level loader so it can call the on-screen text prompt)
+    display_interactive_text = new bool(false);
+
     // Get window size
-    sf::Vector2u windowSize = sf::Vector2u(1800, 1020); // Remember to change when window is scaled.
+    sf::Vector2u windowSize = sf::Vector2u(1800, 1020);
 
     // Level logic
     if (*level_number > 3)
@@ -74,9 +79,9 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Platform(400, 180, 300, 20)); // Left
 
         // Final platform with portal at top-right
-        level_data.push_back(new Platform(1200, 200, 200, 20));                               // Final platform
-        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
-        level_data.push_back(new Water(1550, 200, 100, 900, 2));                              // Water beneath portal (added by Isabella)
+        level_data.push_back(new Platform(1200, 200, 200, 20));                                                         // Final platform
+        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, display_interactive_text, level_number)); // End portal
+        level_data.push_back(new Water(1550, 200, 100, 900, 2));                                                        // Water beneath portal (added by Isabella)
 
         // Obstacles
         level_data.push_back(new Spike(555, 660, 21, 20, 1));    // Spike on a rightward platform
@@ -134,9 +139,9 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Platform(400, 180, 300, 20)); // Left
 
         // Final platform with portal at top-right
-        level_data.push_back(new Platform(1200, 200, 200, 20));                               // Final platform
-        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
-        level_data.push_back(new Water(1550, 200, 100, 900, 2));                              // Water beneath portal (added by Isabella)
+        level_data.push_back(new Platform(1200, 200, 200, 20));                                                         // Final platform
+        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, display_interactive_text, level_number)); // End portal
+        level_data.push_back(new Water(1550, 200, 100, 900, 2));                                                        // Water beneath portal (added by Isabella)
 
         // Obstacles
         level_data.push_back(new Spike(555, 660, 100, 20, 1));   // Spike on a rightward platform
@@ -194,9 +199,9 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Platform(400, 180, 300, 20)); // Left
 
         // Final platform with portal at top-right
-        level_data.push_back(new Platform(1200, 200, 200, 20));                               // Final platform
-        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, level_number)); // End portal
-        level_data.push_back(new Water(1550, 200, 100, 900, 2));                              // Water beneath portal (added by Isabella)
+        level_data.push_back(new Platform(1200, 200, 200, 20));                                                         // Final platform
+        level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, display_interactive_text, level_number)); // End portal
+        level_data.push_back(new Water(1550, 200, 100, 900, 2));                                                        // Water beneath portal (added by Isabella)
 
         // Obstacles
         level_data.push_back(new Spike(555, 660, 100, 20, 1));   // Spike on a rightward platform
@@ -268,6 +273,26 @@ void Level::custom_stats_display(sf::RenderWindow &window, sf::Font &font, Playe
     window.draw(health_text);
 }
 
+// Function to write text in the GUI to prompt player to move to next level when in the level_loader hitbox.
+void Level::draw_interactive_text(sf::RenderWindow &window, sf::Font &font)
+{
+    // Create text element.
+    sf::Text interaction_text;
+    interaction_text.setFont(font);
+    interaction_text.setCharacterSize(50);
+    interaction_text.setFillColor(sf::Color::White);
+    interaction_text.setPosition(600, 50);
+
+    // Check if the player is within the level_loader's hitbox.
+    if (*display_interactive_text == true)
+    {
+        // Set text string and draw the text to the window.
+        interaction_text.setString("Press E to continue to next level!");
+        window.draw(interaction_text);
+        *display_interactive_text = false;
+    }
+}
+
 // getter for vector containing all level objects.
 std::vector<Object *> &Level::get_level_vector()
 {
@@ -280,5 +305,10 @@ Level::~Level()
     for (int i = 0; i < level_data.size(); i++)
     {
         delete level_data[i];
+    }
+
+    if (display_interactive_text)
+    {
+        delete display_interactive_text;
     }
 }

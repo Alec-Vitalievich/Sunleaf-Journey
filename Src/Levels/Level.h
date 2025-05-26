@@ -42,6 +42,9 @@ protected:
     // Current level number
     int current_level_number;
 
+    // Bool for checking if the player is in the level loader.
+    bool *display_interactive_text = nullptr;
+
 public:
 
     // Level constructor
@@ -51,6 +54,7 @@ public:
     // GUI handling
     void draw_background(sf::RenderWindow &window);
     void custom_stats_display(sf::RenderWindow &window, sf::Font &font, Player &player);
+    void draw_interactive_text(sf::RenderWindow &window, sf::Font &font);
 
     // Destructor
     ~Level();

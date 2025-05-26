@@ -70,19 +70,16 @@ protected:
 public:
 
     // Game constructor
-    Game(int window_x_size, int window_y_size, std::string name, int max_framerate); // Update to remove window size variables
+    Game(std::string name, int max_framerate); // Update to remove window size variables
 
     // Game state handling
     void load_level(bool *new_level);
     void update();
     double get_dt();
     void game_reset();
-<<<<<<< HEAD
     void on_close_action(sf::Event event);
-=======
 
     // Destructor
->>>>>>> refs/remotes/origin/v1.1
     ~Game();
 };
 

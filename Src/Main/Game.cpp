@@ -8,10 +8,10 @@
 #include <SFML/Audio.hpp>
 
 // Game constructor.
-Game::Game(int window_size_x, int window_size_y, std::string window_name, int max_framerate) : window(sf::VideoMode(window_size_x, window_size_y), window_name), player(0, 0, 50, 50, 3, 0),
-                                                                                               story_screen(font, sf::Vector2u(window_size_x, window_size_y)),
-                                                                                               end_screen(font, sf::Vector2u(window_size_x, window_size_y)),
-                                                                                               control_screen(font, sf::Vector2u(window_size_x, window_size_y))
+Game::Game(std::string window_name, int max_framerate) : window(sf::VideoMode(1800, 1020), window_name), player(0, 0, 50, 50, 3, 0),
+                                                                                               story_screen(font, sf::Vector2u(1800, 1020)),
+                                                                                               end_screen(font, sf::Vector2u(1800, 1020)),
+                                                                                               control_screen(font, sf::Vector2u(1800, 1020))
 {
 
     // Load font.
@@ -260,6 +260,7 @@ void Game::update()
             window.clear();
             level->draw_background(window);
             level->custom_stats_display(window, font, player);
+            level->draw_interactive_text(window, font);
             for (int i = 0; i < level_data.size(); i++)
             {
                 window.draw(level_data[i]->get_object_hitbox());
@@ -269,8 +270,8 @@ void Game::update()
 
             // Call function to check if the next level needs to be loaded.
             load_level(new_level);
-            // Game reset if health is zero
-            if(player.get_player_health() == 0){
+            // Game reset if health is less than one.
+            if(player.get_player_health() < 1){
                 game_reset();
             }
         }
@@ -340,6 +341,7 @@ void Game::update()
             window.clear();
             level->draw_background(window);
             level->custom_stats_display(window, font, player);
+            level->draw_interactive_text(window, font);
             for (int i = 0; i < level_data.size(); i++)
             {
                 window.draw(level_data[i]->get_object_hitbox());
