@@ -39,13 +39,20 @@ protected:
     sf::Texture health_display_texture;
     sf::Sprite health_display_sprite;
 
+    // Current level number
     int current_level_number;
 
 public:
+
+    // Level constructor
     Level(int *level_number, bool *new_level);
     std::vector<Object *> &get_level_vector();
+
+    // GUI handling
     void draw_background(sf::RenderWindow &window);
     void custom_stats_display(sf::RenderWindow &window, sf::Font &font, Player &player);
+
+    // Destructor
     ~Level();
 };
 

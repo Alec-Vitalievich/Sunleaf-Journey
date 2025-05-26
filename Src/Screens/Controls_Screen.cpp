@@ -2,7 +2,7 @@
 
 Controls_Screen::Controls_Screen(sf::Font &font, sf::Vector2u window_size)
 {
-    // Text explaining the mechanics of the game.
+    // Setting controls text attributes and string explaining the mechanics of the game.
     controls_text.setFont(font);
     controls_text.setString("CONTROLS:\n"
                             "\n"
@@ -29,7 +29,7 @@ Controls_Screen::Controls_Screen(sf::Font &font, sf::Vector2u window_size)
     controls_text.setFillColor(sf::Color::White);
     controls_text.setPosition(100, 65);
 
-    // Text on how to return to menu.
+    // Setting return text attributes and string for how to return to menu.
     return_text.setFont(font);
     return_text.setString("...Press ENTER to return to main menu");
     return_text.setCharacterSize(24);

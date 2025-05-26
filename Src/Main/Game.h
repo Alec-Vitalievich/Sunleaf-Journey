@@ -18,7 +18,7 @@
 // #include <SFML/Audio.hpp>
 // #include <SFML/System.hpp>
 
-// Different game states
+// Different game states to handle events
 enum class GameState
 {
     MENU,
@@ -33,6 +33,7 @@ enum class GameState
 class Game
 {
 protected:
+
     // General game variables.
     sf::Vector2u window_size;
     std::string game_name;
@@ -56,6 +57,7 @@ protected:
     save_data save_game_data;
 
     // Music background_music;
+    // OS specific
 
     // Screens
     Story_Screen story_screen;
@@ -66,11 +68,17 @@ protected:
     sf::Font font;
 
 public:
+
+    // Game constructor
     Game(int window_x_size, int window_y_size, std::string name, int max_framerate); // Update to remove window size variables
+
+    // Game state handling
     void load_level(bool *new_level);
     void update();
     double get_dt();
     void game_reset();
+
+    // Destructor
     ~Game();
 };
 

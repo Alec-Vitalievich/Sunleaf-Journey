@@ -4,9 +4,10 @@
 Pause_Screen::Pause_Screen(sf::RenderWindow &window)
 {
 
+    // Get window size to allow for texture scaling
     sf::Vector2u windowSize = window.getSize();
 
-    // Buttons
+    // Buttons for pause screen
     // Button textures
     if (!resume_texture.loadFromFile("Assets/Textures/ScreenTextures/resumeButton.png"))
     {
@@ -26,13 +27,14 @@ Pause_Screen::Pause_Screen(sf::RenderWindow &window)
     resume_sprite.setScale(button_scale, button_scale);
     quit_sprite.setScale(button_scale, button_scale);
 
+    // Center button function
     auto centre_origin = [](sf::Sprite &sprite)
     {
         sf::FloatRect bounds = sprite.getLocalBounds();
         sprite.setOrigin(bounds.width / 2, bounds.height / 2);
     };
 
-    // Centre the origin position of the buttons.
+    // Center the origin position of the buttons.
     centre_origin(resume_sprite);
     centre_origin(quit_sprite);
 
@@ -40,7 +42,7 @@ Pause_Screen::Pause_Screen(sf::RenderWindow &window)
     float centreY = windowSize.y / 2.0;
     float spacing = 100.0;
 
-    // Set position of button based on centre position and spacing factor.
+    // Set position of button based on centre position and spacing factor
     resume_sprite.setPosition(centreX, centreY - spacing * 1);
     quit_sprite.setPosition(centreX, centreY + spacing * 0.25);
 }
@@ -54,9 +56,10 @@ void Pause_Screen::draw(sf::RenderWindow &window)
 
 void Pause_Screen::update(sf::Vector2i mouse_position)
 {
+    // Hover effect to provide feedback to player
     auto hover_effect = [&](sf::Sprite &sprite)
     {
-        // Check if the mouse position is within the bounds of the button.
+        // Check if the mouse position is within the bounds of the button
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_position)))
         {
             sprite.setScale(0.55, 0.55);
@@ -67,12 +70,12 @@ void Pause_Screen::update(sf::Vector2i mouse_position)
         }
     };
 
-    // Apply effect when hovering over buttons.
+    // Apply effect when hovering over buttons
     hover_effect(resume_sprite);
     hover_effect(quit_sprite);
 }
 
-// Functions for checking buttons.
+// Functions for checking if buttons are clicked
 bool Pause_Screen::is_resume_clicked(sf::Vector2i mouse_position)
 {
     return resume_sprite.getGlobalBounds().contains(sf::Vector2f(mouse_position));

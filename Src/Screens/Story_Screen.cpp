@@ -2,7 +2,7 @@
 
 Story_Screen::Story_Screen(sf::Font &font, sf::Vector2u window_size)
 {
-    // set text explaining the backstory and goal of the user.
+    // Set story text attributes and set story
     story_text.setFont(font);
     story_text.setString("Buried in the darkness below,\n"
                          "a small seedling sprouts,\n"
@@ -27,7 +27,7 @@ Story_Screen::Story_Screen(sf::Font &font, sf::Vector2u window_size)
     story_text.setFillColor(sf::Color::White);
     story_text.setPosition(100, 65);
 
-    // Set text explaining how to contine or return to menu.
+    // Set continue text attributes and explain how to contine or return to menu.
     continue_text.setFont(font);
     continue_text.setString("...Press ENTER to continue, ...BACKSPACE to return to main menu");
     continue_text.setCharacterSize(24);

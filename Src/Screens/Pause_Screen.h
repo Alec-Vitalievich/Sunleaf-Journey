@@ -16,9 +16,11 @@ private:
     sf::Sprite quit_sprite;
 
 public:
+
+    // Pause screen constructor
     Pause_Screen(sf::RenderWindow &window);
 
-    // Draw
+    // Drawing and update constructors
     void draw(sf::RenderWindow &window);
     void update(sf::Vector2i mouse_position);
 

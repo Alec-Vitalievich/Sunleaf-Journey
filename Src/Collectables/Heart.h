@@ -7,14 +7,22 @@
 class Heart : public Collectable
 {
 protected:
+
+    // Heart texture
     sf::Texture heart_texture;
 
 public:
+
+    // Heart constructor
     Heart(float Heart_pos_x, float Heart_pos_y, float Heart_size_x, float Heart_size_y);
+
+    // Collision constructors
     void vertical_collision_action(Player &player);
     void horizontal_collision_action(Player &player);
     void enscapsulated_collision_action(Player &player);
     void set_collectable_position(int x, int y);
+
+    // Destructor
     ~Heart();
 };
 

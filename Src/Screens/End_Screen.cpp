@@ -2,7 +2,7 @@
 
 End_Screen::End_Screen(sf::Font &font, sf::Vector2u window_size)
 {
-    // Settubg End screen (win screen) text.
+    // Setting end screen (win screen) text attributes and string.
     end_text.setFont(font);
     end_text.setString("The young sunleaf finds the sun,\n"
                        "from a young seedling to full sprout,\n"
@@ -11,7 +11,7 @@ End_Screen::End_Screen(sf::Font &font, sf::Vector2u window_size)
     end_text.setFillColor(sf::Color::White);
     end_text.setPosition(100, 65);
 
-    // Setting text explaining how to return to menu.
+    // Setting return text attributes and string explaining how to return to menu.
     return_text.setFont(font);
     return_text.setString("...Press Enter to return the the main menu");
     return_text.setCharacterSize(24);

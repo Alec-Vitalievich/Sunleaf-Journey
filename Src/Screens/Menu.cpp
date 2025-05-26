@@ -3,10 +3,10 @@
 
 Menu::Menu(sf::RenderWindow &window)
 {
-    // Load background.
+    // Load background textures 
     if (!menuTexture.loadFromFile("Assets/Textures/ScreenTextures/menu.png"))
     {
-        std::cerr << "Can't load texture";
+        std::cerr << "Can't load menu texture"; //Error message if texture can't load
     }
     menu.setTexture(menuTexture);
 
@@ -18,25 +18,25 @@ Menu::Menu(sf::RenderWindow &window)
     menu.setScale(scaleX, scaleY);
 
     // Buttons:
-    // Check for textures.
+    // Check and load textures.
     if (!startTexture.loadFromFile("Assets/Textures/ScreenTextures/startButton.png"))
     {
-        std::cerr << "Can't load start texture";
+        std::cerr << "Can't load start button texture"; //Error message if texture can't load
     }
     if (!load_texture.loadFromFile("Assets/Textures/ScreenTextures/load_button.png"))
     {
-        std::cerr << "Can't load load texture";
+        std::cerr << "Can't load load button texture"; //Error message if texture can't load
     }
     if (!controls_texture.loadFromFile("Assets/Textures/ScreenTextures/controls_button.png"))
     {
-        std::cerr << "Can't load controls texture";
+        std::cerr << "Can't load controls button texture"; //Error message if texture can't load
     }
     if (!exitTexture.loadFromFile("Assets/Textures/ScreenTextures/quitButton.png"))
     {
-        std::cerr << "Can't load quit texture";
+        std::cerr << "Can't load quit button texture"; //Error message if texture can't load
     }
 
-    // Textures
+    // Set textures
     start.setTexture(startTexture);
     exit.setTexture(exitTexture);
     load_sprite.setTexture(load_texture);
@@ -49,6 +49,7 @@ Menu::Menu(sf::RenderWindow &window)
     load_sprite.setScale(button_scale, button_scale);
     controls_sprite.setScale(button_scale, button_scale);
 
+    // Center the origin position of the buttons.
     auto centre_origin = [](sf::Sprite &sprite)
     {
         sf::FloatRect bounds = sprite.getLocalBounds();
@@ -75,17 +76,17 @@ Menu::Menu(sf::RenderWindow &window)
     // Load font
     if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf"))
     {
-        std::cerr << "Error loading font";
+        std::cerr << "Error loading font";  //Error message if font can't load
     }
 
-    // Title text
+    // Set title text attributes and string
     title_text.setFont(font);
     title_text.setString("Sunleaf Journey: The Quest For The Sun");
     title_text.setCharacterSize(32);
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);
 
-    // centre
+    // Centre buttons
     sf::FloatRect text_bounds = title_text.getLocalBounds();
     title_text.setOrigin(text_bounds.width / 2, text_bounds.height / 2);
     title_text.setPosition(window.getSize().x / 2, 100);
@@ -104,6 +105,7 @@ void Menu::draw(sf::RenderWindow &window)
 
 void Menu::update(sf::Vector2i mousePosition)
 {
+    // Hover effect to provide feedback 
     auto hover_effect = [&](sf::Sprite &sprite)
     {
         // Check if mouse position is within a given button.

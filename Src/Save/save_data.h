@@ -5,11 +5,15 @@
 class save_data
 {
 private:
+
+    // Game variables to save
     int level_number;
     int player_health;
     int sun_count;
 
 public:
+
+    // Default save variables
     save_data(int level = 1, int health = 3, int sun = 0);
 
     // Getters and setters
