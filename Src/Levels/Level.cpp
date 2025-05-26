@@ -94,8 +94,8 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Platform(1800, 0, 1, 1020));
 
         // Testing new sun texture
-        level_data.push_back(new Sun(550, 550, 20, 20));
-        level_data.push_back(new Heart(500, 550, 20, 20));
+        level_data.push_back(new Sun(550, 550, 35, 35));
+        level_data.push_back(new Heart(500, 550, 35, 35));
         break;
 
     case 2:
@@ -253,12 +253,12 @@ void Level::custom_stats_display(sf::RenderWindow &window, sf::Font &font, Playe
 
     // Set string & position of sun count.
     std::string sun_text_string = "#: " + std::to_string(player.get_sun_count());
-    sf::Text sun_text(sun_text_string, font, 32);
+    sf::Text sun_text(sun_text_string, font, 38);
     sun_text.setPosition(70, 20);
 
     // Set string & position of player health.
     std::string health_text_string = "#: " + std::to_string(player.get_player_health()) + "/3";
-    sf::Text health_text(health_text_string, font, 32);
+    sf::Text health_text(health_text_string, font, 38);
     health_text.setPosition(70, 80);
 
     // Draw sprites and text in the GUI (window).
