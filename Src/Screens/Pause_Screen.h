@@ -16,13 +16,15 @@ private:
     sf::Sprite quit_sprite;
 
 public:
+
+    // Pause screen constructor
     Pause_Screen(sf::RenderWindow &window);
 
-    // Draw
+    // Drawing and update constructors
     void draw(sf::RenderWindow &window);
     void update(sf::Vector2i mouse_position);
 
-    // Construc
+    // Checking if button has been clicked.
     bool is_resume_clicked(sf::Vector2i mouse_positiion);
     bool is_quit_clicked(sf::Vector2i mouse_positiion);
 };

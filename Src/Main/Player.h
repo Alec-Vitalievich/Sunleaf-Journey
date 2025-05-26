@@ -9,6 +9,8 @@
 class Player
 { // Maybe add a name attribute?
 protected:
+
+    // Player attributes
     sf::RectangleShape player_hitbox;
     sf::Vector2f player_velocity;
     sf::Vector2i player_acceleration;
@@ -21,12 +23,16 @@ protected:
     int jump_velocity;
     bool on_platform;
 
+    // Player texture
     sf::Texture player_texture;
 
 public:
+
+    // Player constructor
     Player(float player_position_x, float player_position_y, float player_size_x,
            float player_size_y, int player_health, int sun_count); // Some of these can probably be changed to constant variables.
 
+    // Getters and setters
     bool get_on_platform();
     void set_on_platform(bool on_platform);
 
@@ -42,8 +48,8 @@ public:
     int get_player_acceleration_y();
     void set_player_acceleration_y(int new_acceleration);
 
-    int get_player_health();
-    void set_player_health(int player_health);
+    virtual int get_player_health();
+    virtual void set_player_health(int player_health);
 
     int get_sun_count();
     void set_sun_count(int sun_count);
@@ -64,6 +70,7 @@ public:
     sf::RectangleShape &get_player_hitbox();
     // void set_player_hitbox(); ^ Shouldn't be needed when passing by reference.
 
+    // Movement and collision constructors
     void horizontal_movement(double dt);
     void vertical_movement(double dt);
     void horizontal_collision(double dt, std::vector<Object *> &level_data);
@@ -71,6 +78,7 @@ public:
     void encapsulated_collision(double dt, std::vector<Object *> &level_data);
     void player_update(double dt, std::vector<Object *> &level_data);
 
+    // Destructor
     ~Player();
 };
 

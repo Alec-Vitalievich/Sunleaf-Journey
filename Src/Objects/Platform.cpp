@@ -1,46 +1,62 @@
 #include "Objects/Platform.h"
 #include "Main/Player.h"
 
-// TODO: comments
-Platform::Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y):
-Object(platform_position_x, platform_position_y,platform_size_x, platform_size_y){
+
+Platform::Platform(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y) : Object(platform_position_x, platform_position_y, platform_size_x, platform_size_y)
+{
     object_hitbox.setFillColor(sf::Color::Black); // Will be replaced by texture
 }
 
-void Platform::vertical_collision_action(Player& player){
-    // sf::RectangleShape player_hitbox = player.get_player_hitbox();
+// Action when vertical-axis collision is detected.
+void Platform::vertical_collision_action(Player &player)
+{
+    // Retrieve player & platform hitbox boundaries.
     sf::FloatRect player_hitbox_boundaries = player.get_player_hitbox().getGlobalBounds();
     sf::FloatRect platform_hitbox_boundaries = this->get_object_hitbox().getGlobalBounds();
-    if(player.get_player_velocity_y() > 0){
+    
+    // Check if the player is moving downwards (positive y-velocity).
+    if (player.get_player_velocity_y() > 0)
+    {
+        // Snap player to top boundary of platform.
         player.set_player_position(player_hitbox_boundaries.left, platform_hitbox_boundaries.top - player_hitbox_boundaries.height);
         player.set_on_platform(true);
     }
-    
-    if(player.get_player_velocity_y() < 0){
+
+    // Check if the player is moving upwards (negative y-velocity).
+    if (player.get_player_velocity_y() < 0)
+    {
+        // Snap player to bottom boundary of platform.
         player.set_player_position(player_hitbox_boundaries.left, platform_hitbox_boundaries.top + platform_hitbox_boundaries.height);
     }
 
     player.set_player_velocity_y(0);
 }
 
-void Platform::horizontal_collision_action(Player& player){
+// Action when horizontal-axis collision is detected.
+void Platform::horizontal_collision_action(Player &player)
+{
+    // Retrieve player & platform hitbox boundaries.
     sf::FloatRect player_hitbox_boundaries = player.get_player_hitbox().getGlobalBounds();
     sf::FloatRect platform_hitbox_boundaries = this->get_object_hitbox().getGlobalBounds();
-    if(player.get_player_velocity_x() > 0){
+    
+    // Check if player is moving to the right.
+    if (player.get_player_velocity_x() > 0)
+    {
+        // Snap player to left boundary of platform.
         player.set_player_position(platform_hitbox_boundaries.left - player_hitbox_boundaries.width, player_hitbox_boundaries.top);
     }
-    
-    if(player.get_player_velocity_x() < 0){
+
+    // Check if player is moving to the left.
+    if (player.get_player_velocity_x() < 0)
+    {
+        // Snap player to the right boundary of platform.
         player.set_player_position(platform_hitbox_boundaries.left + platform_hitbox_boundaries.width, player_hitbox_boundaries.top);
     }
 
     player.set_player_velocity_x(0);
 }
 
-void Platform::enscapsulated_collision_action(Player& player){
-    // Doesn't do anything for standard platform.
-}
+// Empty implementation for unused collision.
+void Platform::enscapsulated_collision_action(Player &player) {}
 
-Platform::~Platform(){
-    // Nothin' to see here.
-}
+Platform::~Platform() {}

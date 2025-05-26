@@ -3,88 +3,90 @@
 
 Menu::Menu(sf::RenderWindow &window)
 {
-    // Load background
+    // Load background textures 
     if (!menuTexture.loadFromFile("Assets/Textures/ScreenTextures/menu.png"))
     {
-        std::cerr << "Can't load texture";
+        std::cerr << "Can't load menu texture"; //Error message if texture can't load
     }
     menu.setTexture(menuTexture);
 
-    // Scale background texture to fit window size
+    // Scale background texture to fit window size.
     sf::Vector2u textureSize = menuTexture.getSize();
     sf::Vector2u windowSize = window.getSize();
     float scaleX = (float)windowSize.x / textureSize.x;
     float scaleY = (float)windowSize.y / textureSize.y;
     menu.setScale(scaleX, scaleY);
 
-    // Buttons
-    // Check for textures
+    // Buttons:
+    // Check and load textures.
     if (!startTexture.loadFromFile("Assets/Textures/ScreenTextures/startButton.png"))
     {
-        std::cerr << "Can't load start texture";
+        std::cerr << "Can't load start button texture"; //Error message if texture can't load
     }
     if (!load_texture.loadFromFile("Assets/Textures/ScreenTextures/load_button.png"))
     {
-        std::cerr << "Can't load load texture";
+        std::cerr << "Can't load load button texture"; //Error message if texture can't load
     }
     if (!controls_texture.loadFromFile("Assets/Textures/ScreenTextures/controls_button.png"))
     {
-        std::cerr << "Can't load controls texture";
+        std::cerr << "Can't load controls button texture"; //Error message if texture can't load
     }
     if (!exitTexture.loadFromFile("Assets/Textures/ScreenTextures/quitButton.png"))
     {
-        std::cerr << "Can't load quit texture";
+        std::cerr << "Can't load quit button texture"; //Error message if texture can't load
     }
 
-    // Textures
+    // Set textures
     start.setTexture(startTexture);
     exit.setTexture(exitTexture);
     load_sprite.setTexture(load_texture);
     controls_sprite.setTexture(controls_texture);
 
-    // Button scaling (too large originally)
+    // Button scaling (too large without modification).
     const float button_scale = 0.5;
     start.setScale(button_scale, button_scale);
     exit.setScale(button_scale, button_scale);
     load_sprite.setScale(button_scale, button_scale);
     controls_sprite.setScale(button_scale, button_scale);
 
-    auto center_origin = [](sf::Sprite &sprite)
+    // Center the origin position of the buttons.
+    auto centre_origin = [](sf::Sprite &sprite)
     {
         sf::FloatRect bounds = sprite.getLocalBounds();
         sprite.setOrigin(bounds.width / 2, bounds.height / 2);
     };
 
-    center_origin(start);
-    center_origin(load_sprite);
-    center_origin(controls_sprite);
-    center_origin(exit);
+    // Modify centre position.
+    centre_origin(start);
+    centre_origin(load_sprite);
+    centre_origin(controls_sprite);
+    centre_origin(exit);
 
-    float centerX = windowSize.x / 2.0;
-    float centerY = windowSize.y / 2.0;
+    float centreX = windowSize.x / 2.0;
+    float centreY = windowSize.y / 2.0;
+    float spacing = 100.0;
 
-    const float spacing = 100.0;
-
-    start.setPosition(centerX, centerY - spacing * 1);
-    load_sprite.setPosition(centerX, centerY + spacing * 0.25);
-    controls_sprite.setPosition(centerX, centerY + spacing * 1.75);
-    exit.setPosition(centerX, centerY + spacing * 3);
+    // Set position based on the centre position and the spacing factor.
+    start.setPosition(centreX, centreY - spacing * 1);
+    load_sprite.setPosition(centreX, centreY + spacing * 0.25);
+    controls_sprite.setPosition(centreX, centreY + spacing * 1.75);
+    exit.setPosition(centreX, centreY + spacing * 3);
 
     // Title screen
     // Load font
-    if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf"))
+    if (!font.loadFromFile("Assets/Fonts/m6x11plus.ttf"))
     {
-        std::cerr << "Error loading font";
+        std::cerr << "Error loading font";  //Error message if font can't load
     }
 
-    // Title text
+    // Set title text attributes and string
     title_text.setFont(font);
     title_text.setString("Sunleaf Journey: The Quest For The Sun");
-    title_text.setCharacterSize(32);
+    title_text.setCharacterSize(50);
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);
 
-    // Center
+    // Centre buttons
     sf::FloatRect text_bounds = title_text.getLocalBounds();
     title_text.setOrigin(text_bounds.width / 2, text_bounds.height / 2);
     title_text.setPosition(window.getSize().x / 2, 100);
@@ -92,6 +94,7 @@ Menu::Menu(sf::RenderWindow &window)
 
 void Menu::draw(sf::RenderWindow &window)
 {
+    // Draw all elements of the menu in the GUI (window).
     window.draw(menu);
     window.draw(title_text);
     window.draw(start);
@@ -102,8 +105,10 @@ void Menu::draw(sf::RenderWindow &window)
 
 void Menu::update(sf::Vector2i mousePosition)
 {
+    // Hover effect to provide feedback 
     auto hover_effect = [&](sf::Sprite &sprite)
     {
+        // Check if mouse position is within a given button.
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
         {
             sprite.setScale(0.55, 0.55);
@@ -120,6 +125,7 @@ void Menu::update(sf::Vector2i mousePosition)
     hover_effect(controls_sprite);
 }
 
+// Button checking functions.
 bool Menu::is_start_clicked(sf::Vector2i mousePosition)
 {
     return start.getGlobalBounds().contains(sf::Vector2f(mousePosition));

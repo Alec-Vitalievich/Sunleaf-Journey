@@ -34,6 +34,19 @@ SRC = $(wildcard Src/**/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 OUT = game.out
 
+# -------------------------
+# Unit testing
+# -------------------------
+
+#Unit test
+TEST_SRC = $(wildcard Unit_Tests/*.cpp)
+TEST_OBJ = $(TEST_SRC:.cpp=.o)
+TEST_OUT = tests.out
+
+$(TEST_OUT): $(TEST_OBJ) $(filter-out Src/main.o, $(OBJ))
+	$(CXX) $(CXXFLAGS) $(TEST_OBJ) $(filter-out Src/Main/main.o, $(OBJ)) -o $@ $(LDFLAGS)
+
+
 #Saves time by only specific .o files related to .cpp changes are recompiled instead of every .cpp
 $(OUT): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ $(LDFLAGS)
@@ -65,6 +78,13 @@ mac: all
 	@echo "Compiling for macOS"
 	@./$(OUT)
 
+test: CXXFLAGS += $(SFML_INCLUDE)
+test: LDFLAGS += $(SFML_LIB)
+test: $(TEST_OUT)
+	@$(CLEAR)
+	@echo "Unit testing"
+	./$(TEST_OUT)
+
 
 # -------------------------
 # Debugging
@@ -79,7 +99,7 @@ debug: all
 
 clean:
 	@$(CLEAR)
-	rm -f $(OUT) $(OBJ)
+	rm -f $(OUT) $(OBJ) $(TEST_OUT) $(TEST_OBJ)
 
 run: all
 	./$(OUT)

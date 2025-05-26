@@ -15,7 +15,7 @@ Game::Game(int window_size_x, int window_size_y, std::string window_name, int ma
 {
 
     // Load font.
-    if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf"))
+    if (!font.loadFromFile("Assets/Fonts/m6x11plus.ttf"))
     {
         std::cerr << "Failed to load font";
     }
