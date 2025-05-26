@@ -9,9 +9,9 @@
 
 // Game constructor.
 Game::Game(std::string window_name, int max_framerate) : window(sf::VideoMode(1800, 1020), window_name), player(0, 0, 50, 50, 3, 0),
-                                                                                               story_screen(font, sf::Vector2u(1800, 1020)),
-                                                                                               end_screen(font, sf::Vector2u(1800, 1020)),
-                                                                                               control_screen(font, sf::Vector2u(1800, 1020))
+                                                         story_screen(font, sf::Vector2u(1800, 1020)),
+                                                         end_screen(font, sf::Vector2u(1800, 1020)),
+                                                         control_screen(font, sf::Vector2u(1800, 1020))
 {
 
     // Load font.
@@ -271,7 +271,8 @@ void Game::update()
             // Call function to check if the next level needs to be loaded.
             load_level(new_level);
             // Game reset if health is less than one.
-            if(player.get_player_health() < 1){
+            if (player.get_player_health() < 1)
+            {
                 game_reset();
             }
         }
@@ -361,17 +362,22 @@ void Game::update()
     }
 }
 // Game reset
-void Game::game_reset(){
+void Game::game_reset()
+{
     *current_level = 1;
     *new_level = true;
     load_level(new_level);
     player.set_sun_count(0);
     player.set_player_health(3);
-    player.set_player_position(0,800);
+    player.set_player_position(0, 800);
 }
 
-void Game::on_close_action(sf::Event event){
-    if (event.type == sf::Event::Closed){window.close();}
+void Game::on_close_action(sf::Event event)
+{
+    if (event.type == sf::Event::Closed)
+    {
+        window.close();
+    }
 }
 
 // dt getter

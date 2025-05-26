@@ -14,7 +14,6 @@ protected:
     bool *display_interactive_text = nullptr;
 
 public:
-
     // Level loader constructor
     Level_Loader(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y, bool *new_level, bool *display_interactive_text, int *current_level);
 

@@ -7,7 +7,7 @@
 Level::Level(int *level_number, bool *new_level)
 {
 
-    // Dynamically allocate memory for level_loader bool. 
+    // Dynamically allocate memory for level_loader bool.
     // (Checks if the player is in the level loader so it can call the on-screen text prompt)
     display_interactive_text = new bool(false);
 

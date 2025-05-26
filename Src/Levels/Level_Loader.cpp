@@ -2,9 +2,8 @@
 #include "Main/Player.h"
 
 // Constructor for in-game portal to next level.
-Level_Loader::Level_Loader(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y, bool *new_level, bool *display_interactive_text, int *current_level) : 
-                            Object(platform_position_x, platform_position_y, platform_size_x, platform_size_y), new_level(new_level),
-                            display_interactive_text(display_interactive_text), current_level(current_level)
+Level_Loader::Level_Loader(float platform_position_x, float platform_position_y, float platform_size_x, float platform_size_y, bool *new_level, bool *display_interactive_text, int *current_level) : Object(platform_position_x, platform_position_y, platform_size_x, platform_size_y), new_level(new_level),
+                                                                                                                                                                                                      display_interactive_text(display_interactive_text), current_level(current_level)
 {
     object_hitbox.setFillColor(sf::Color::White); // Will be replaced by texture
 }

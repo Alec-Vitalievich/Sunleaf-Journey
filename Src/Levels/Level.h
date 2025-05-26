@@ -46,7 +46,6 @@ protected:
     bool *display_interactive_text = nullptr;
 
 public:
-
     // Level constructor
     Level(int *level_number, bool *new_level);
     std::vector<Object *> &get_level_vector();
