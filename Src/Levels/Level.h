@@ -55,6 +55,11 @@ public:
     void custom_stats_display(sf::RenderWindow &window, sf::Font &font, Player &player);
     void draw_interactive_text(sf::RenderWindow &window, sf::Font &font);
 
+    // Getters and setters
+    int get_current_level();
+
+    void set_current_level(int level);
+
     // Destructor
     ~Level();
 };

@@ -25,6 +25,13 @@ public:
     virtual void enscapsulated_collision_action(Player &player) = 0;
     sf::RectangleShape &get_object_hitbox();
 
+    // Getters and setters
+    sf::Vector2f get_position() const;
+    sf::Vector2f set_position() const;
+
+    sf::Vector2f get_size() const;
+    sf::Vector2f set_size() const;
+
     // Destructor
     virtual ~Object();
 };

@@ -13,4 +13,15 @@ sf::RectangleShape &Object::get_object_hitbox()
     return object_hitbox;
 }
 
+// Getters and setters
+sf::Vector2f Object::get_position() const {
+    return object_hitbox.getPosition();
+}
+
+sf::Vector2f Object::get_size() const {
+    return object_hitbox.getSize();
+}
+
+
+
 Object::~Object() {}

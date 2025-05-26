@@ -299,6 +299,16 @@ std::vector<Object *> &Level::get_level_vector()
     return level_data;
 }
 
+int Level::get_current_level()
+{
+    return current_level_number;
+}
+
+void Level::set_current_level(int level)
+{
+    current_level_number = level;
+}
+
 Level::~Level()
 {
     // Iterate through each element of the vector to release the memory.
