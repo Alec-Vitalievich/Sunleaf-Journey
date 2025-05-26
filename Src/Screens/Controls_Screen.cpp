@@ -5,7 +5,6 @@ Controls_Screen::Controls_Screen(sf::Font &font, sf::Vector2u window_size)
     // Setting controls text attributes and string explaining the mechanics of the game.
     controls_text.setFont(font);
     controls_text.setString("CONTROLS:\n"
-                            "\n"
                             " - A: Move Left\n"
                             " - D: Move Right\n"
                             " - Space: Jump\n"
@@ -25,14 +24,14 @@ Controls_Screen::Controls_Screen(sf::Font &font, sf::Vector2u window_size)
                             "Collectables:\n"
                             " - Heart: Increase player health by one\n"
                             " - Sun: Score for the playery\n");
-    controls_text.setCharacterSize(24);
+    controls_text.setCharacterSize(38);
     controls_text.setFillColor(sf::Color::White);
     controls_text.setPosition(100, 65);
 
     // Setting return text attributes and string for how to return to menu.
     return_text.setFont(font);
     return_text.setString("...Press ENTER to return to main menu");
-    return_text.setCharacterSize(24);
+    return_text.setCharacterSize(38);
     return_text.setFillColor(sf::Color::Yellow);
     float return_text_x = 100;
     float return_text_y = window_size.y - 100;

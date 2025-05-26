@@ -74,7 +74,7 @@ Menu::Menu(sf::RenderWindow &window)
 
     // Title screen
     // Load font
-    if (!font.loadFromFile("Assets/Fonts/antiquity-print.ttf"))
+    if (!font.loadFromFile("Assets/Fonts/m6x11plus.ttf"))
     {
         std::cerr << "Error loading font";  //Error message if font can't load
     }
@@ -82,7 +82,7 @@ Menu::Menu(sf::RenderWindow &window)
     // Set title text attributes and string
     title_text.setFont(font);
     title_text.setString("Sunleaf Journey: The Quest For The Sun");
-    title_text.setCharacterSize(32);
+    title_text.setCharacterSize(50);
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);
 
