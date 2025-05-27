@@ -23,7 +23,7 @@ Pause_Screen::Pause_Screen(sf::RenderWindow &window)
     quit_sprite.setTexture(quit_texture);
 
     // Button scaling (too large without modification)
-    const float button_scale = 0.5;
+    const float button_scale = 0.4;
     resume_sprite.setScale(button_scale, button_scale);
     quit_sprite.setScale(button_scale, button_scale);
 
@@ -62,11 +62,11 @@ void Pause_Screen::update(sf::Vector2i mouse_position)
         // Check if the mouse position is within the bounds of the button
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_position)))
         {
-            sprite.setScale(0.55, 0.55);
+            sprite.setScale(0.45, 0.45);
         }
         else
         {
-            sprite.setScale(0.5, 0.5);
+            sprite.setScale(0.4, 0.4);
         }
     };
 
