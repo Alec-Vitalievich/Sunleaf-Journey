@@ -87,7 +87,7 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Lava(900, 260, 100, 20, 2));    // Lava near the top
         level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
 
-        // One-way platform
+        // Collectables
         level_data.push_back(new One_Way_Platform(850, 180, 100, 20)); // Near final jump
         level_data.push_back(new Sun(70, 630, 35, 35)); // Sun 1
         level_data.push_back(new Sun(900, 130, 35, 35)); // Sun 2   
