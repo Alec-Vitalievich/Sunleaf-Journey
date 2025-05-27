@@ -29,7 +29,7 @@ void Spike::vertical_collision_action(Player &player)
         // Reduce player health by the health modifier and reset player back to the start of the level.
         player.set_player_position(0, 800);
         player.set_player_health(player.get_player_health() - health_modifier);
-        player.set_on_platform(true);
+        player.set_on_platform(false);
     }
 
     // Check if player is moving up (negative velocity).

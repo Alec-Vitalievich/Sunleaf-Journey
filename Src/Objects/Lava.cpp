@@ -13,7 +13,7 @@ void Lava::vertical_collision_action(Player &player)
     // Set player back to the starting position, set player velocity to 0, and reduce player health by the modifier.
     player.set_player_position(0, 800);
     player.set_player_health(player.get_player_health() - health_modifier);
-    player.set_on_platform(true);
+    player.set_on_platform(false);
     player.set_player_velocity_x(0);
     player.set_player_velocity_y(0);
 }
