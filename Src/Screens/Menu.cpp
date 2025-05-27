@@ -43,7 +43,7 @@ Menu::Menu(sf::RenderWindow &window)
     controls_sprite.setTexture(controls_texture);
 
     // Button scaling (too large without modification).
-    const float button_scale = 0.5;
+    const float button_scale = 0.4;
     start.setScale(button_scale, button_scale);
     exit.setScale(button_scale, button_scale);
     load_sprite.setScale(button_scale, button_scale);
@@ -82,7 +82,7 @@ Menu::Menu(sf::RenderWindow &window)
     // Set title text attributes and string
     title_text.setFont(font);
     title_text.setString("Sunleaf Journey: The Quest For The Sun");
-    title_text.setCharacterSize(50);
+    title_text.setCharacterSize(100);
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);
 
@@ -111,11 +111,11 @@ void Menu::update(sf::Vector2i mousePosition)
         // Check if mouse position is within a given button.
         if (sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
         {
-            sprite.setScale(0.55, 0.55);
+            sprite.setScale(0.45, 0.45);
         }
         else
         {
-            sprite.setScale(0.5, 0.5);
+            sprite.setScale(0.4, 0.4);
         }
     };
 
