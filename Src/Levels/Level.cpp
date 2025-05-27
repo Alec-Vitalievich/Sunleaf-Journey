@@ -83,7 +83,7 @@ Level::Level(int *level_number, bool *new_level)
         level_data.push_back(new Level_Loader(1550, 100, 100, 100, new_level, display_interactive_text, level_number)); // End portal
         level_data.push_back(new Platform(1450, 200, 300, 20));                                                        // Water beneath portal (added by Isabella)
 
-        // Obstacless
+        // Obstacles
         level_data.push_back(new Lava(900, 260, 100, 20, 2));    // Lava near the top
         level_data.push_back(new Jump_Pad(330, 940, 80, 40, 2)); // Jump pad at start to help
 
