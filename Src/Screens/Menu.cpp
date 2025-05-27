@@ -81,7 +81,7 @@ Menu::Menu(sf::RenderWindow &window)
 
     // Set title text attributes and string
     title_text.setFont(font);
-    title_text.setString("Sunleaf Journey: The Quest For The Sun");
+    title_text.setString("Sunleaf Journey: The Quest For Sun");
     title_text.setCharacterSize(100);
     title_text.setFillColor(sf::Color::Black);
     title_text.setStyle(sf::Text::Bold);

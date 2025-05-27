@@ -9,8 +9,10 @@ Player::Player(float player_position_x, float player_position_y, float player_si
     player_hitbox.setPosition(player_position_x, player_position_y);
     player_hitbox.setSize({player_size_x, player_size_y}); // Takes a vector2f, or 2 position in {}.
 
+    // Attempt to load player texture.
     if (!player_texture.loadFromFile("Assets/Textures/player_texture.png"))
     {
+        // If the player texture cannot load, output error message and set default player colour to magenta.
         std::cerr << "Failed to load player texture";
         player_hitbox.setFillColor(sf::Color::Magenta);
     }
@@ -19,11 +21,13 @@ Player::Player(float player_position_x, float player_position_y, float player_si
         player_hitbox.setTexture(&player_texture);
     }
 
+    // Assign variables.
     this->player_health = player_health;
     this->sun_count = sun_count;
     saved_player_health = player_health;
     saved_sun_count = sun_count;
 
+    // Set values for acceleration, maximum velocity, etc (movement values).
     player_acceleration.x = 2000; // Horizontal acceleration
     player_acceleration.y = 1500; // Gravity
     max_player_velocity.x = 500;
@@ -33,6 +37,7 @@ Player::Player(float player_position_x, float player_position_y, float player_si
     on_platform = false;
 }
 
+// Getters & setters.
 bool Player::get_on_platform()
 {
     return on_platform;
@@ -138,9 +143,10 @@ sf::RectangleShape &Player::get_player_hitbox()
     return player_hitbox;
 }
 
+// Function to update player values.
 void Player::player_update(double dt, std::vector<Object *> &level_data)
 {
-    // Potentially move to game class
+    // Make sure player health is within a valid range.
     if (player_health < 0)
     {
         player_health = 0;
@@ -150,6 +156,7 @@ void Player::player_update(double dt, std::vector<Object *> &level_data)
         player_health = 3;
     }
 
+    // Call individual movement and collision detection functions.
     horizontal_movement(dt);
     horizontal_collision(dt, level_data);
     vertical_movement(dt);
@@ -157,9 +164,11 @@ void Player::player_update(double dt, std::vector<Object *> &level_data)
     encapsulated_collision(dt, level_data);
 }
 
+// Function to move player left & right.
 void Player::horizontal_movement(double dt)
 {
     int input = 0;
+    // Set variable input based on which key is pressed (A to left, D for right).
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         input = -1;
@@ -169,11 +178,13 @@ void Player::horizontal_movement(double dt)
         input = 1;
     }
 
+    // Player is moving.
     if (input == -1 || input == 1)
     {
         // Apply movement.
         player_velocity.x += input * player_acceleration.x * dt; // Input changes the direction, times by the acceleration and the time passed.
     }
+    // Player is not moving.
     else if (input == 0)
     {
         // Apply friction reduction (since movement has stopped)
@@ -195,13 +206,14 @@ void Player::horizontal_movement(double dt)
         }
     }
     else
-    { // Just in case. Shouldn't actually be possible for input to be any other value.
+    { // Just in case it somehow becomes an invalid value.
         input = 0;
     }
 
+    // Reset player acceleration in case it was modified by another function.
     player_acceleration.x = 2000;
 
-    // Cap. speed.
+    // Cap. speed according to the maximum values for horizontal velocity.
     if (player_velocity.x > max_player_velocity.x)
     {
         player_velocity.x = max_player_velocity.x;
@@ -212,17 +224,21 @@ void Player::horizontal_movement(double dt)
     }
 }
 
+// Function to apply jump velocity and gravity (vertical movement).
 void Player::vertical_movement(double dt)
 {
-    // Jump
+    // Jump when space key is pressed.
     if (on_platform == true && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)))
     {
         player_velocity.y = jump_velocity;
+        // Set on_platform bool to false so the player can't jump whilst in the air.
         on_platform = false;
     }
 
+    // Reset jump velocity in case it was modified.
     jump_velocity = -600;
 
+    // If the player has positive y velocity (moving down), set on_platform to false.
     if (player_velocity.y > 0)
     {
         on_platform = false;

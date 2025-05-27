@@ -11,6 +11,7 @@ Sun::Sun(float Sun_pos_x, float Sun_pos_y, float Sun_size_x, float Sun_size_y)
     if (!sun_texture.loadFromFile("Assets/Textures/ObjectTextures/sun.png"))
     {
         std::cout << "Failed to load sun texture!" << std::endl;
+        object_hitbox.setFillColor(sf::Color::Yellow);
     }
     else
     {

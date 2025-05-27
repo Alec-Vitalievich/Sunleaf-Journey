@@ -11,6 +11,7 @@ Heart::Heart(float Heart_pos_x, float Heart_pos_y, float Heart_size_x, float Hea
     if (!heart_texture.loadFromFile("Assets/Textures/ObjectTextures/heart.png"))
     {
         std::cout << "Failed to load heart texture!" << std::endl;
+        object_hitbox.setFillColor(sf::Color::Red);
     }
     else
     {

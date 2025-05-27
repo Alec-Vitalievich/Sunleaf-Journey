@@ -8,6 +8,7 @@ Spike::Spike(float spike_position_x, float spike_position_y, float spike_size_x,
     if (!spike_texture.loadFromFile("Assets/Textures/ObjectTextures/spike.png"))
     {
         std::cout << "Failed to load spike texture!" << std::endl;
+        object_hitbox.setFillColor(sf::Color::White);
     }
     else
     {
