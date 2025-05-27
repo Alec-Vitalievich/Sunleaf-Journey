@@ -255,12 +255,15 @@ void Player::vertical_movement(double dt)
         player_velocity.y = -max_player_velocity.y;
     }
 
+    // Reset player y-acceleration in case it was modified by another function.
     player_acceleration.y = 1500;
 }
 
+// Detect if the player collides with the left or right side of an object.
 void Player::horizontal_collision(double dt, std::vector<Object *> &level_data)
 {
-    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds(); // Get the boundary coordinates of the current hitbox.
+    // Get the boundary coordinates of the current (player) hitbox.
+    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds();
     float player_bottom = player_boundary.top + player_boundary.height;
     float player_right = player_boundary.left + player_boundary.width;
 
@@ -269,8 +272,10 @@ void Player::horizontal_collision(double dt, std::vector<Object *> &level_data)
     future_player_boundary.left += player_velocity.x * dt; // Predict where player will be next frame.
     float future_player_right = future_player_boundary.left + future_player_boundary.width;
 
+    // Iterate through the level vector.
     for (int i = 0; i < level_data.size(); i++)
     {
+        // Get the hitbox boundaries of the current object (platform, level loader, etc).
         sf::RectangleShape current_object = level_data[i]->get_object_hitbox();
         sf::FloatRect object_boundary = current_object.getGlobalBounds();
         float object_bottom = object_boundary.top + object_boundary.height;
@@ -290,12 +295,15 @@ void Player::horizontal_collision(double dt, std::vector<Object *> &level_data)
             break;
         }
     }
+    // Apply movement (velocity * time = displacement).
     player_hitbox.move(player_velocity.x * dt, 0);
 }
 
+// Detect if the player hits the top of bottom of an object.
 void Player::vertical_collision(double dt, std::vector<Object *> &level_data)
 {
-    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds(); // Get the boundary coordinates of the current hitbox.
+    // Get the boundary coordinates of the current (player) hitbox.
+    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds();
     float player_bottom = player_boundary.top + player_boundary.height;
     float player_right = player_boundary.left + player_boundary.width;
 
@@ -304,54 +312,62 @@ void Player::vertical_collision(double dt, std::vector<Object *> &level_data)
     future_player_boundary.top += player_velocity.y * dt; // Predict where player will be next frame.
     float future_player_bottom = future_player_boundary.top + future_player_boundary.height;
 
+    // Iterate through level vector.
     for (int i = 0; i < level_data.size(); i++)
     {
+        // Get the boundaries of the current object's hitbox (platform, level loader, etc).
         sf::RectangleShape current_object = level_data[i]->get_object_hitbox();
         sf::FloatRect object_boundary = current_object.getGlobalBounds();
         float object_bottom = object_boundary.top + object_boundary.height;
         float object_right = object_boundary.left + object_boundary.width;
 
-        // might be worth splitting the following if statement up a little for readability reasons.
+        // Check if the player is moving down, if the current position is above the top of the object, and the future position will be below. (top collision)
         if (player_velocity.y > 0 && (player_bottom <= object_boundary.top && future_player_bottom >= object_boundary.top && player_right > object_boundary.left && player_boundary.left < object_right))
         {
+            // Call the function in each object using polymorphism.
             level_data[i]->vertical_collision_action(*this); // Passes the object that called the function (player) into the function.
             break;
         }
 
-        // What comes up, must go down.
+        // Check if the player is moving up, if the current position is below the top of the object, and the future position will be above. (bottomcollision)
         if (player_velocity.y < 0 && (player_boundary.top >= object_bottom && future_player_boundary.top <= object_bottom && player_right > object_boundary.left && player_boundary.left < object_right))
         {
+            // Call the function in each object using polymorphism.
             level_data[i]->vertical_collision_action(*this); // Passes the object that called the function (player) into the function.
             break;
         }
     }
+    // Apply movement (velocity * time = displacement)
     player_hitbox.move(0, player_velocity.y * dt);
 }
 
+// Detect if the player is at all within the boundaries of the object.
 void Player::encapsulated_collision(double dt, std::vector<Object *> &level_data)
 {
-    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds(); // Get the boundary coordinates of the current hitbox.
+    // Get the boundary coordinates of the current (player) hitbox.
+    sf::FloatRect player_boundary = player_hitbox.getGlobalBounds();
     float player_bottom = player_boundary.top + player_boundary.height;
     float player_right = player_boundary.left + player_boundary.width;
 
+    // Iterate through the level vector.
     for (int i = 0; i < level_data.size(); i++)
     {
+        // Get the boundaries of the current object (level loader, jump pad, etc)
         sf::RectangleShape current_object = level_data[i]->get_object_hitbox();
         sf::FloatRect object_boundary = current_object.getGlobalBounds();
         float object_bottom = object_boundary.top + object_boundary.height;
         float object_right = object_boundary.left + object_boundary.width;
 
-        // might be worth splitting the following if statement up a little for readability reasons. Removing the velocity requirement may be a good idea too? unsure.
+        // Check if the player is within the boundaries (overlapping) of the object at all.
         if (player_boundary.left < object_right && player_right > object_boundary.left && player_boundary.top < object_bottom &&
             player_bottom > object_boundary.top)
         {
+            // Call the function in each object using polymorphism.
             level_data[i]->enscapsulated_collision_action(*this); // Passes the object that called the function (player) into the function.
             break;
         }
     }
 }
 
-Player::~Player()
-{
-    // Nothin' to see here.
-}
+// Destructor
+Player::~Player() {}
