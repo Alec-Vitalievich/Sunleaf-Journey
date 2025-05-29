@@ -1,4 +1,4 @@
-# 🌻 Sunleaf Journey : The Quest For The Sun
+# 🌻 Sunleaf Journey : The Quest For Sun
 
  ## _A OOP Platformer Game Project in C++_
  
@@ -83,3 +83,6 @@ brew install sfml@2
 - Background textures: [Nature Landscapes Free Pixel Art](https://free-game-assets.itch.io/nature-landscapes-free-pixel-art/download/eyJleHBpcmVzIjoxNzQ4MzE5NTc3LCJpZCI6MjExNDQ5Mn0%3d.rgGsOx9LqqchzRGYCFiEA1Ugfz8%3d) by Free and Premium Game Assets (GUI, Sprite, Tilesets)
 - Buttons textures: [Free Buttons Pixel Animation Pack](https://hiorespace.itch.io/freebuttonspixelanimation) by hiorespace
 ---
+
+## Contacts
+- Please contact me at avitalievich815@gmail.com if you have any questions!
