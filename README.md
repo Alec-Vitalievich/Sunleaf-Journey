@@ -86,3 +86,9 @@ brew install sfml@2
 
 ## Contacts
 - Please contact me at avitalievich815@gmail.com if you have any questions!
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
